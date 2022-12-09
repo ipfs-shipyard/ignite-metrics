@@ -1,0 +1,89 @@
+
+div.metrics-notification-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height:  auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  
+  div.metrics-notification-container {
+    background-color: rgba(246, 248, 251, 1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 15px 15px;
+    max-width: 1024px;
+  }
+
+  div.metrics-notification-link {
+    margin: 0 5px;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  div.metrics-notification-wrapper .metrics-notification-text {
+    color: rgba(7, 58, 83, 1);
+    order: 1;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .metrics-notification-wrapper .metrics-notification-text .metric-info-link-wrapper {
+    padding: 8px 0;
+  }
+  
+  div.metrics-notification-wrapper .metrics-notification-buttons {
+    order: 3;
+    align-self: center;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  div.metrics-notification-wrapper a {
+    color: rgba(107, 196, 206, 1);
+  }
+  
+  div.metrics-notification-wrapper button {
+    border: none;
+    color: rgba(107, 196, 206, 1);
+    cursor: pointer;
+    background-color: transparent;
+    align-content: center;
+    vertical-align: center;
+    text-align: center;
+  }
+  
+  .metrics-notification-wrapper button#metrics-notification-accept {
+    border: 1pt solid rgba(107, 196, 206, 1);
+  }
+  
+  
+  @media (max-width: 1002px) {
+  
+      .metrics-notification-wrapper .metrics-notification-text {
+        color: rgba(7, 58, 83, 1);
+        order: 1;
+        align-self: flex-start;
+        padding: 0 2rem;
+      }
+  
+    .metrics-notification-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    div.metrics-notification-wrapper .metrics-notification-buttons {
+      margin-top: 8px;
+    }
+  }
+  

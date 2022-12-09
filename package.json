@@ -1,0 +1,94 @@
+{
+  "name": "@ipfs-shipyard/ignite-metrics",
+  "version": "1.0.0",
+  "description": "UI library for gathering metrics for ignite team projects",
+  "author": "Ignite Team",
+  "private": false,
+  "license": "MIT",
+  "homepage": "https://github.com/ipfs-shipyard/ignite-metrics#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ipfs-shipyard/ignite-metrics.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ipfs-shipyard/ignite-metrics/issues"
+  },
+  "keywords": [
+    "react",
+    "ipfs",
+    "metrics",
+    "ignite"
+  ],
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "types": "dist/index.d.ts",
+  "files": [
+    "src",
+    "dist",
+    "package.json",
+    "README.md"
+  ],
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "rollup-watch": "rollup -c -w",
+    "rollup": "npm run prebuild && rollup -c",
+    "lint": "aegir lint",
+    "aegier-release": "aegir release",
+    "aegir-build": "aegir build",
+    "test": "aegir test",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "dependencies": {
+    "countly-sdk-web": "^22.6.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.5",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-sourcemaps": "^0.6.3",
+    "rollup-plugin-visualizer": "^5.8.3",
+    "styled-components": "^5.3.6",
+    "typescript": "^4.9.3"
+  },
+  "aegir": {
+    "tsRepo": true
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.5",
+    "@babel/preset-env": "^7.20.2",
+    "@babel/preset-react": "^7.18.6",
+    "@rollup/plugin-commonjs": "^23.0.4",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^10.0.1",
+    "@storybook/addon-actions": "^6.5.14",
+    "@storybook/addon-essentials": "^6.5.14",
+    "@storybook/addon-interactions": "^6.5.14",
+    "@storybook/addon-links": "^6.5.14",
+    "@storybook/builder-webpack5": "^6.5.14",
+    "@storybook/manager-webpack5": "^6.5.14",
+    "@storybook/react": "^6.5.14",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/react-dom": "^18.0.9",
+    "@types/styled-components": "^5.1.26",
+    "aegir": "^37.6.4",
+    "babel-loader": "^9.1.0",
+    "css-loader": "^6.7.2",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "html-loader": "^4.2.0",
+    "prettier": "^2.8.1",
+    "rollup": "^3.7.0",
+    "rollup-plugin-dts": "^5.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-terser": "^7.0.2",
+    "style-loader": "^3.3.1"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
