@@ -4,7 +4,7 @@ import Consent from '../components/ConsentBanner';
 import ConsentToggle from '../components/ConsentToggle';
 import { InitCountlyMetrics, getMetricsConsent, updateMetricsConsent, acceptMetricsConsent, declineMetricsConsent } from '../CountlyMetrics';
 
-const Example = () => {
+const Example = ({metricsAppKey, metricsURL}) => {
   const [showWarning, setShowWarning] = useState(false);
   const [showConsentBanner, setShowConsentBanner] = useState(false);
   const [metricsConsent, setMetricsConsent] = useState<string | null>(getMetricsConsent());
@@ -25,8 +25,8 @@ const Example = () => {
   }
 
   useEffect(() => {
-    const appKey = '3c2c0819434074fc4d339ddd8e112a1e741ecb72';
-    const url='https://countly.ipfs.io';
+    const appKey = metricsAppKey;
+    const url=metricsURL;
 
     InitCountlyMetrics(appKey,url);
     

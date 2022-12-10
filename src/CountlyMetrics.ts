@@ -1,6 +1,6 @@
 import Countly from 'countly-sdk-web';
 
-export const InitCountlyMetrics = (appKey = '3c2c0819434074fc4d339ddd8e112a1e741ecb72', url='https://countly.ipfs.io') => {
+export const InitCountlyMetrics = (appKey, url) => {
     window.Countly = Countly;
 
     Countly.init({
