@@ -64,6 +64,11 @@
   .metrics-warning-wrapper button#metrics-warning-accept {
     border: 1pt solid rgba(107, 196, 206, 1);
   }
+
+  .metrics-warning-wrapper .metrics-warning-link {
+    margin: 0 5px;
+  }
+  
   
   button#metrics-warning-close {
     border: 1pt solid rgba(107, 196, 206, 1);

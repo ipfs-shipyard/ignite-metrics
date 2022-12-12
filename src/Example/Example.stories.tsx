@@ -8,7 +8,10 @@ export default {
     title: "Metrics Consent Example",
     component: Example,
     subComponents: { Warning, Consent, ConsentToggle},
-    args: {}
+    args: {
+        metricsAppKey: '',
+        metricsURL: 'https://countly.ipfs.io'
+    }
 };
 
 const Template = args => <Example {...args}/>

@@ -1,7 +1,10 @@
 .example-metrics-app {
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 300px;
+    position: relative;
+    padding: 25px;
+
 }
 
 .example-metrics-app-consent {
@@ -25,4 +28,10 @@
     justify-content: center;
     width: 100%;
     height: 100%;
+}
+
+.example-metrics-app .cookieConsentToggle {
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }

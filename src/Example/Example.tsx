@@ -1,10 +1,16 @@
 import React, {useState, useEffect} from 'react';
 import Warning from '../components/Warning';
-import Consent from '../components/ConsentBanner';
+import ConsentBanner from '../components/ConsentBanner';
 import ConsentToggle from '../components/ConsentToggle';
+import "./Example.css";
 import { InitCountlyMetrics, getMetricsConsent, updateMetricsConsent, acceptMetricsConsent, declineMetricsConsent } from '../CountlyMetrics';
 
-const Example = ({metricsAppKey, metricsURL}) => {
+interface ExampleProps {
+  metricsAppKey?: string,
+  metricsURL?: string
+}
+
+const Example = ({metricsAppKey, metricsURL}:ExampleProps) => {
   const [showWarning, setShowWarning] = useState(false);
   const [showConsentBanner, setShowConsentBanner] = useState(false);
   const [metricsConsent, setMetricsConsent] = useState<string | null>(getMetricsConsent());
@@ -21,7 +27,7 @@ const Example = ({metricsAppKey, metricsURL}) => {
   }
 
   const onToggleClick = () => {
-    setShowConsentBanner(!!showConsentBanner);
+    setShowConsentBanner(!showConsentBanner);
   }
 
   useEffect(() => {
@@ -38,6 +44,7 @@ const Example = ({metricsAppKey, metricsURL}) => {
     if(metricsConsent != null) {
       try {
         updateMetricsConsent(JSON.parse(metricsConsent))
+        setShowConsentBanner(false)
       } catch {
         setShowConsentBanner(true)
       }
@@ -51,7 +58,7 @@ const Example = ({metricsAppKey, metricsURL}) => {
       <div className="example-metrics-app-body">
         <div className="example-metrics-consent">
             <Warning showWarning={showWarning} onClose={() => setShowWarning(false)} showMetricInfoLink={true} />
-            <Consent onAccept={() => onAccept()} onDecline={() => onDecline()} />
+            <ConsentBanner onAccept={() => onAccept()} onDecline={() => onDecline()} showConsentBanner={showConsentBanner} />
             <ConsentToggle onToggleClick={() => onToggleClick()}/>
         </div>
         <div className="example-metrics-status">
