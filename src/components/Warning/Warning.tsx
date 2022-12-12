@@ -32,9 +32,9 @@ const Warning = ({ showWarning, warningText, showMetricInfoLink, onClose, childr
     }   
 
     if(children) return (
-        <>
+        <div className="js-metrics-warning-decline-warning metrics-warning-wrapper">
             {children}
-        </>
+        </div>
     )
     
     return showWarning ? (

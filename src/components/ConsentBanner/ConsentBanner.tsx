@@ -14,9 +14,9 @@ const ConsentBanner = ({showConsentBanner, consentText, showConsentInfoIssueLink
     const msgText = consentText || "We're collecting web-vitals, pageview and other metrics in order to improve and prioritize our work on IPFS";
     
     if(children) return (
-        <>
+        <div className="metrics-notification-wrapper">
             {children}
-        </>
+        </div>
     )
     
     return showConsentBanner ? (
