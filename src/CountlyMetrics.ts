@@ -40,9 +40,13 @@ export const updateMetricsConsent = (consent: string[]) => {
   Countly.add_consent(consent)
 
   if (Array.isArray(consent)) {
-    localStorage.setItem('metrics_consent', JSON.stringify(consent))
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('metrics_consent', JSON.stringify(consent))
+    }
   } else {
-    localStorage.setItem('metrics_consent', JSON.stringify([consent]))
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('metrics_consent', JSON.stringify([consent]))
+    }
   }
 }
 
