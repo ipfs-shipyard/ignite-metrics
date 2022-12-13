@@ -59,6 +59,10 @@ export const declineMetricsConsent = () => {
 }
 
 export const getMetricsConsent = ():string | null => {
-  const metricsConsent = localStorage.getItem('metrics_consent');
-  return metricsConsent
+  if (typeof window !== 'undefined') {
+   const metricsConsent = localStorage.getItem('metrics_consent');
+    return metricsConsent
+  }
+
+  return null
 }
