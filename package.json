@@ -23,30 +23,29 @@
     "node": ">=14.0.0",
     "npm": ">=6.0.0"
   },
-  "types": "dist/index.d.ts",
   "type": "module",
+  "types": "dist/index.d.ts",
   "files": [
     "src",
-    "dist",
-    "package.json",
-    "README.md"
+    "dist"
   ],
-  "main": "dist/index.js",
+  "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "scripts": {
-    "prebuild": "rm -rf dist",
     "lint": "aegir lint",
     "release": "aegir release",
     "build": "aegir build",
+    "rollup": "rollup -c",
     "test": "aegir test",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "link-local": "npm link && cd node_modules/react && npm link && cd ../react-dom && npm link",
+    "unlink-local": "npm unlink && cd node_modules/react && npm unlink && cd ../react-dom && npm unlink"
   },
   "dependencies": {
     "countly-sdk-web": "^22.6.4",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-router-dom": "^6.4.5",
+    "rollup-plugin-sourcemaps": "^0.6.3",
     "styled-components": "^5.3.6",
     "typescript": "^4.9.3"
   },
@@ -57,6 +56,9 @@
     "@babel/core": "^7.20.5",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
+    "@rollup/plugin-commonjs": "^23.0.4",
+    "@rollup/plugin-node-resolve": "^15.0.1",
+    "@rollup/plugin-typescript": "^10.0.1",
     "@storybook/addon-actions": "^6.5.14",
     "@storybook/addon-essentials": "^6.5.14",
     "@storybook/addon-interactions": "^6.5.14",
@@ -74,10 +76,11 @@
     "eslint-plugin-prettier": "^4.2.1",
     "html-loader": "^4.2.0",
     "prettier": "^2.8.1",
+    "rollup": "^3.7.3",
+    "rollup-plugin-dts": "^5.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-postcss": "^4.0.2",
+    "rollup-plugin-terser": "^7.0.2",
     "style-loader": "^3.3.1"
-  },
-  "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
   }
 }
