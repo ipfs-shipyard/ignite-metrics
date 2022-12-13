@@ -79,5 +79,8 @@
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
+  },
+  "optionalDependencies": {
+    "@esbuild/darwin-arm64": "^0.16.5"
   }
 }
