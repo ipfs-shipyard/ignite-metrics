@@ -82,6 +82,7 @@
   },
   "optionalDependencies": {
     "@esbuild/darwin-arm64": "^0.16.5",
+    "@esbuild/linux-x64": "^0.16.5",
     "react-refresh": "^0.14.0"
   }
 }
