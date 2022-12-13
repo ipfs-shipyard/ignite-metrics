@@ -28,7 +28,7 @@ A longer repository description.
 
 ## Lead Maintainer
 
-[Your name](https://github.com/alinktoyourname)
+[Russell Dempsey](https://github.com/SgtPooki)
 
 ## Contributing
 
