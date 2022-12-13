@@ -27,3 +27,4 @@ typings/
 .eslintcache
 *.tgz
 
+storybook-static
