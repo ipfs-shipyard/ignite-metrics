@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "UI library for gathering metrics for ignite team projects",
   "author": "Ignite Team",
-  "private": false,
-  "license": "MIT",
+  "license": "Apache-2.0 OR MIT",
   "homepage": "https://github.com/ipfs-shipyard/ignite-metrics#readme",
   "repository": {
     "type": "git",
@@ -14,25 +13,120 @@
     "url": "https://github.com/ipfs-shipyard/ignite-metrics/issues"
   },
   "keywords": [
-    "react",
+    "ignite",
     "ipfs",
     "metrics",
-    "ignite"
+    "react"
   ],
   "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=6.0.0"
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
   },
-  "types": "dist/index.d.ts",
   "type": "module",
+  "types": "./dist/src/index.d.ts",
   "files": [
     "src",
-    "dist",
-    "package.json",
-    "README.md"
+    "dist/src",
+    "!dist/test",
+    "!**/*.tsbuildinfo"
   ],
-  "main": "dist/index.js",
-  "module": "dist/esm/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/src/index.js"
+    }
+  },
+  "eslintConfig": {
+    "extends": "ipfs",
+    "parserOptions": {
+      "sourceType": "module"
+    }
+  },
+  "release": {
+    "branches": [
+      "main"
+    ],
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits",
+          "releaseRules": [
+            {
+              "breaking": true,
+              "release": "major"
+            },
+            {
+              "revert": true,
+              "release": "patch"
+            },
+            {
+              "type": "feat",
+              "release": "minor"
+            },
+            {
+              "type": "fix",
+              "release": "patch"
+            },
+            {
+              "type": "docs",
+              "release": "patch"
+            },
+            {
+              "type": "test",
+              "release": "patch"
+            },
+            {
+              "type": "deps",
+              "release": "patch"
+            },
+            {
+              "scope": "no-release",
+              "release": false
+            }
+          ]
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {
+                "type": "feat",
+                "section": "Features"
+              },
+              {
+                "type": "fix",
+                "section": "Bug Fixes"
+              },
+              {
+                "type": "chore",
+                "section": "Trivial Changes"
+              },
+              {
+                "type": "docs",
+                "section": "Documentation"
+              },
+              {
+                "type": "deps",
+                "section": "Dependencies"
+              },
+              {
+                "type": "test",
+                "section": "Tests"
+              }
+            ]
+          }
+        }
+      ],
+      "@semantic-release/changelog",
+      "@semantic-release/npm",
+      "@semantic-release/github",
+      "@semantic-release/git"
+    ]
+  },
   "scripts": {
     "prebuild": "rm -rf dist",
     "lint": "aegir lint",
@@ -49,9 +143,6 @@
     "react-router-dom": "^6.4.5",
     "styled-components": "^5.3.6",
     "typescript": "^4.9.3"
-  },
-  "aegir": {
-    "tsRepo": true
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
@@ -84,5 +175,10 @@
     "@esbuild/darwin-arm64": "^0.16.5",
     "@esbuild/linux-x64": "^0.16.5",
     "react-refresh": "^0.14.0"
-  }
+  },
+  "aegir": {
+    "tsRepo": true
+  },
+  "module": "dist/esm/index.js",
+  "private": false
 }
