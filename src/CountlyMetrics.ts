@@ -1,7 +1,6 @@
 import Countly from 'countly-sdk-web'
 
 export const InitCountlyMetrics = (appKey: string, url: string) => {
-
   Countly.init({
     app_key: appKey,
     url: url,

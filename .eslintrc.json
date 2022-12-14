@@ -10,8 +10,5 @@
     "sourceType": "module"
   },
   "rules": {
-    "no-return-await": "off",
-    "no-undef-init": "off",
-    "@typescript-eslint/return-await": "in-try-catch"
   }
 }
