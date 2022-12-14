@@ -1,13 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import Warning from '../components/Warning';
-import ConsentBanner from '../components/ConsentBanner';
-import ConsentToggle from '../components/ConsentToggle';
+import Warning from '../components/Warning/index.js';
+import ConsentBanner from '../components/ConsentBanner/index.js';
+import ConsentToggle from '../components/ConsentToggle/index.js';
 import "./Example.css";
 import { InitCountlyMetrics, getMetricsConsent, updateMetricsConsent, acceptMetricsConsent, declineMetricsConsent } from '../CountlyMetrics';
 
 interface ExampleProps {
-  metricsAppKey?: string,
-  metricsURL?: string
+  metricsAppKey: string,
+  metricsURL: string
 }
 
 const Example = ({metricsAppKey, metricsURL}:ExampleProps) => {
@@ -17,7 +17,7 @@ const Example = ({metricsAppKey, metricsURL}:ExampleProps) => {
 
   const onAccept = () => {
     acceptMetricsConsent()
-    setMetricsConsent(getMetricsConsent()) 
+    setMetricsConsent(getMetricsConsent())
   }
 
   const onDecline = () => {
@@ -32,10 +32,10 @@ const Example = ({metricsAppKey, metricsURL}:ExampleProps) => {
 
   useEffect(() => {
     const appKey = metricsAppKey;
-    const url=metricsURL;
+    const url = metricsURL;
 
     InitCountlyMetrics(appKey,url);
-    
+
   }, [])
 
   useEffect(() => {

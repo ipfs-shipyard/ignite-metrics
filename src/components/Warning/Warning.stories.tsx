@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Warning from "./Warning";
+import Warning from "./Warning.js";
 
 export default {
     title: "Metrics Warning",
@@ -13,7 +13,7 @@ const Template = args => {
         <Warning onClose={() => setShowWarning(false)} showWarning={showWarning} {...args} />
     )
 }
-    
+
 const Standard = Template.bind({});
 
 export { Standard }

@@ -1,1 +1,1 @@
-export { default }from './Warning';
+export { default } from './Warning.js'

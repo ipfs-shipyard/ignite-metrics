@@ -1,1 +1,1 @@
-export { default }from './ConsentToggle';
+export { default } from './ConsentToggle.js'

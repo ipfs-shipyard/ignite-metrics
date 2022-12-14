@@ -1,5 +1,5 @@
 import React from "react";
-import ConsentToggle from "./ConsentToggle";
+import ConsentToggle from "./ConsentToggle.js";
 
 export default {
     title: "Metrics Consent Toggle",

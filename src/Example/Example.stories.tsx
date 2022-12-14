@@ -1,8 +1,8 @@
 import React from "react";
-import Example from "./Example";
-import Warning from '../components/Warning';
-import Consent from '../components/ConsentBanner';
-import ConsentToggle from '../components/ConsentToggle';
+import Example from "./Example.js";
+import Warning from '../components/Warning/index.js';
+import Consent from '../components/ConsentBanner/index.js';
+import ConsentToggle from '../components/ConsentToggle/index.js';
 
 export default {
     title: "Metrics Consent Example",

@@ -1,2 +1,2 @@
-export * from './components';
-export * from './CountlyMetrics';
+export * from './components/index.js'
+export * from './CountlyMetrics.js'

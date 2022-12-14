@@ -1,5 +1,5 @@
 import React from "react";
-import ConsentBanner from "./ConsentBanner";
+import ConsentBanner from "./ConsentBanner.js";
 
 export default {
     title: "Metrics Consent",
