@@ -1,5 +1,6 @@
 import React from "react";
 import ConsentBanner from "./ConsentBanner.js";
+import type { ConsentBannerProps } from "./ConsentBanner.js";
 
 export default {
     title: "Metrics Consent",
@@ -11,7 +12,7 @@ export default {
     },
 };
 
-const Template = args => <ConsentBanner {...args}/>;
+const Template = (args:ConsentBannerProps) => <ConsentBanner {...args}/>;
 
 const Standard = Template.bind({});
 

@@ -36,8 +36,12 @@ const Warning = ({ showWarning, warningText, showMetricInfoLink, onClose, childr
             {children}
         </div>
     )
+
+    if(!showWarning) {
+        return null
+    }
     
-    return showWarning ? (
+    return (
         <div className="js-metrics-warning-decline-warning metrics-warning-wrapper">
             <div className="metrics-warning-container">
                 {renderWarningMessage()}
@@ -52,7 +56,7 @@ const Warning = ({ showWarning, warningText, showMetricInfoLink, onClose, childr
                 </div>
             </div>
         </div>
-    ) : null
+    )
 }
 
 export default Warning;

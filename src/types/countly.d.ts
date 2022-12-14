@@ -1,8 +1,4 @@
-/* eslint-disable no-unused-vars */
 declare module 'countly-sdk-web' {
-  /**
-   * From https://support.count.ly/hc/en-us/articles/360037441932-Web-analytics-JavaScript-#minimal-setup
-   */
   interface CountlyEventData {
     key: string
     count: number

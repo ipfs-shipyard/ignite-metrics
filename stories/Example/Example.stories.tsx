@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import Warning from '../components/Warning/index.js';
-import ConsentBanner from '../components/ConsentBanner/index.js';
-import ConsentToggle from '../components/ConsentToggle/index.js';
+import Warning from '../../src/components/Warning/index.js';
+import ConsentBanner from '../../src/components/ConsentBanner/index.js';
+import ConsentToggle from '../../src/components/ConsentToggle/index.js';
 import "./Example.css";
-import { InitCountlyMetrics, getMetricsConsent, updateMetricsConsent, acceptMetricsConsent, declineMetricsConsent } from '../CountlyMetrics';
+import { InitCountlyMetrics, getMetricsConsent, updateMetricsConsent, acceptMetricsConsent, declineMetricsConsent } from '../../src/CountlyMetrics.js';
 
 interface ExampleProps {
   metricsAppKey: string,
@@ -70,4 +70,18 @@ const Example = ({metricsAppKey, metricsURL}:ExampleProps) => {
   );
 }
 
-export default Example;
+export default {
+    title: "Metrics Consent Example",
+    component: Example,
+    subComponents: { Warning, ConsentBanner, ConsentToggle},
+    args: {
+        metricsAppKey: '',
+        metricsURL: 'https://countly.ipfs.io'
+    }
+};
+
+const Template = (args:ExampleProps) => <Example {...args}/>
+
+const Standard = Template.bind({})
+
+export { Standard }

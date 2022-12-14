@@ -18,8 +18,12 @@ const ConsentBanner = ({showConsentBanner, consentText, showConsentInfoIssueLink
             {children}
         </div>
     )
+
+    if (!showConsentBanner) {
+        return null
+    }
     
-    return showConsentBanner ? (
+    return (
         <div className="js-metrics-notification metrics-notification-wrapper">
         <div className="metrics-notification-container">
           <div className="metrics-notification-text">
@@ -50,7 +54,7 @@ const ConsentBanner = ({showConsentBanner, consentText, showConsentInfoIssueLink
           </div>
         </div>
       </div>
-    ) : null
+    )
 }
 
 export default ConsentBanner;

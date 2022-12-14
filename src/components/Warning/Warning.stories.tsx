@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Warning from "./Warning.js";
+import type { WarningProps } from "./Warning.js";
 
 export default {
     title: "Metrics Warning",
@@ -7,10 +8,10 @@ export default {
     args: {}
 };
 
-const Template = args => {
+const Template = (args:WarningProps) => {
     const [showWarning, setShowWarning] = useState(true);
     return (
-        <Warning onClose={() => setShowWarning(false)} showWarning={showWarning} {...args} />
+        <Warning {...args} onClose={() => setShowWarning(false)} showWarning={showWarning} />
     )
 }
 
