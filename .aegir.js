@@ -24,7 +24,7 @@ export default {
              *///  `aegir build --tool=tsc && copyfiles -u 1 src/**/*.css dist/ && aegir build --tool=esbuild`
              /***/
             return new Promise((resolve, reject) => {
-              copyfiles(['src/**/*.css', 'dist/'], {up: 0, soft: true}, (err) => {
+              copyfiles(['src/**/*.css', 'dist/'], {up: 0, soft: false}, (err) => {
                 if (err) {
                   reject(err)
                 } else {
