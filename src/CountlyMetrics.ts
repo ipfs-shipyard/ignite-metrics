@@ -21,10 +21,6 @@ export const InitCountlyMetrics = (appKey: string, url: string) => {
     performance: performanceFeatures
   })
 
-  /**
-   * we can call all the helper methods we want, they won't record until consent is provided for specific features
-   */
-  //
   Countly.track_clicks()
   Countly.track_errors()
   Countly.track_forms()
