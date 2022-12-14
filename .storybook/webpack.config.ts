@@ -3,16 +3,17 @@
  * @param {object} param0
  * @param {string} param0.mode
  * @param {import('webpack').Configuration} param0.config
- * @returns
+ * @returns {import('webpack').Configuration}
  */
 module.exports = ({ config, mode }) => {
-  config.module.rules.push({
-    test: /\.(ts|tsx)$/,
-    loader: require.resolve('babel-loader'),
-    options: {
-      presets: [['react-app', { flow: false, typescript: true }]],
+  config.resolve = {
+    ...config.resolve,
+    extensionAlias: {
+      ...config.resolve.extensionAlias,
+      ".js": [".ts", ".js", ".tsx", ".jsx"],
+      ".mjs": [".mts", ".mjs"],
     },
-  });
-  config.resolve.extensions.push('.ts', '.tsx');
+  };
+
   return config;
 };

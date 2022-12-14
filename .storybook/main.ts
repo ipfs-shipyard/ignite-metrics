@@ -1,4 +1,4 @@
-// const path = require("path");
+const path = require('path');
 
 module.exports = {
   core: {
@@ -6,7 +6,7 @@ module.exports = {
   },
   features: {
     postcss: false,
-    storyStoreV7: true
+    storyStoreV7: false
   },
   stories: [
     '../src/**/*.stories.mdx',
@@ -15,10 +15,7 @@ module.exports = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/addon-interactions'
+    '@storybook/addon-interactions',
   ],
   framework: '@storybook/react',
-  core: {
-    builder: '@storybook/builder-webpack5'
-  }
 }
