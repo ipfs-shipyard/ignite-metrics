@@ -10,7 +10,7 @@ export default {
   build: {
     types: true,
     config: {
-      platform: 'node',
+      format: 'esm',
       external: ['electron', '#ansi-styles', 'yargs/yargs', '#supports-color'],
       plugins: [
         {

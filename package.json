@@ -31,8 +31,12 @@
   ],
   "exports": {
     ".": {
-      "types": "./src/index.d.ts",
+      "types": "./dist/src/index.d.ts",
       "import": "./dist/src/index.js"
+    },
+    "./vanilla": {
+      "types": "./dist/src/CountlyMetrics.d.ts",
+      "import": "./dist/src/CountlyMetrics.js"
     }
   },
   "eslintConfig": {
