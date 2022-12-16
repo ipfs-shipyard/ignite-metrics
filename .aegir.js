@@ -1,4 +1,5 @@
 import copyfiles from 'copyfiles'
+import cssModulesPlugin from 'esbuild-css-modules-plugin'
 
 /** @type {import('aegir').PartialOptions} */
 export default {
@@ -33,7 +34,8 @@ export default {
               })
             });
           },
-        }
+        },
+        cssModulesPlugin(),
       ]
     },
     bundlesizeMax: '44KB',

@@ -1,4 +1,4 @@
-.cookieConsentToggle {
+.consent-toggle {
     width: 40px;
     height: 40px;
     will-change: transform;
@@ -14,15 +14,15 @@
     margin: 0 1em 0 0;
   }
   
-  .cookieConsentToggle:disabled {
+  .consent-toggle:disabled {
     cursor: default;
   }
   
-  .cookieConsentToggle:hover:not(:disabled) {
+  .consent-toggle:hover:not(:disabled) {
     color: white;
     background: #69c4cd;
   }
   
-  .cookieConsentToggle * {
+  .consent-toggle * {
     fill: currentColor;
   }

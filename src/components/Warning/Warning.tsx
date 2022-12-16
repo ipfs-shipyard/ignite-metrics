@@ -1,5 +1,5 @@
 import React from "react";
-import "./Warning.css";
+import styles from "./Warning.module.css";
 
 export interface WarningProps {
     showWarning?: boolean,
@@ -15,13 +15,13 @@ const Warning = ({ showWarning, warningText, showMetricInfoLink, onClose, childr
         const msgText = warningText || "We will limit collection of metrics to only necessary features: 'sessions' and 'views'."
 
         return (
-            <div id="metrics-warning-decline-warning" className="metrics-warning-text">
+            <div id={styles.consentWarningDeclineWarning} className={styles["consent-warning-text"]}>
                 {msgText}
                 {
                     showMetricInfoLink && 
-                    <div className="metric-info-link-wrapper">
+                    <div className={styles["consent-warning-link-wrapper"]}>
                         See 
-                        <a className="metrics-warning-link" href="https://support.count.ly/hc/en-us/articles/360037441932-Web-analytics-JavaScript-#features-for-consent" target="_blank" rel="noreferrer">
+                        <a className={styles["consent-warning-link"]} href="https://support.count.ly/hc/en-us/articles/360037441932-Web-analytics-JavaScript-#features-for-consent" target="_blank" rel="noreferrer">
                             {`Countly's group_features`}
                         </a> 
                         for more information.
@@ -32,7 +32,7 @@ const Warning = ({ showWarning, warningText, showMetricInfoLink, onClose, childr
     }   
 
     if(children) return (
-        <div className="js-metrics-warning-decline-warning metrics-warning-wrapper">
+        <div className={styles["consent-warning-wrapper"]}>
             {children}
         </div>
     )
@@ -42,13 +42,13 @@ const Warning = ({ showWarning, warningText, showMetricInfoLink, onClose, childr
     }
     
     return (
-        <div className="js-metrics-warning-decline-warning metrics-warning-wrapper">
-            <div className="metrics-warning-container">
+        <div className={styles["consent-warning-wrapper"]}>
+            <div className={styles["consent-warning-container"]}>
                 {renderWarningMessage()}
-                <div className="metrics-warning-buttons">
+                <div className={styles["consent-warning-buttons"]}>
                     <button 
-                        id="metrics-warning-warning-close" 
-                        className="js-metrics-warning-warning-close"
+                        id={styles["consent-warning-warning-close"]} 
+                        className="js-consent-warning-warning-close"
                         onClick={onClose}
                     >
                             ✕&nbsp;Close

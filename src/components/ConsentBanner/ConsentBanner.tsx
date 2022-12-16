@@ -1,5 +1,5 @@
 import React from "react";
-import "./ConsentBanner.css";
+import styles from "./ConsentBanner.module.css";
 
 export interface ConsentBannerProps {
     showConsentBanner?: boolean,
@@ -14,7 +14,7 @@ const ConsentBanner = ({showConsentBanner, consentText, showConsentInfoIssueLink
     const msgText = consentText || "We're collecting web-vitals, pageview and other metrics in order to improve and prioritize our work on IPFS";
     
     if(children) return (
-        <div className="metrics-notification-wrapper">
+        <div className={styles["consent-banner-wrapper"]}>
             {children}
         </div>
     )
@@ -24,29 +24,29 @@ const ConsentBanner = ({showConsentBanner, consentText, showConsentInfoIssueLink
     }
     
     return (
-        <div className="js-metrics-notification metrics-notification-wrapper">
-        <div className="metrics-notification-container">
-          <div className="metrics-notification-text">
+        <div className={styles["consent-banner-wrapper"]}>
+        <div className={styles["consent-banner-container"]}>
+          <div className={styles["consent-banner-text"]}>
             {msgText}
             { showConsentInfoIssueLink && 
-            <div className="metric-info-link-wrapper">
-                <a className="consent-info-link" href="https://github.com/ipfs/ipfs-gui/issues/125" target="_blank" rel="noreferrer">
+            <div className={styles["consent-banner-link-wrapper"]}>
+                <a className={styles["consent-banner-link"]} href="https://github.com/ipfs/ipfs-gui/issues/125" target="_blank" rel="noreferrer">
                     See details on metric collection
                 </a>
             </div>
             }
             </div>
-          <div className="metrics-notification-buttons">
+          <div className={styles["consent-banner-buttons"]}>
             <button 
-                id="metrics-notification-accept" 
-                className="js-metrics-notification-accept"
+                id={styles["consent-banner-accept"]} 
+                className="js-consent-banner-accept"
                 onClick={onAccept}
             >
                 ☑&nbsp;Agree
             </button>
             <button 
-                id="metrics-notification-decline" 
-                className="js-metrics-notification-decline"
+                id={styles["consent-banner-decline"]} 
+                className="js-consent-banner-decline"
                 onClick={onDecline}
             >
                 Decline

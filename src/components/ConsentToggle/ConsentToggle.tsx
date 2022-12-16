@@ -1,5 +1,5 @@
 import React from "react";
-import "./ConsentToggle.css";
+import styles from "./ConsentToggle.module.css";
 
 export interface ConsentToggleProps {
     onToggleClick?: () => void
@@ -7,7 +7,7 @@ export interface ConsentToggleProps {
 
 const ConsentToggle = ( {onToggleClick}:ConsentToggleProps ) => {
     return (
-        <button onClick={onToggleClick} className="cookieConsentToggle js-cookie-banner-toggle" aria-label="Edit cookie settings">
+        <button onClick={onToggleClick} className={styles["consent-toggle"]} aria-label="Edit cookie settings">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
           <path d="M510.52 255.82c-69.97-.85-126.47-57.69-126.47-127.86-70.17
             0-127-56.49-127.86-126.45-27.26-4.14-55.13.3-79.72 12.82l-69.13
