@@ -35,7 +35,7 @@ declare module 'countly-sdk-web' {
     add_event: (event: CountlyEvent) => void
     app_key: string
     url: string
-    q?: CountlyEventQueueItem[]
+    q: CountlyEventQueueItem[]
     track_domains: boolean
     /**
      * For the track_* functions below, @see https://github.com/Countly/countly-sdk-web/blob/1c72a3b5d4c1e66031e3ecc5779adfe030ab21e0/lib/countly.js
