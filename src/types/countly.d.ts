@@ -23,7 +23,9 @@ declare module 'countly-sdk-web' {
   type CountlyEventQueueItem = [string, CountlyEventData] | [eventName: string, key: string] | [eventName: string]
   interface CountlyWebSdk {
     group_features: (arg0: Record<string, string[]>) => unknown
+    check_consent: (consentFeature: string) => boolean
     add_consent: (consentFeature: string | string[]) => void
+    remove_consent: (consentFeature: string | string[], enforceConsentUpdate?: boolean) => void
     require_consent: boolean
     init: (configOptions?: Partial<CountlyWebSdk>) => void
     /**
@@ -97,5 +99,5 @@ declare module 'countly-sdk-web' {
     track_forms: () => void
   }
   const Countly: CountlyWebSdk
-  export default Countly
+  export = Countly
 }
