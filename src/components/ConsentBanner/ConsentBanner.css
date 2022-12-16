@@ -5,9 +5,6 @@ div.metrics-notification-wrapper {
     align-items: center;
     width: 100%;
     height:  auto;
-    position: fixed;
-    top: 0;
-    left: 0;
   }
   
   div.metrics-notification-container {
