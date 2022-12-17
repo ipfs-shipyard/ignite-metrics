@@ -97,6 +97,22 @@ declare module 'countly-sdk-web' {
      * @param {boolean} trackHidden - provide true to also track hidden inputs, default false
      * */
     track_forms: () => void
+
+    /**
+     *
+     * @param {boolean} noHeartBeat - true if you don't want to use internal heartbeat to manage session
+     * @param {boolean} force - force begin session request even if session cookie is enabled
+     * @returns {void}
+     */
+    begin_session: (noHeartBeat, force) => void
+
+    /**
+     *
+     * @param {number} sec - amount of seconds to report for current session, before ending it
+     * @param {boolean} force - force end session request even if session cookie is enabled
+     * @returns {void}
+     */
+    end_session: (sec, force) => void
   }
   const Countly: CountlyWebSdk
   export = Countly

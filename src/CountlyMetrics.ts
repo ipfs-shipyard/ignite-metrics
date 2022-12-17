@@ -1,5 +1,11 @@
 import Countly from 'countly-sdk-web'
 
+interface MetricsProviderConstructorOptions {
+  appKey: string
+  url?: string
+  autoTrack: boolean
+}
+
 export class MetricsProvider {
   private readonly groupedFeatures: Record<string, string[]> = {
     minimal: ['sessions', 'views'],
@@ -8,26 +14,29 @@ export class MetricsProvider {
     performance: ['scrolls', 'clicks', 'forms', 'star-rating', 'feedback']
   }
 
-  constructor (private readonly appKey: string, private readonly url = 'https://countly.ipfs.io') {
+  private sessionStartTime: number | null = null
+
+  constructor ({ autoTrack = true, url = 'https://countly.ipfs.io', appKey }: MetricsProviderConstructorOptions) {
     this.metricsService.init({
-      app_key: this.appKey,
-      url: this.url,
+      app_key: appKey,
+      url: url,
       require_consent: true
     })
-    this.init()
-    console.log('ingite-metrics provider', this)
+
+    this.metricsService.group_features({
+      all: [...this.groupedFeatures.minimal, ...this.groupedFeatures.marketing, ...this.groupedFeatures.tracking, ...this.groupedFeatures.performance],
+      ...this.groupedFeatures
+    })
+    if (autoTrack) {
+      this.autoTrack()
+    }
   }
 
   get metricsService (): typeof Countly {
     return Countly
   }
 
-  init () {
-    this.metricsService.group_features({
-      all: [...this.groupedFeatures.minimal, ...this.groupedFeatures.marketing, ...this.groupedFeatures.tracking, ...this.groupedFeatures.performance],
-      ...this.groupedFeatures
-    })
-
+  autoTrack () {
     this.metricsService.track_clicks()
     this.metricsService.track_errors()
     this.metricsService.track_forms()
@@ -65,5 +74,24 @@ export class MetricsProvider {
         this.removeConsent(groupName)
       }
     }
+  }
+
+  startSession (noHeartBeat = false, force = false) {
+    console.log('startSession called')
+    if (this.sessionStartTime == null) {
+      this.sessionStartTime = new Date().getTime()
+      this.metricsService.begin_session(noHeartBeat, force)
+    }
+  }
+
+  endSession (force = false) {
+    console.log('endSession called')
+    const now = Date.now()
+    let sessionTime = 0
+    if (this.sessionStartTime != null) {
+      sessionTime = (now - this.sessionStartTime) / 1000
+      this.sessionStartTime = null
+    }
+    this.metricsService.begin_session(sessionTime, force)
   }
 }
