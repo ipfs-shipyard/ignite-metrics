@@ -160,7 +160,7 @@
     "@storybook/testing-library": "^0.0.13",
     "@types/react-dom": "^18.0.9",
     "@types/styled-components": "^5.1.26",
-    "aegir": "^37.6.4",
+    "aegir": "^37.7.8",
     "babel-loader": "^9.1.0",
     "copyfiles": "^2.4.1",
     "css-loader": "^6.7.2",
