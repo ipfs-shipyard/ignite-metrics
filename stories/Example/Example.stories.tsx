@@ -3,7 +3,7 @@ import ConsentBanner from '../../src/components/ConsentBanner/index.js';
 import ConsentToggle from '../../src/components/ConsentToggle/index.js';
 import Warning from '../../src/components/Warning/index.js';
 import { COUNTLY_API_URL } from '../../src/config.js';
-import MetricsProvider from '../../src/CountlyMetrics';
+import MetricsProvider from '../../src/MetricsProvider';
 import './Example.css';
 
 interface ExampleProps {
