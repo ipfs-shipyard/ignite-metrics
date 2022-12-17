@@ -1,34 +1,44 @@
+import { COUNTLY_API_URL } from './config';
+import type { consentTypes, eventTypes } from 'countly-sdk-web';
 import Countly from 'countly-sdk-web'
 
 interface MetricsProviderConstructorOptions {
   appKey: string
   url?: string
-  autoTrack: boolean
+  autoTrack?: boolean
 }
 
-export class MetricsProvider {
-  private readonly groupedFeatures: Record<string, string[]> = {
-    minimal: ['sessions', 'views'],
-    marketing: ['attribution', 'users', 'location'],
-    tracking: ['events', 'crashes', 'apm'],
-    performance: ['scrolls', 'clicks', 'forms', 'star-rating', 'feedback']
+export default class MetricsProvider {
+  private readonly minimalEvents: eventTypes[] = ['sessions', 'views'];
+  private readonly marketingEvents: eventTypes[] = ['attribution', 'users', 'location'];
+  private readonly trackingEvents: eventTypes[] = ['events', 'crashes', 'apm'];
+  private readonly performanceEvents: eventTypes[] = ['scrolls', 'clicks', 'forms', 'star-rating', 'feedback'];
+  private readonly groupedFeatures: Record<consentTypes, eventTypes[]> = {
+    all: [
+      ...this.marketingEvents,
+      ...this.minimalEvents,
+      ...this.performanceEvents,
+      ...this.trackingEvents
+    ],
+    marketing: this.marketingEvents,
+    minimal: this.minimalEvents,
+    performance: this.performanceEvents,
+    tracking: this.trackingEvents,
   }
 
   private sessionStarted: boolean = false
 
-  constructor ({ autoTrack = true, url = 'https://countly.ipfs.io', appKey }: MetricsProviderConstructorOptions) {
+  constructor ({ autoTrack = true, url = COUNTLY_API_URL, appKey }: MetricsProviderConstructorOptions) {
     this.metricsService.init({
       app_key: appKey,
       url: url,
       require_consent: true
     })
 
-    this.metricsService.group_features({
-      all: [...this.groupedFeatures.minimal, ...this.groupedFeatures.marketing, ...this.groupedFeatures.tracking, ...this.groupedFeatures.performance],
-      ...this.groupedFeatures
-    })
+    this.metricsService.group_features(this.groupedFeatures);
+
     if (autoTrack) {
-      this.autoTrack()
+      this.setupAutoTrack()
     }
   }
 
@@ -36,7 +46,7 @@ export class MetricsProvider {
     return Countly
   }
 
-  autoTrack () {
+  setupAutoTrack () {
     this.metricsService.track_clicks()
     this.metricsService.track_errors()
     this.metricsService.track_forms()
@@ -47,33 +57,35 @@ export class MetricsProvider {
     this.metricsService.track_view()
   }
 
-  addConsent (consent: string) {
+  addConsent(consent: consentTypes | consentTypes[]) {
     this.metricsService.add_consent(consent)
   }
 
-  removeConsent (consent: string) {
+  removeConsent (consent: consentTypes | consentTypes[]) {
     this.metricsService.remove_consent(consent, true)
   }
 
-  checkConsent (consent: string) {
-    const featuresArray = this.groupedFeatures[consent]
-    if (featuresArray == null) {
-      return this.metricsService.check_consent(consent)
+  checkConsent(consent: consentTypes) {
+    if (!(consent in this.groupedFeatures)) {
+      throw new Error('Unknown consent type');
     }
-    return featuresArray.every((feature) => this.metricsService.check_consent(feature))
+    return this.groupedFeatures[consent].every(this.metricsService.check_consent)
   }
 
-  async updateConsent (consent: string[]) {
-    const groupNames = Object.keys(this.groupedFeatures)
-    for (let i = 0; i < groupNames.length; i++) {
-      const groupName = groupNames[i]
-      // console.log('groupName: ', groupName)
-      if (consent.includes(groupName)) {
-        this.addConsent(groupName)
+  /**
+   * Update consent.
+   *
+   * @param {string[]} consent
+   */
+  updateConsent (consent: string[]) {
+    const approvedConsent = new Set(consent)
+    Object.keys(this.groupedFeatures).forEach((groupName) => {
+      if (approvedConsent.has(groupName)) {
+        this.addConsent(groupName as consentTypes)
       } else {
-        this.removeConsent(groupName)
+        this.removeConsent(groupName as consentTypes)
       }
-    }
+    })
   }
 
   /**
