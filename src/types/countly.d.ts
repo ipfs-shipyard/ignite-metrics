@@ -18,9 +18,9 @@ declare module 'countly-sdk-web' {
     segmentation?: Segments
   }
 
-  export type eventTypes = 'apm' | 'attribution' | 'clicks' | 'crashes' | 'events' | 'feedback' | 'forms'
-    | 'location' | 'scrolls' | 'sessions' | 'star-rating' | 'users' | 'views'
-  export type consentTypes = 'all' | 'minimal' | 'marketing' | 'tracking' | 'performance';
+  export type eventTypes = 'apm' | 'attribution' | 'clicks' | 'crashes' | 'events' | 'feedback' | 'forms' |
+  'location' | 'scrolls' | 'sessions' | 'star-rating' | 'users' | 'views'
+  export type consentTypes = 'all' | 'minimal' | 'marketing' | 'tracking' | 'performance'
   type Segments = Record<string, string>
   type IgnoreList = Array<string | RegExp>
   type CountlyEventQueueItem = [string, CountlyEventData] | [eventName: string, key: string] | [eventName: string]

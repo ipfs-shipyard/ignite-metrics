@@ -1,5 +1,5 @@
-import { COUNTLY_API_URL } from './config';
-import type { consentTypes, eventTypes } from 'countly-sdk-web';
+import { COUNTLY_API_URL } from './config'
+import type { consentTypes, eventTypes } from 'countly-sdk-web'
 import Countly from 'countly-sdk-web'
 
 interface MetricsProviderConstructorOptions {
@@ -9,10 +9,10 @@ interface MetricsProviderConstructorOptions {
 }
 
 export default class MetricsProvider {
-  private readonly minimalEvents: eventTypes[] = ['sessions', 'views'];
-  private readonly marketingEvents: eventTypes[] = ['attribution', 'users', 'location'];
-  private readonly trackingEvents: eventTypes[] = ['events', 'crashes', 'apm'];
-  private readonly performanceEvents: eventTypes[] = ['scrolls', 'clicks', 'forms', 'star-rating', 'feedback'];
+  private readonly minimalEvents: eventTypes[] = ['sessions', 'views']
+  private readonly marketingEvents: eventTypes[] = ['attribution', 'users', 'location']
+  private readonly trackingEvents: eventTypes[] = ['events', 'crashes', 'apm']
+  private readonly performanceEvents: eventTypes[] = ['scrolls', 'clicks', 'forms', 'star-rating', 'feedback']
   private readonly groupedFeatures: Record<consentTypes, eventTypes[]> = {
     all: [
       ...this.marketingEvents,
@@ -23,11 +23,11 @@ export default class MetricsProvider {
     marketing: this.marketingEvents,
     minimal: this.minimalEvents,
     performance: this.performanceEvents,
-    tracking: this.trackingEvents,
+    tracking: this.trackingEvents
   }
 
   private sessionStarted: boolean = false
-  private _consentGranted: Set<consentTypes> = new Set()
+  private readonly _consentGranted: Set<consentTypes> = new Set()
 
   constructor ({ autoTrack = true, url = COUNTLY_API_URL, appKey }: MetricsProviderConstructorOptions) {
     this.metricsService.init({
@@ -36,7 +36,7 @@ export default class MetricsProvider {
       require_consent: true
     })
 
-    this.metricsService.group_features(this.groupedFeatures);
+    this.metricsService.group_features(this.groupedFeatures)
 
     if (autoTrack) {
       this.setupAutoTrack()
@@ -47,7 +47,7 @@ export default class MetricsProvider {
     return Countly
   }
 
-  get consentGranted(): consentTypes[] {
+  get consentGranted (): consentTypes[] {
     return [...this._consentGranted]
   }
 
@@ -62,25 +62,25 @@ export default class MetricsProvider {
     this.metricsService.track_view()
   }
 
-  addConsent(consent: consentTypes | consentTypes[]) {
+  addConsent (consent: consentTypes | consentTypes[]) {
     if (!Array.isArray(consent)) {
-      consent = [consent];
+      consent = [consent]
     }
-    consent.forEach(c => this._consentGranted.add(c));
+    consent.forEach(c => this._consentGranted.add(c))
     this.metricsService.add_consent(consent)
   }
 
-  removeConsent(consent: consentTypes | consentTypes[]) {
+  removeConsent (consent: consentTypes | consentTypes[]) {
     if (!Array.isArray(consent)) {
-      consent = [consent];
+      consent = [consent]
     }
     consent.forEach(c => this._consentGranted.delete(c))
     this.metricsService.remove_consent(consent, true)
   }
 
-  checkConsent(consent: consentTypes) {
+  checkConsent (consent: consentTypes) {
     if (!(consent in this.groupedFeatures)) {
-      throw new Error('Unknown consent type');
+      throw new Error('Unknown consent type')
     }
     return this.groupedFeatures[consent].every(this.metricsService.check_consent)
   }
