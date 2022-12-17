@@ -1,28 +1,33 @@
-import React, {useState, useEffect} from 'react';
-import Warning from '../../src/components/Warning/index.js';
+import React, { useEffect, useState } from 'react';
 import ConsentBanner from '../../src/components/ConsentBanner/index.js';
 import ConsentToggle from '../../src/components/ConsentToggle/index.js';
-import "./Example.css";
-import { InitCountlyMetrics, getMetricsConsent, updateMetricsConsent, acceptMetricsConsent, declineMetricsConsent } from '../../src/CountlyMetrics.js';
+import Warning from '../../src/components/Warning/index.js';
+import { COUNTLY_API_URL } from '../../src/config.js';
+import MetricsProvider from '../../src/CountlyMetrics';
+import './Example.css';
 
 interface ExampleProps {
   metricsAppKey: string,
   metricsURL: string
 }
 
-const Example = ({metricsAppKey, metricsURL}:ExampleProps) => {
+const Example = ({ metricsAppKey }: ExampleProps) => {
+  const metricsProvider = new MetricsProvider({
+    url: metricsAppKey,
+    appKey: metricsAppKey
+  });
   const [showWarning, setShowWarning] = useState(false);
   const [showConsentBanner, setShowConsentBanner] = useState(false);
-  const [metricsConsent, setMetricsConsent] = useState<string | null>(getMetricsConsent());
+  const [metricsConsent, setMetricsConsent] = useState<string[] | null>(metricsProvider.consentGranted);
 
   const onAccept = () => {
-    acceptMetricsConsent()
-    setMetricsConsent(getMetricsConsent())
+    metricsProvider.addConsent('minimal')
+    setMetricsConsent(metricsProvider.consentGranted)
   }
 
   const onDecline = () => {
-    declineMetricsConsent()
-    setMetricsConsent(getMetricsConsent())
+    metricsProvider.removeConsent('minimal');
+    setMetricsConsent(metricsProvider.consentGranted)
     setShowWarning(true);
   }
 
@@ -31,19 +36,10 @@ const Example = ({metricsAppKey, metricsURL}:ExampleProps) => {
   }
 
   useEffect(() => {
-    const appKey = metricsAppKey;
-    const url = metricsURL;
-
-    InitCountlyMetrics(appKey,url);
-
-  }, [])
-
-  useEffect(() => {
     setMetricsConsent(metricsConsent)
 
     if(metricsConsent != null) {
       try {
-        updateMetricsConsent(JSON.parse(metricsConsent))
         setShowConsentBanner(false)
       } catch {
         setShowConsentBanner(true)
@@ -76,7 +72,7 @@ export default {
     subComponents: { Warning, ConsentBanner, ConsentToggle},
     args: {
         metricsAppKey: '',
-        metricsURL: 'https://countly.ipfs.io'
+        metricsURL: COUNTLY_API_URL
     }
 };
 
@@ -84,4 +80,4 @@ const Template = (args:ExampleProps) => <Example {...args}/>
 
 const Standard = Template.bind({})
 
-export { Standard }
+export { Standard };

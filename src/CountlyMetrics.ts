@@ -27,6 +27,7 @@ export default class MetricsProvider {
   }
 
   private sessionStarted: boolean = false
+  private _consentGranted: Set<consentTypes> = new Set()
 
   constructor ({ autoTrack = true, url = COUNTLY_API_URL, appKey }: MetricsProviderConstructorOptions) {
     this.metricsService.init({
@@ -46,6 +47,10 @@ export default class MetricsProvider {
     return Countly
   }
 
+  get consentGranted(): consentTypes[] {
+    return [...this._consentGranted]
+  }
+
   setupAutoTrack () {
     this.metricsService.track_clicks()
     this.metricsService.track_errors()
@@ -58,10 +63,18 @@ export default class MetricsProvider {
   }
 
   addConsent(consent: consentTypes | consentTypes[]) {
+    if (!Array.isArray(consent)) {
+      consent = [consent];
+    }
+    consent.forEach(c => this._consentGranted.add(c));
     this.metricsService.add_consent(consent)
   }
 
-  removeConsent (consent: consentTypes | consentTypes[]) {
+  removeConsent(consent: consentTypes | consentTypes[]) {
+    if (!Array.isArray(consent)) {
+      consent = [consent];
+    }
+    consent.forEach(c => this._consentGranted.delete(c))
     this.metricsService.remove_consent(consent, true)
   }
 
