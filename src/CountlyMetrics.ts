@@ -92,6 +92,6 @@ export class MetricsProvider {
       sessionTime = (now - this.sessionStartTime) / 1000
       this.sessionStartTime = null
     }
-    this.metricsService.begin_session(sessionTime, force)
+    this.metricsService.end_session(sessionTime, force)
   }
 }
