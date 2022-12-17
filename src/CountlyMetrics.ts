@@ -14,7 +14,7 @@ export class MetricsProvider {
     performance: ['scrolls', 'clicks', 'forms', 'star-rating', 'feedback']
   }
 
-  private sessionStartTime: number | null = null
+  private sessionStarted: boolean = false
 
   constructor ({ autoTrack = true, url = 'https://countly.ipfs.io', appKey }: MetricsProviderConstructorOptions) {
     this.metricsService.init({
@@ -76,22 +76,32 @@ export class MetricsProvider {
     }
   }
 
+  /**
+   *
+   * @param {boolean} noHeartBeat - By defaulting to false, we allow countly to calculate session lengths. Countly will send session_duration events every ~60 seconds.
+   * @param {boolean} force
+   */
   startSession (noHeartBeat = false, force = false) {
-    console.log('startSession called')
-    if (this.sessionStartTime == null) {
-      this.sessionStartTime = new Date().getTime()
+    /**
+     * Don't call start_session if there is already a session.
+     */
+    if (!this.sessionStarted) {
+      this.sessionStarted = true
       this.metricsService.begin_session(noHeartBeat, force)
     }
   }
 
   endSession (force = false) {
-    console.log('endSession called')
-    const now = Date.now()
-    let sessionTime = 0
-    if (this.sessionStartTime != null) {
-      sessionTime = (now - this.sessionStartTime) / 1000
-      this.sessionStartTime = null
+    /**
+     * Don't call end_session if there is no session.
+     */
+    if (this.sessionStarted) {
+      /**
+       * Don't pass seconds to Countly, it will calculate session duration for us.
+       * When ending a session, countly will set session_duration to the length of time between now and the last session_duration event.
+       */
+      this.metricsService.end_session(undefined, force)
+      this.sessionStarted = false
     }
-    this.metricsService.end_session(sessionTime, force)
   }
 }

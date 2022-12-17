@@ -108,8 +108,8 @@ declare module 'countly-sdk-web' {
 
     /**
      *
-     * @param {number} sec - amount of seconds to report for current session, before ending it
-     * @param {boolean} force - force end session request even if session cookie is enabled
+     * @param {number} [sec] - amount of seconds to report for current session, before ending it
+     * @param {boolean} [force] - force end session request even if session cookie is enabled
      * @returns {void}
      */
     end_session: (sec, force) => void
