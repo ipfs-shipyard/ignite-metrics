@@ -1,0 +1,28 @@
+.consent-toggle {
+    width: 40px;
+    height: 40px;
+    will-change: transform;
+    padding: 9px;
+    border: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    background: white;
+    border-radius: 50%;
+    transition: 200ms;
+    opacity: 1;
+    z-index: 99980;
+    cursor: pointer;
+    margin: 0 1em 0 0;
+  }
+  
+  .consent-toggle:disabled {
+    cursor: default;
+  }
+  
+  .consent-toggle:hover:not(:disabled) {
+    color: white;
+    background: #69c4cd;
+  }
+  
+  .consent-toggle * {
+    fill: currentColor;
+  }

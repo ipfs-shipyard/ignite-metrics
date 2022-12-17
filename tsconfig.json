@@ -1,0 +1,22 @@
+{
+  "extends": "aegir/src/config/tsconfig.aegir.json",
+  "compilerOptions": {
+    "jsx": "react",
+    "types": ["node"],
+    "outDir": "dist",
+    "target": "ES6",
+  },
+  "include": [
+    "src",
+    "src/**/*.css"
+  ],
+  "exclude": [
+    "node_modules",
+  ],
+  "ts-node": {
+    "extends": "aegir/src/config/tsconfig.aegir.json",
+      "transpileOnly": true,
+      "compilerOptions": {
+      }
+  }
+}
