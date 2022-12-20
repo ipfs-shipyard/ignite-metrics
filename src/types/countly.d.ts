@@ -26,7 +26,7 @@ declare module 'countly-sdk-web' {
   type CountlyEventQueueItem = [string, CountlyEventData] | [eventName: string, key: string] | [eventName: string]
   interface CountlyWebSdk {
     group_features: (arg0: Record<consentTypes, eventTypes[]>) => unknown
-    check_consent: (consentFeature: eventTypes) => boolean
+    check_consent: (consentFeature: eventTypes | consentTypes) => boolean
     add_consent: (consentFeature: consentTypes | consentTypes[]) => void
     remove_consent: (consentFeature: consentTypes | consentTypes[], enforceConsentUpdate?: boolean) => void
     require_consent: boolean

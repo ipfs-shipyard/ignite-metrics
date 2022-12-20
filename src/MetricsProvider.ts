@@ -78,12 +78,12 @@ export default class MetricsProvider {
     this.metricsService.remove_consent(consent, true)
   }
 
-  checkConsent (consent: consentTypes) {
-    const featuresArray = this.groupedFeatures[consent]
-    if (featuresArray == null) {
-      return this.metricsService.check_consent(consent)	
+  checkConsent (consent: consentTypes | eventTypes) {
+    if (consent in this.groupedFeatures) {
+      return this.groupedFeatures[consent as consentTypes].every(this.metricsService.check_consent)
     }
-    return this.groupedFeatures[consent].every(this.metricsService.check_consent)
+
+    return this.metricsService.check_consent(consent)
   }
 
   /**
