@@ -143,7 +143,7 @@
     "esbuild-css-modules-plugin": "^2.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.5",
+    "react-router-dom": "^6.5.0",
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
@@ -160,10 +160,10 @@
     "@storybook/testing-library": "^0.0.13",
     "@types/react-dom": "^18.0.9",
     "@types/styled-components": "^5.1.26",
-    "aegir": "^37.6.4",
+    "aegir": "^37.7.8",
     "babel-loader": "^9.1.0",
     "copyfiles": "^2.4.1",
-    "css-loader": "^6.7.2",
+    "css-loader": "^6.7.3",
     "css-tree": "^2.3.1",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -180,8 +180,8 @@
     "react-dom": "^18.2.0"
   },
   "optionalDependencies": {
-    "@esbuild/darwin-arm64": "^0.16.5",
-    "@esbuild/linux-x64": "^0.16.5",
+    "@esbuild/darwin-arm64": "^0.16.8",
+    "@esbuild/linux-x64": "^0.16.8",
     "react-refresh": "^0.14.0"
   },
   "module": "src/index.ts",
