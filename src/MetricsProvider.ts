@@ -79,8 +79,9 @@ export default class MetricsProvider {
   }
 
   checkConsent (consent: consentTypes) {
-    if (!(consent in this.groupedFeatures)) {
-      throw new Error('Unknown consent type')
+    const featuresArray = this.groupedFeatures[consent]
+    if (featuresArray == null) {
+      return this.metricsService.check_consent(consent)	
     }
     return this.groupedFeatures[consent].every(this.metricsService.check_consent)
   }
