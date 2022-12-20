@@ -180,7 +180,7 @@
     "react-dom": "^18.2.0"
   },
   "optionalDependencies": {
-    "@esbuild/darwin-arm64": "^0.16.8",
+    "@esbuild/darwin-arm64": "^0.16.10",
     "@esbuild/linux-x64": "^0.16.8",
     "react-refresh": "^0.14.0"
   },
