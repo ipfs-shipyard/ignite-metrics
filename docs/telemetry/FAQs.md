@@ -48,3 +48,6 @@ For public-gateway-checker changes, see the following PRs and issues:
 * https://github.com/ipfs/public-gateway-checker/issues/341
 * https://github.com/ipfs/public-gateway-checker/issues/342
 
+## Can I turn telemetry completely off?
+
+Yes. If you toggle all telemetry groups off (i.e. opt-out), no telemetry will be collected. The one caveat is that we send a single request when you opt-out of metrics collection.
