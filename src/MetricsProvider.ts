@@ -1,5 +1,5 @@
 import { COUNTLY_API_URL } from './config'
-import type { consentTypes, eventTypes } from 'countly-sdk-web'
+import type { consentTypes, metricFeatures } from 'countly-sdk-web'
 import Countly from 'countly-sdk-web'
 
 interface MetricsProviderConstructorOptions {
@@ -9,21 +9,24 @@ interface MetricsProviderConstructorOptions {
 }
 
 export default class MetricsProvider {
-  private readonly minimalEvents: eventTypes[] = ['sessions', 'views']
-  private readonly marketingEvents: eventTypes[] = ['attribution', 'users', 'location']
-  private readonly trackingEvents: eventTypes[] = ['events', 'crashes', 'apm']
-  private readonly performanceEvents: eventTypes[] = ['scrolls', 'clicks', 'forms', 'star-rating', 'feedback']
-  private readonly groupedFeatures: Record<consentTypes, eventTypes[]> = {
+  private readonly minimalFeatures: metricFeatures[] = ['sessions', 'views', 'events']
+  private readonly performanceFeatures: metricFeatures[] = ['crashes', 'apm']
+  private readonly uxFeatures: metricFeatures[] = ['scrolls', 'clicks', 'forms']
+  private readonly feedbackFeatures: metricFeatures[] = ['star-rating', 'feedback']
+  private readonly locationFeatures: metricFeatures[] = ['location']
+  private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = {
     all: [
-      ...this.marketingEvents,
-      ...this.minimalEvents,
-      ...this.performanceEvents,
-      ...this.trackingEvents
+      ...this.minimalFeatures,
+      ...this.locationFeatures,
+      ...this.performanceFeatures,
+      ...this.uxFeatures,
+      ...this.feedbackFeatures
     ],
-    marketing: this.marketingEvents,
-    minimal: this.minimalEvents,
-    performance: this.performanceEvents,
-    tracking: this.trackingEvents
+    minimal: this.minimalFeatures,
+    performance: this.performanceFeatures,
+    ux: this.uxFeatures,
+    feedback: this.feedbackFeatures,
+    location: this.locationFeatures
   }
 
   private sessionStarted: boolean = false
@@ -78,7 +81,7 @@ export default class MetricsProvider {
     this.metricsService.remove_consent(consent, true)
   }
 
-  checkConsent (consent: consentTypes | eventTypes) {
+  checkConsent (consent: consentTypes | metricFeatures) {
     if (consent in this.groupedFeatures) {
       return this.groupedFeatures[consent as consentTypes].every(this.metricsService.check_consent)
     }

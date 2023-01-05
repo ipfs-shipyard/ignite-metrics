@@ -24,7 +24,11 @@ A longer repository description.
 
 ## Documentation
 
-[Insert link to documentation]() or expand with Install, Build, Usage sections.
+### Telemetry
+
+[Telemetry collection policy](./docs/telemetry/CollectionPolicy.md)
+[Privacy Policy](./docs/telemetry/PrivacyPolicy.md)
+[FAQs])(./docs/telemetry/FAQs.md)
 
 ## Lead Maintainer
 
