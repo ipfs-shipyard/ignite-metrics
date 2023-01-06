@@ -57,9 +57,47 @@ The code implementing these groupings is at https://github.com/ipfs-shipyard/ign
 
 ## SOPs (Standard Operating Procedures)
 
+## What do the consent toggling UIs look like?
+
+Consent toggling has two distinct views depending on the type of application implementing telemetry using this library: Projects without a settings page, and Projects with settings page(s).
+
+### Projects without its own settings page(s)
+
+In this case, we would follow the patterns discussed in https://github.com/ipfs/public-gateway-checker/issues/340 and https://github.com/ipfs-shipyard/ignite-metrics/issues/36.
+
+There will be a floating icon in the bottom left of the page: ![example telemetry settings modal toggle for projects withour a settings page](./images/telemetry-modal-toggle.png)
+
+When clicked, that icon will expand into a modal that will allow you to enable/disable the collection of groups of features as defined above in the "Metric features and their groupings" section.
+
+Single toggle Example: ![example modal containing a single consent toggle](./images/single-toggle-modal.png)
+
+Multi toggle Example: ![example modal containing multiple consent toggles](./images/multi-toggle-modal.png)
+
+### Projects with its own settings page(s)
+
+The consent should conform to the UX expectations of the library it's being implemented in.
+
+#### IPFS-companion
+
+It should look like the rest of the settings in the application.
+
+Example: ![example telemetry toggle UI for settings page in ipfs-companion](./images/settings-page-multi-toggle.png)
+
+#### IPFS-Webui & IPFS-Desktop
+
+Analytics toggling and consent notifications are already implemented in the desktop app and webui.
+
+Example: ![example telemetry toggle UI for settings page in ipfs-companion](./images/webui-settings-page-single-toggle.png)
+
 ### Informing users of changes to this policy
 
 We will not display notifications to users regarding telemetry changes, but users can follow release-notes as well as changes to this library, it's telemetry documentation (`./docs/telemetry/*`), and projects implementing this library to stay up to date on our telemetry policy changes.
+
+### Adding telemetry collection to a project without telemetry collection
+
+1. Copy the [CollectedData.template](./CollectedData.template.md) file to your project at `./docs/telemetry/CollectedData.md`
+2. Implement the library according to your project's needs
+3. Update your `CollectedData.md` file specifying exactly which metrics your collecting, and when they're collected.
 
 ### Changing what metrics data is collected by a project
 
@@ -68,7 +106,7 @@ When you add/remove metrics data that is collected by a project, you MUST follow
 1. Fist ask yourself: Are you trying to collect user-identifiable, or other user data at all? STOP.
    * You must get legal approval
    * You must update the following documents:
-      * `./PrivacyPolicy.md` - responsibility of legal to update after meeting with you and discussing what your plans are
+      * `./PrivacyPolicy.md` - responsibility of legal write a new doc after meeting with you and discussing what your plans are. You would then update the `PrivacyPolicy.md` in this repo.
       * `./CollectionPolicy.md` - responsibility of you to update according to the changes you're making.
       * `./FAQs.md` - responsibility of you to update clarifying exactly why we're now collecting user data.
 1. Modify the project's `./docs/telemetry/CollectedData.md` file.
