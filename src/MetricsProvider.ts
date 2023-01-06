@@ -34,11 +34,10 @@ export default class MetricsProvider {
   }
 
   mapAllEvents (eventMap: Record<consentTypesExceptAll, eventTypes[]>): Record<consentTypes, eventTypes[]> {
-    const eventMapWithAll = { ...eventMap, all: [] as eventTypes[] }
-    Object.keys(eventMap).forEach((key) => {
-      eventMapWithAll.all = [...eventMapWithAll.all, ...eventMapWithAll[key as consentTypes]]
-    })
-    return eventMapWithAll
+    return {
+      ...eventMap,
+      all: Object.values(eventMap).flat()
+    }
   }
 
   get metricsService (): typeof Countly {
