@@ -29,7 +29,7 @@ Application data only contains information about events, modules, performance, a
 
 #### What is User data?
 
-User data can vary across industries and applications, but is generally data that is used to classify or categorize users, typically for targeting classes or categories of users via campaigns or other marketing purposes. Think demographics, emails, physical addresses, personal preferences, and marketing.
+User data can vary across industries and applications, but is generally data that is used to classify or categorize users, typically for targeting classes or categories of users via campaigns or other marketing methods for various purposes. Think demographics, emails, physical addresses, personal preferences, and marketing.
 
 As a general rule, we do not collect user or personal data. See our [Privacy Policy](./PrivacyPolicy.md) for more details.
 
@@ -65,6 +65,12 @@ We will not display notifications to users regarding telemetry changes, but user
 
 When you add/remove metrics data that is collected by a project, you MUST follow this checklist:
 
+1. Fist ask yourself: Are you trying to collect user-identifiable, or other user data at all? STOP.
+   * You must get legal approval
+   * You must update the following documents:
+      * `./PrivacyPolicy.md` - responsibility of legal to update after meeting with you and discussing what your plans are
+      * `./CollectionPolicy.md` - responsibility of you to update according to the changes you're making.
+      * `./FAQs.md` - responsibility of you to update clarifying exactly why we're now collecting user data.
 1. Modify the project's `./docs/telemetry/CollectedData.md` file.
    * Ensure the table under `What metrics data DO we collect` is accurate and up to date
 
