@@ -17,7 +17,7 @@ Our other projects did not do telemetry or any metrics data collection and did n
 
 ## Metrics collection expectations
 
-It's important to clarify that our intention for telemetry with our projects is solely to prioritize our work efforts in bringing us all to the web3 mecca. This includes not violating our users expectations of privacy nor anonymity.
+It's important to clarify that our intention for telemetry within our projects is solely to prioritize our work efforts in bringing us all to the web3 mecca. This includes not violating our users expectations of privacy nor anonymity.
 
 ### Application data vs User data
 
