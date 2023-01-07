@@ -16,6 +16,8 @@ We do not collect any of the below listed items in our metric data:
 2. CIDs
 3. IP addresses
 
+Countly also calls out how they protect your data at https://support.count.ly/hc/en-us/articles/360037501372-Security-Privacy-and-Access-FAQ
+
 ## What metrics data DO we collect
 
 As a general rule, we collect only application data; no user data. Some examples of application data we collect are:
