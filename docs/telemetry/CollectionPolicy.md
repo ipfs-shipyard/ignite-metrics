@@ -69,9 +69,13 @@ There will be a floating icon at the bottom left of the page:
 
 When clicked, that icon will expand into a modal that will allow you to enable/disable the collection of groups of features as defined above in the "Metric features and their groupings" section.
 
-Single toggle Example: ![example modal containing a single consent toggle](./images/single-toggle-modal.png)
+Single toggle Example:
 
-Multi toggle Example: ![example modal containing multiple consent toggles](./images/multi-toggle-modal.png)
+![example modal containing a single consent toggle](./images/single-toggle-modal.png)
+
+Multi toggle Example:
+
+![example modal containing multiple consent toggles](./images/multi-toggle-modal.png)
 
 #### Projects with its own settings page(s)
 
