@@ -63,7 +63,9 @@ Consent toggling has two distinct views depending on the type of application imp
 
 In this case, we would follow the patterns discussed in https://github.com/ipfs/public-gateway-checker/issues/340 and https://github.com/ipfs-shipyard/ignite-metrics/issues/36.
 
-There will be a floating icon in the bottom left of the page: ![example telemetry settings modal toggle for projects withour a settings page](./images/telemetry-modal-toggle.png)
+There will be a floating icon at the bottom left of the page:
+
+![example telemetry settings modal toggle for projects without a settings page](./images/telemetry-modal-toggle.png)
 
 When clicked, that icon will expand into a modal that will allow you to enable/disable the collection of groups of features as defined above in the "Metric features and their groupings" section.
 
