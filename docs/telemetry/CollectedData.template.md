@@ -8,7 +8,7 @@ This is the default for projects using the ignite-metrics library. Each project'
 * 'What metrics data DO we collect'
 
 -->
-## What metrics data DON'T we collect
+## What metrics data do we NOT collect
 
 We do not collect any of the below listed items in our metric data:
 

@@ -65,13 +65,18 @@ Each toggle that a user sees will be tied to a specific "Metric feature group na
 
 #### Projects without its own settings page(s)
 
-In this case, we would follow the patterns discussed in https://github.com/ipfs/public-gateway-checker/issues/340 and https://github.com/ipfs-shipyard/ignite-metrics/issues/36.
+In this case, we would follow the patterns discussed in https://github.com/ipfs/public-gateway-checker/issues/340 and https://github.com/ipfs-shipyard/ignite-metrics/issues/36. See https://pl-strflt.notion.site/Metrics-Collection-and-Consent-Language-0d4059f11d4d474bb76d00539d778d8d#3e2a579c4be043888b1f64bf300048b8 for up to date info.
 
-There will be a floating icon at the bottom left of the page:
+1. There will be a floating icon at the bottom left of the page:
 
 ![example telemetry settings modal toggle for projects without a settings page](./images/telemetry-modal-toggle.png)
 
-When clicked, that icon will expand into a modal that will allow you to enable/disable the collection of groups of features as defined above in the "Metric features and their groupings" section.
+2. When clicked, that icon will expand into a modal that displays information about our telemetry collection
+
+![example telemetry settings modal first view](./images/telemetry-modal-view1.png)
+
+
+3. When "manage settings" is clicked, the modal will update to allow you to enable/disable the project's implemented collection of groups of features as defined above in the "Metric features and their groupings" section.
 
 Single toggle Example:
 
@@ -89,15 +94,21 @@ The consent should conform to the UX expectations of the library it's being impl
 
 It should look like the rest of the settings in the application.
 
-Potential UI with multiple toggles: ![example telemetry multi-toggle UI for settings page in ipfs-companion](./images/settings-page-multi-toggle.png)
+Potential UI with multiple toggles:
 
-Example with single toggle (PR at https://github.com/ipfs/ipfs-companion/pull/1117): ![example telemetry single-toggle UI for settings page in ipfs-companion](./images/settings-page-single-toggle.png)
+![example telemetry multi-toggle UI for settings page in ipfs-companion](./images/settings-page-multi-toggle.png)
+
+Example with single toggle (PR at https://github.com/ipfs/ipfs-companion/pull/1117):
+
+![example telemetry single-toggle UI for settings page in ipfs-companion](./images/settings-page-single-toggle.png)
 
 ##### IPFS-Webui & IPFS-Desktop
 
 Analytics toggling and consent notifications are already implemented in the desktop app and webui.
 
-Example: ![example telemetry toggle UI for settings page in ipfs-webui and ipfs-desktop](./images/webui-settings-page-single-toggle.png)
+Example:
+
+![example telemetry toggle UI for settings page in ipfs-webui and ipfs-desktop](./images/webui-settings-page-single-toggle.png)
 
 ### Informing users of changes to this policy
 
