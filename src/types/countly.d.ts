@@ -20,7 +20,8 @@ declare module 'countly-sdk-web' {
 
   export type metricFeatures = 'apm' | 'attribution' | 'clicks' | 'crashes' | 'events' | 'feedback' | 'forms' |
   'location' | 'scrolls' | 'sessions' | 'star-rating' | 'users' | 'views'
-  export type consentTypes = 'all' | 'minimal' | 'performance' | 'ux' | 'feedback' | 'location'
+  export type consentTypesExceptAll = 'minimal' | 'performance' | 'ux' | 'feedback' | 'location'
+  export type consentTypes = 'all' | consentTypesExceptAll
   type Segments = Record<string, string>
   type IgnoreList = Array<string | RegExp>
   type CountlyEventQueueItem = [string, CountlyEventData] | [eventName: string, key: string] | [eventName: string]

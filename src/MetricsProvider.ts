@@ -1,5 +1,5 @@
 import { COUNTLY_API_URL } from './config'
-import type { consentTypes, metricFeatures } from 'countly-sdk-web'
+import type { consentTypes, consentTypesExceptAll, metricFeatures } from 'countly-sdk-web'
 import Countly from 'countly-sdk-web'
 
 interface MetricsProviderConstructorOptions {
@@ -9,25 +9,13 @@ interface MetricsProviderConstructorOptions {
 }
 
 export default class MetricsProvider {
-  private readonly minimalFeatures: metricFeatures[] = ['sessions', 'views', 'events']
-  private readonly performanceFeatures: metricFeatures[] = ['crashes', 'apm']
-  private readonly uxFeatures: metricFeatures[] = ['scrolls', 'clicks', 'forms']
-  private readonly feedbackFeatures: metricFeatures[] = ['star-rating', 'feedback']
-  private readonly locationFeatures: metricFeatures[] = ['location']
-  private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = {
-    all: [
-      ...this.minimalFeatures,
-      ...this.locationFeatures,
-      ...this.performanceFeatures,
-      ...this.uxFeatures,
-      ...this.feedbackFeatures
-    ],
-    minimal: this.minimalFeatures,
-    performance: this.performanceFeatures,
-    ux: this.uxFeatures,
-    feedback: this.feedbackFeatures,
-    location: this.locationFeatures
-  }
+  private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = this.mapAllEvents({
+    minimal: ['sessions', 'views', 'events'],
+    performance: ['crashes', 'apm'],
+    ux: ['scrolls', 'clicks', 'forms'],
+    feedback: ['star-rating', 'feedback'],
+    location: ['location']
+  })
 
   private sessionStarted: boolean = false
   private readonly _consentGranted: Set<consentTypes> = new Set()
@@ -43,6 +31,13 @@ export default class MetricsProvider {
 
     if (autoTrack) {
       this.setupAutoTrack()
+    }
+  }
+
+  mapAllEvents (eventMap: Record<consentTypesExceptAll, metricFeatures[]>): Record<consentTypes, metricFeatures[]> {
+    return {
+      ...eventMap,
+      all: Object.values(eventMap).flat()
     }
   }
 
