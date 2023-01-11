@@ -20,6 +20,8 @@ We are collecting metrics for all of our projects to assist with prioritizing wo
         2. webui usage within ipfs-desktop - tracked as desktop usage
         3. webui bundled with kubo - not tracked
 
+You can find more information about the discussions held when making these decisions at https://pl-strflt.notion.site/Telemetry-b005d4f217f44db3986902c67d922cf4
+
 ## What data is collected?
 
 In order to standardize the documentation of metrics collection, we will keep a file in each project's repository that
@@ -51,3 +53,25 @@ For public-gateway-checker changes, see the following PRs and issues:
 ## Can I turn telemetry completely off?
 
 Yes. If you toggle all telemetry groups off (i.e. opt-out), no telemetry will be collected. The one caveat is that we send a single request when you opt-out of metrics collection.
+
+
+## I want to help development efforts, but want to be updated of any future changes. How do I stay up to date?
+
+There are a few ways you can stay up to date depending on what you're interested in.
+
+### Global telemetry changes
+
+Watch for changes to https://github.com/ipfs-shipyard/ignite-metrics via GitHub's watch feature. You can adjust notification preferences using GitHub's watch feature. Updates can be found in the following locations:
+
+1. PRs
+2. Release notes
+3. `./docs/telemetry/CollectedData.template.md`
+
+
+### Project specific telemetry changes
+
+Watch for changes to https://github.com/<repo-of-interest> via GitHub's watch feature. You can adjust notification preferences using GitHub's watch feature. Updates can be found in the following locations:
+
+1. PRs
+2. Release notes
+3. `./docs/telemetry/CollectedData.md`

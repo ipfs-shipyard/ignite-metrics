@@ -42,22 +42,26 @@ The metric features in the first column name and their descriptions come directl
 | sessions            | Opt-out        | Minimal                   | tracks when, how often, and how long users use your website                    | For determining unique daily/weekly/monthly active users in order to prioritize projects |
 | views               | Opt-out        | Minimal                   | allows for the views/pages accessed by a user to be tracked                    | For tracking application pages and component views only                    |
 | events              | Opt-out        | Minimal                   | allows your events to be sent to the server                                    | Timed and one-off application events such as app_start, app_close, function_used, etc. |
-| crashes             | Opt-in         | Performance               | allows JavaScript errors to be tracked                                         | Not used yet - Eventually for bug fixes and debugging |
-| apm                 | Opt-in         | Performance               | allows performance tracking of application by recording traces                 | Not used yet - Eventually for bug fixes and debugging |
-| scrolls             | Opt-in         | UX                        | allows a user’s scrolls to be tracked on the heatmap                           | Not used yet - Possibly for performance and UX optimizations |
-| clicks              | Opt-in         | UX                        | allows a user’s clicks and link clicks to be tracked on the heatmap            | Not used yet - Possibly for performance and UX optimizations |
-| forms               | Opt-in         | UX                        | allows a user’s form submissions to be tracked                                 | Not used yet - Possibly for bug fixes and debugging, performance and UX optimizations |
-| star-rating         | Opt-in         | Feedback                  | allows user rating and feedback tracking through rating widgets                | Not used yet - Possibly for getting user feedback more directly through our applications |
-| feedback            | Opt-in         | Feedback                  | allows survey, nps rating and feedback tracking through feedback widgets       | Not used yet - Possibly for getting user feedback more directly through our applications |
-| location            | Opt-in         | Location                  | allows a user’s location (country, city area) to be recorded                   | N/A - we have no current need for collecting a user's location data. |
-| attribution         | Opt-in         | N/A                       | allows the campaign from which a user came to be tracked                       | N/A - we do not have any plans to implement or utilize user campaigns |
-| users               | Opt-in         | N/A                       | allows user information, including custom properties, to be collected/provided | N/A - we will not collect user information |
+| crashes             | Opt-out        | Performance               | allows JavaScript errors to be tracked                                         | Not used yet - Eventually for bug fixes and debugging |
+| apm                 | Opt-out        | Performance               | allows performance tracking of application by recording traces                 | Not used yet - Eventually for bug fixes and debugging |
+| scrolls             | Opt-out        | UX                        | allows a user’s scrolls to be tracked on the heatmap                           | Not used yet - Possibly for performance and UX optimizations |
+| clicks              | Opt-out        | UX                        | allows a user’s clicks and link clicks to be tracked on the heatmap            | Not used yet - Possibly for performance and UX optimizations |
+| forms               | Opt-out        | UX                        | allows a user’s form submissions to be tracked                                 | Not used yet - Possibly for bug fixes and debugging, performance and UX optimizations |
+| star-rating         | Opt-out        | Feedback                  | allows user rating and feedback tracking through rating widgets                | Not used yet - Possibly for getting user feedback more directly through our applications |
+| feedback            | Opt-out        | Feedback                  | allows survey, nps rating and feedback tracking through feedback widgets       | Not used yet - Possibly for getting user feedback more directly through our applications |
+| location            | Opt-out        | Location                  | allows a user’s location (country, city area) to be recorded                   | N/A - we have no current need for collecting a user's location data. |
+| attribution         | N/A            | N/A                       | allows the campaign from which a user came to be tracked                       | N/A - we do not have any plans to implement or utilize user campaigns |
+| users               | N/A            | N/A                       | allows user information, including custom properties, to be collected/provided | N/A - we will not collect user information |
 
 The code implementing these groupings can be found [here](./../../src/MetricsProvider.ts#L17-L30)
+
+**Note:** The above groupings are our global settings. You will want to check the specific `./docs/telemetry/CollectedData.md` for for variations.
 
 ### What do the consent toggling UIs look like?
 
 Consent toggling has two distinct views depending on the type of application implementing telemetry using this library: Projects without a settings page, and Projects with settings page(s).
+
+Each toggle that a user sees will be tied to a specific "Metric feature group name" as listed in the above table. For now, we don't have any plans to allow more granular control than that, but please [open an issue](https://github.com/ipfs-shipyard/ignite-metrics/issues/new?assignees=&labels=need%2Ftriage&template=open_an_issue.md&title=) if you feel like that should change.
 
 #### Projects without its own settings page(s)
 

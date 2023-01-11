@@ -22,15 +22,20 @@ Countly also calls out how they protect your data at https://support.count.ly/hc
 
 As a general rule, we collect only application data; no user data. Some examples of application data we collect are:
 
-| Metric data name | Metric feature name | What is this data used for |
-|:----------------:|---------------------|----------------------------|
-| Fill in          | Fill in             | Fill in                    |
-|                  |                     |                            |
-|                  |                     |                            |
+| Metric data name | Metric feature name | Metric trigger | Analytics use | Notes         |
+|:----------------:|---------------------|----------------|---------------|---------------|
+| Fill in          | Fill in             | Fill in        | Fill in       | Fill in       |
+|                  |                     |                |               |               |
+|                  |                     |                |               |               |
 
+* "Metric data name" - The app-specific metric/event name we're using for this metric data. (e.g. APP_BOOTSTRAP_START)
+* "Metric feature name" - The metric feature the event/metric data correlates to. The group the metric feature belongs to is defined in our [CollectionPolicy](https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/telemetry-documentation/docs/telemetry/CollectionPolicy.md#metric-features-and-their-groupings). (e.g. Minimal)
+* "Metric trigger" - An explanation covering when this metric data is triggered. (e.g. On Application init)
+* "Analytics use" - An explanation about how this metric data is used for analytics. (e.g. Input to load time calculations)
+* "Notes" - Any additional notes. (e.g. Used as a timestamp identifier for when an application is first loaded)
 
 ## Other related documents
 
-* https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/metric-library/129/docs/telemetry/CollectionPolicy.md
-* https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/metric-library/129/docs/telemetry/PrivacyPolicy.md
-* https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/metric-library/129/docs/telemetry/FAQs.md
+* [CollectionPolicy](https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/metric-library/129/docs/telemetry/CollectionPolicy.md)
+* [PrivacyPolicy](https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/metric-library/129/docs/telemetry/PrivacyPolicy.md)
+* [FAQs](https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/metric-library/129/docs/telemetry/FAQs.md)
