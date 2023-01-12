@@ -26,8 +26,8 @@ A longer repository description.
 
 ### Telemetry
 
-- [Telemetry collection policy](./docs/telemetry/CollectionPolicy.md)
-- [Privacy Policy](./docs/telemetry/PrivacyPolicy.md)
+- [Telemetry collection policy](./docs/telemetry/COLLECTION_POLICY.md)
+- [Privacy Policy](./docs/telemetry/PRIVACY_POLICY.md)
 - [FAQs](./docs/telemetry/FAQs.md)
 
 ## Lead Maintainer

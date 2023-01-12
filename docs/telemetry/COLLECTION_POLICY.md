@@ -31,7 +31,7 @@ Application data only contains information about events, modules, performance, a
 
 User data can vary across industries and applications, but is generally data that is used to classify or categorize users, typically for targeting classes or categories of users via campaigns or other marketing methods for various purposes. Think demographics, emails, physical addresses, personal preferences, and marketing.
 
-As a general rule, we do not collect user or personal data. See our [Privacy Policy](./PrivacyPolicy.md) for more details.
+As a general rule, we do not collect user or personal data. See our [Privacy Policy](./PRIVACY_POLICY.md) for more details.
 
 ### Metric features and their groupings
 
@@ -55,7 +55,7 @@ The metric features in the first column name and their descriptions come directl
 
 The code implementing these groupings can be found [here](./../../src/MetricsProvider.ts#L17-L30)
 
-**Note:** The above groupings are our global settings. You will want to check the specific `./docs/telemetry/CollectedData.md` for for variations.
+**Note:** The above groupings are our global settings. You will want to check the specific `./docs/telemetry/COLLECTED_DATA.md` for for variations.
 
 ### What do the consent toggling UIs look like?
 
@@ -118,9 +118,9 @@ We will not display notifications to users regarding telemetry changes, but user
 
 ### Adding telemetry collection to a project without telemetry collection
 
-1. Copy the [CollectedData.template](./CollectedData.template.md) file to your project at `./docs/telemetry/CollectedData.md`
+1. Copy the [COLLECTED_DATA.template](./COLLECTED_DATA.template.md) file to your project at `./docs/telemetry/COLLECTED_DATA.md`
 2. Implement the library according to your project's needs
-3. Update your `CollectedData.md` file specifying exactly which metrics your collecting, and when they're collected.
+3. Update your `COLLECTED_DATA.md` file specifying exactly which metrics your collecting, and when they're collected.
 
 ### Changing what metrics data is collected by a project
 
@@ -129,10 +129,10 @@ When you add/remove metrics data that is collected by a project, you MUST follow
 1. Fist ask yourself: Are you trying to collect user-identifiable, or other user data at all? STOP.
    * You must get legal approval
    * You must update the following documents:
-      * `./PrivacyPolicy.md` - responsibility of legal write a new doc after meeting with you and discussing what your plans are. You would then update the `PrivacyPolicy.md` in this repo.
-      * `./CollectionPolicy.md` - responsibility of you to update according to the changes you're making.
+      * `./PRIVACY_POLICY.md` - responsibility of legal write a new doc after meeting with you and discussing what your plans are. You would then update the `PRIVACY_POLICY.md` in this repo.
+      * `./COLLECTION_POLICY.md` - responsibility of you to update according to the changes you're making.
       * `./FAQs.md` - responsibility of you to update clarifying exactly why we're now collecting user data.
-1. Modify the project's `./docs/telemetry/CollectedData.md` file.
+1. Modify the project's `./docs/telemetry/COLLECTED_DATA.md` file.
    * Ensure the table under `What metrics data DO we collect` is accurate and up to date
 
 

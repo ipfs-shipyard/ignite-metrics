@@ -25,17 +25,17 @@ You can find more information about the discussions held when making these decis
 ## What data is collected?
 
 In order to standardize the documentation of metrics collection, we will keep a file in each project's repository that
-specifies all metrics data collected by that project. The file will be located at `./docs/telemetry/CollectedData.md`. These documents will provide answers to the following bullet-points:
+specifies all metrics data collected by that project. The file will be located at `./docs/telemetry/COLLECTED_DATA.md`. These documents will provide answers to the following bullet-points:
 
 * This is what will be collected
 * This is what won't be collected
 * Why we are collecting each piece of metric data.
 
-You can read our [Privacy Policy](./PrivacyPolicy.md) and [Collection Policy](./CollectionPolicy.md) for more generic details.
+You can read our [Privacy Policy](./PRIVACY_POLICY.md) and [Collection Policy](./COLLECTION_POLICY.md) for more generic details.
 
 ## As an existing user, how am I notified about changes to the data that is collected?
 
-You can follow updates to the metrics we collect for each repo in that repo's release notes. You can find changes to our collection policy in our [Collection Policy](./CollectionPolicy.md) document. The document at `./docs/telemetry/CollectedData.md` in each relevant repo will be updated when any metrics collection changes are made.
+You can follow updates to the metrics we collect for each repo in that repo's release notes. You can find changes to our collection policy in our [Collection Policy](./COLLECTION_POLICY.md) document. The document at `./docs/telemetry/COLLECTED_DATA.md` in each relevant repo will be updated when any metrics collection changes are made.
 
 ## How do I opt-out of metrics?
 
@@ -65,7 +65,7 @@ Watch for changes to https://github.com/ipfs-shipyard/ignite-metrics via GitHub'
 
 1. PRs
 2. Release notes
-3. `./docs/telemetry/CollectedData.template.md`
+3. `./docs/telemetry/COLLECTED_DATA.template.md`
 
 
 ### Project specific telemetry changes
@@ -74,4 +74,4 @@ Watch for changes to https://github.com/<repo-of-interest> via GitHub's watch fe
 
 1. PRs
 2. Release notes
-3. `./docs/telemetry/CollectedData.md`
+3. `./docs/telemetry/COLLECTED_DATA.md`
