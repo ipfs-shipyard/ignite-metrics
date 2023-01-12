@@ -1,6 +1,6 @@
 # Collected telemetry data
 
-Copied from https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/metric-library/129/docs/telemetry/CollectedData.template.md
+Copied from https://github.com/ipfs-shipyard/ignite-metrics/blob/main/docs/telemetry/CollectedData.template.md
 
 <!--
 This is the default for projects using the ignite-metrics library. Each project's own `./docs/telemetry/CollectedData.md` file should contain very specific information under each of the following sections:
@@ -36,6 +36,6 @@ As a general rule, we collect only application data; no user data. Some examples
 
 ## Other related documents
 
-* [CollectionPolicy](https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/metric-library/129/docs/telemetry/CollectionPolicy.md)
-* [PrivacyPolicy](https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/metric-library/129/docs/telemetry/PrivacyPolicy.md)
-* [FAQs](https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/metric-library/129/docs/telemetry/FAQs.md)
+* [CollectionPolicy](https://github.com/ipfs-shipyard/ignite-metrics/blob/main/docs/telemetry/CollectionPolicy.md)
+* [PrivacyPolicy](https://github.com/ipfs-shipyard/ignite-metrics/blob/main/docs/telemetry/PrivacyPolicy.md)
+* [FAQs](https://github.com/ipfs-shipyard/ignite-metrics/blob/main/docs/telemetry/FAQs.md)
