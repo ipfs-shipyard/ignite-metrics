@@ -1,6 +1,6 @@
 # Telemetry collection policy
 
-This document is the source of truth for our telemetry policies and practices across all Ignite team projects. The discussion held at https://github.com/ipfs/ipfs-gui/issues/125 is the origin and inspiration for this library and all documents under `./docs/telemetry`.
+This document is the source of truth for our telemetry policies and practices across all Ignite team (IPFS GUI) projects. The discussion held at https://github.com/ipfs/ipfs-gui/issues/125 is the origin and inspiration for this library and all documents under `./docs/telemetry`.
 
 The initial list of projects we're adding telemetry to was originally discussed at https://github.com/ipfs/ipfs-gui/issues/105.
 
