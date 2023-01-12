@@ -16,7 +16,7 @@ We do not collect any of the below listed items in our metric data:
 2. CIDs
 3. IP addresses
 
-Countly also calls out how they protect your data at https://support.count.ly/hc/en-us/articles/360037501372-Security-Privacy-and-Access-FAQ
+Telemetry is sent to Countly instance at `countly.ipfs.tech`. You can read how they protect your data at [Security, Privacy, and Access FAQ](https://support.count.ly/hc/en-us/articles/360037501372-Security-Privacy-and-Access-FAQ)
 
 ## What metrics data DO we collect
 
