@@ -2,7 +2,7 @@
 
 ## Why are you collecting metrics?
 
-We are collecting metrics for all of our projects to assist with prioritizing work and provide proof that our work is valuable. Our prior state had the following issues:
+We are collecting metrics for all of our projects to assist with prioritizing work and provide proof that our work is valuable. Our prior state (<2023) had the following issues:
 
 1. Opt-in only metrics for webui and desktop did not send metrics data to our countly server
     1. We have no insight into the total number of users in our applications
