@@ -34,6 +34,11 @@ A longer repository description.
 
 [Russell Dempsey](https://github.com/SgtPooki)
 
+## Team
+
+[IPFS-Ignite(ipfs-gui) team in ipfs-shipyard](https://github.com/orgs/ipfs-shipyard/teams/ipfs-gui)
+[IPFS-Ignite(ipfs-gui) team in ipfs](https://github.com/orgs/ipfs/teams/gui-dev)
+
 ## Contributing
 
 Contributions are welcome! This repository is part of the IPFS project and therefore governed by our [contributing guidelines](https://github.com/ipfs/community/blob/master/CONTRIBUTING.md).
