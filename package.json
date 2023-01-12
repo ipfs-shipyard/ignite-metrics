@@ -185,5 +185,8 @@
     "react-refresh": "^0.14.0"
   },
   "module": "src/index.ts",
-  "private": false
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  }
 }
