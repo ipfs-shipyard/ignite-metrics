@@ -141,6 +141,6 @@ When you add/remove metrics data that is collected by a project, you MUST follow
 When you move a metric feature to/from a particular feature group, or that group changes its consent method, you must update:
 
 1. The table above at `Metric features and their groupings`
-2. The code at https://github.com/ipfs-shipyard/ignite-metrics/blob/f4431f59ce363c898affd4171eed979ede24e514/src/CountlyMetrics.ts#L10-L16
-3. Possibly the code at https://github.com/ipfs-shipyard/ignite-metrics/blob/f4431f59ce363c898affd4171eed979ede24e514/src/CountlyMetrics.ts#L27-L36
+2. The code at https://github.com/ipfs-shipyard/ignite-metrics/blob/main/src/CountlyMetrics.ts#L10-L16
+3. Possibly the code at https://github.com/ipfs-shipyard/ignite-metrics/blob/main/src/CountlyMetrics.ts#L27-L36
 

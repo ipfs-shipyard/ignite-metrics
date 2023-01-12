@@ -29,7 +29,7 @@ As a general rule, we collect only application data; no user data. Some examples
 |                  |                     |                |               |               |
 
 * "Metric data name" - The app-specific metric/event name we're using for this metric data. (e.g. APP_BOOTSTRAP_START)
-* "Metric feature name" - The metric feature the event/metric data correlates to. The group the metric feature belongs to is defined in our [COLLECTION_POLICY](https://github.com/ipfs-shipyard/ignite-metrics/blob/feature/telemetry-documentation/docs/telemetry/COLLECTION_POLICY.md#metric-features-and-their-groupings). (e.g. Minimal)
+* "Metric feature name" - The metric feature the event/metric data correlates to. The group the metric feature belongs to is defined in our [COLLECTION_POLICY](https://github.com/ipfs-shipyard/ignite-metrics/blob/main/docs/telemetry/COLLECTION_POLICY.md#metric-features-and-their-groupings). (e.g. Minimal)
 * "Metric trigger" - An explanation covering when this metric data is triggered. (e.g. On Application init)
 * "Analytics use" - An explanation about how this metric data is used for analytics. (e.g. Input to load time calculations)
 * "Notes" - Any additional notes. (e.g. Used as a timestamp identifier for when an application is first loaded)
