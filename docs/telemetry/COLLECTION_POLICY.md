@@ -82,10 +82,6 @@ Single toggle Example:
 
 ![example modal containing a single consent toggle](./images/single-toggle-modal.png)
 
-Multi toggle Example:
-
-![example modal containing multiple consent toggles](./images/multi-toggle-modal.png)
-
 #### Projects with its own settings page(s)
 
 The consent should conform to the UX expectations of the library it's being implemented in.
@@ -93,10 +89,6 @@ The consent should conform to the UX expectations of the library it's being impl
 ##### IPFS-companion
 
 It should look like the rest of the settings in the application.
-
-Potential UI with multiple toggles:
-
-![example telemetry multi-toggle UI for settings page in ipfs-companion](./images/settings-page-multi-toggle.png)
 
 Example with single toggle (PR at https://github.com/ipfs/ipfs-companion/pull/1117):
 
