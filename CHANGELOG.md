@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.0.1...v1.0.2) (2023-01-13)
+
+
+### Documentation
+
+* add telemetry documentation ([#35](https://github.com/ipfs-shipyard/ignite-metrics/issues/35)) ([4cb35ba](https://github.com/ipfs-shipyard/ignite-metrics/commit/4cb35bab8642693dd8226f1870fe777c3f8e78c3))
+
 ## [1.0.1](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.0.0...v1.0.1) (2023-01-13)
 
 

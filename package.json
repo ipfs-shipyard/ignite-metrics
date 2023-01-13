@@ -1,6 +1,6 @@
 {
   "name": "@ipfs-shipyard/ignite-metrics",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "UI library for gathering metrics for ignite team projects",
   "author": "Ignite Team",
   "license": "Apache-2.0 OR MIT",
@@ -147,7 +147,7 @@
     "styled-components": "^5.3.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.5",
+    "@babel/core": "^7.20.12",
     "@babel/preset-env": "^7.20.2",
     "@babel/preset-react": "^7.18.6",
     "@storybook/addon-actions": "^6.5.14",
