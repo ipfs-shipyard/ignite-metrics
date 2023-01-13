@@ -1,3 +1,15 @@
+## [1.0.1](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.0.0...v1.0.1) (2023-01-13)
+
+
+### Dependencies
+
+* bump @esbuild/darwin-arm64 from 0.16.8 to 0.16.17 ([23c50f4](https://github.com/ipfs-shipyard/ignite-metrics/commit/23c50f4a2e451b5eac3df9432a56a7fe93157299))
+
+
+### Trivial Changes
+
+* npm publishConfig is public ([3b317d4](https://github.com/ipfs-shipyard/ignite-metrics/commit/3b317d4dd254b5d1b755c57e4b782b67351e5d2a))
+
 ## 1.0.0 (2023-01-12)
 
 
