@@ -23,7 +23,7 @@ export default class MetricsProvider {
   constructor ({ autoTrack = true, url = COUNTLY_API_URL, appKey }: MetricsProviderConstructorOptions) {
     this.metricsService.init({
       app_key: appKey,
-      url: url,
+      url,
       require_consent: true
     })
 
@@ -49,7 +49,7 @@ export default class MetricsProvider {
     return [...this._consentGranted]
   }
 
-  setupAutoTrack () {
+  setupAutoTrack (): void {
     this.metricsService.track_clicks()
     this.metricsService.track_errors()
     this.metricsService.track_forms()
@@ -60,7 +60,7 @@ export default class MetricsProvider {
     this.metricsService.track_view()
   }
 
-  addConsent (consent: consentTypes | consentTypes[]) {
+  addConsent (consent: consentTypes | consentTypes[]): void {
     if (!Array.isArray(consent)) {
       consent = [consent]
     }
@@ -68,7 +68,7 @@ export default class MetricsProvider {
     this.metricsService.add_consent(consent)
   }
 
-  removeConsent (consent: consentTypes | consentTypes[]) {
+  removeConsent (consent: consentTypes | consentTypes[]): void {
     if (!Array.isArray(consent)) {
       consent = [consent]
     }
@@ -76,7 +76,7 @@ export default class MetricsProvider {
     this.metricsService.remove_consent(consent, true)
   }
 
-  checkConsent (consent: consentTypes | metricFeatures) {
+  checkConsent (consent: consentTypes | metricFeatures): boolean {
     if (consent in this.groupedFeatures) {
       return this.groupedFeatures[consent as consentTypes].every(this.metricsService.check_consent)
     }
@@ -89,7 +89,7 @@ export default class MetricsProvider {
    *
    * @param {string[]} consent
    */
-  updateConsent (consent: string[]) {
+  updateConsent (consent: string[]): void {
     const approvedConsent = new Set(consent)
     Object.keys(this.groupedFeatures).forEach((groupName) => {
       if (approvedConsent.has(groupName)) {
@@ -105,7 +105,7 @@ export default class MetricsProvider {
    * @param {boolean} noHeartBeat - By defaulting to false, we allow countly to calculate session lengths. Countly will send session_duration events every ~60 seconds.
    * @param {boolean} force
    */
-  startSession (noHeartBeat = false, force = false) {
+  startSession (noHeartBeat = false, force = false): void {
     /**
      * Don't call start_session if there is already a session.
      */
@@ -115,7 +115,7 @@ export default class MetricsProvider {
     }
   }
 
-  endSession (force = false) {
+  endSession (force = false): void {
     /**
      * Don't call end_session if there is no session.
      */
