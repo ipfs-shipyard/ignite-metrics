@@ -1,4 +1,4 @@
-import { COUNTLY_API_URL } from './config'
+import { COUNTLY_API_URL } from './config.js'
 import type { consentTypes, consentTypesExceptAll, metricFeatures } from 'countly-sdk-web'
 import Countly from 'countly-sdk-web'
 
