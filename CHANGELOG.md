@@ -1,3 +1,12 @@
+## [1.0.3](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.0.2...v1.0.3) (2023-01-13)
+
+
+### Dependencies
+
+* **dev:** bump @babel/core from 7.20.5 to 7.20.12 ([#43](https://github.com/ipfs-shipyard/ignite-metrics/issues/43)) ([8f55691](https://github.com/ipfs-shipyard/ignite-metrics/commit/8f55691f96ffe1e620d92b9a1e05d7b4032f33e8))
+* **dev:** bump babel-loader from 9.1.0 to 9.1.2 ([#45](https://github.com/ipfs-shipyard/ignite-metrics/issues/45)) ([29c659e](https://github.com/ipfs-shipyard/ignite-metrics/commit/29c659e8da4391f2e5310ebc51b81c93bcd3d3f5))
+* **dev:** bump prettier from 2.8.1 to 2.8.2 ([#46](https://github.com/ipfs-shipyard/ignite-metrics/issues/46)) ([bc98ca3](https://github.com/ipfs-shipyard/ignite-metrics/commit/bc98ca30eec79dd1589fef163e79fade707a6546))
+
 ## [1.0.2](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.0.1...v1.0.2) (2023-01-13)
 
 
