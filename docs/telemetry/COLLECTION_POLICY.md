@@ -55,7 +55,7 @@ The metric features in the first column name and their descriptions come directl
 
 The code implementing these groupings can be found [here](./../../src/MetricsProvider.ts#L17-L30)
 
-**Note:** The above groupings are our global settings. You will want to check the specific `./docs/telemetry/COLLECTED_DATA.md` for for variations.
+**Note:** The above groupings are our global settings. You will want to check the project specific `./docs/telemetry/COLLECTED_DATA.md` for variations.
 
 ### What do the consent toggling UIs look like?
 
