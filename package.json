@@ -35,8 +35,8 @@
       "import": "./dist/src/index.js"
     },
     "./vanilla": {
-      "types": "./dist/src/CountlyMetrics.d.ts",
-      "import": "./dist/src/CountlyMetrics.js"
+      "types": "./dist/src/MetricsProvider.d.ts",
+      "import": "./dist/src/MetricsProvider.js"
     }
   },
   "eslintConfig": {

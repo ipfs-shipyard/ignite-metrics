@@ -24,11 +24,20 @@ A longer repository description.
 
 ## Documentation
 
-[Insert link to documentation]() or expand with Install, Build, Usage sections.
+### Telemetry
+
+- [Telemetry collection policy](./docs/telemetry/COLLECTION_POLICY.md)
+- [Privacy Policy](./docs/telemetry/PRIVACY_POLICY.md)
+- [FAQs](./docs/telemetry/FAQs.md)
 
 ## Lead Maintainer
 
 [Russell Dempsey](https://github.com/SgtPooki)
+
+## Team
+
+[IPFS-Ignite(ipfs-gui) team in ipfs-shipyard](https://github.com/orgs/ipfs-shipyard/teams/ipfs-gui)
+[IPFS-Ignite(ipfs-gui) team in ipfs](https://github.com/orgs/ipfs/teams/gui-dev)
 
 ## Contributing
 

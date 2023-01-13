@@ -1,5 +1,5 @@
-import { COUNTLY_API_URL } from './config'
-import type { consentTypes, consentTypesExceptAll, eventTypes } from 'countly-sdk-web'
+import { COUNTLY_API_URL } from './config.js'
+import type { consentTypes, consentTypesExceptAll, metricFeatures } from 'countly-sdk-web'
 import Countly from 'countly-sdk-web'
 
 interface MetricsProviderConstructorOptions {
@@ -9,11 +9,12 @@ interface MetricsProviderConstructorOptions {
 }
 
 export default class MetricsProvider {
-  private readonly groupedFeatures: Record<consentTypes, eventTypes[]> = this.mapAllEvents({
-    marketing: ['attribution', 'users', 'location'],
-    minimal: ['sessions', 'views'],
-    performance: ['scrolls', 'clicks', 'forms', 'star-rating', 'feedback'],
-    tracking: ['events', 'crashes', 'apm']
+  private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = this.mapAllEvents({
+    minimal: ['sessions', 'views', 'events'],
+    performance: ['crashes', 'apm'],
+    ux: ['scrolls', 'clicks', 'forms'],
+    feedback: ['star-rating', 'feedback'],
+    location: ['location']
   })
 
   private sessionStarted: boolean = false
@@ -33,7 +34,7 @@ export default class MetricsProvider {
     }
   }
 
-  mapAllEvents (eventMap: Record<consentTypesExceptAll, eventTypes[]>): Record<consentTypes, eventTypes[]> {
+  mapAllEvents (eventMap: Record<consentTypesExceptAll, metricFeatures[]>): Record<consentTypes, metricFeatures[]> {
     return {
       ...eventMap,
       all: Object.values(eventMap).flat()
@@ -75,7 +76,7 @@ export default class MetricsProvider {
     this.metricsService.remove_consent(consent, true)
   }
 
-  checkConsent (consent: consentTypes | eventTypes) {
+  checkConsent (consent: consentTypes | metricFeatures) {
     if (consent in this.groupedFeatures) {
       return this.groupedFeatures[consent as consentTypes].every(this.metricsService.check_consent)
     }

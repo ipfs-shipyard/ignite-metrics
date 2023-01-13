@@ -5,7 +5,8 @@
     "types": ["node"],
     "outDir": "dist",
     "target": "ES6",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "NodeNext"
   },
   "include": [
     "src",
