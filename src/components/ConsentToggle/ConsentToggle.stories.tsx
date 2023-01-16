@@ -1,6 +1,6 @@
 import React from "react";
-import ConsentToggle from "./ConsentToggle.js";
-import type { ConsentToggleProps } from './ConsentToggle.js';
+import ConsentToggle from "./ConsentToggle";
+import type { ConsentToggleProps } from './ConsentToggle';
 
 export default {
     title: "Metrics Consent Toggle",

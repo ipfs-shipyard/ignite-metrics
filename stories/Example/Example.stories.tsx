@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import ConsentBanner from '../../src/components/ConsentBanner/index.js';
-import ConsentToggle from '../../src/components/ConsentToggle/index.js';
-import Warning from '../../src/components/Warning/index.js';
-import { COUNTLY_API_URL } from '../../src/config.js';
+import ConsentBanner from '../../src/components/ConsentBanner';
+import ConsentToggle from '../../src/components/ConsentToggle';
+import Warning from '../../src/components/Warning';
+import { COUNTLY_API_URL } from '../../src/config';
 import MetricsProvider from '../../src/MetricsProvider';
 import './Example.css';
 
