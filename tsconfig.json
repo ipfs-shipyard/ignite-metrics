@@ -4,9 +4,11 @@
     "jsx": "react",
     "types": ["node"],
     "outDir": "dist",
-    "target": "ES6",
+    "target": "ESNext",
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "NodeNext"
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Node"
   },
   "include": [
     "src",
