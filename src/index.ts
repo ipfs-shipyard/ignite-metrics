@@ -1,2 +1,2 @@
-export * from './components/index.js'
-export * from './MetricsProvider.js'
+export * from './components'
+export * from './MetricsProvider'
