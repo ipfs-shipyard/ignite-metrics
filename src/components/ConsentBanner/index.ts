@@ -1,1 +1,1 @@
-export { default } from './ConsentBanner.js'
+export { default } from './ConsentBanner'
