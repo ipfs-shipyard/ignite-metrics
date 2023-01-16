@@ -24,7 +24,7 @@ export default class MetricsProvider {
   private sessionStarted: boolean = false
   private readonly _consentGranted: Set<consentTypes> = new Set()
 
-  constructor(config: MetricsProviderConstructorOptions) {
+  constructor (config: MetricsProviderConstructorOptions) {
     const serviceConfig = {
       ...COUNTLY_SETUP_DEFAULTS,
       ...config
