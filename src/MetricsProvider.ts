@@ -1,11 +1,15 @@
-import { COUNTLY_API_URL } from './config.js'
 import type { consentTypes, consentTypesExceptAll, metricFeatures } from 'countly-sdk-web'
 import Countly from 'countly-sdk-web'
+import { COUNTLY_SETUP_DEFAULTS } from './config.js'
 
-interface MetricsProviderConstructorOptions {
+export interface MetricsProviderConstructorOptions {
   appKey: string
-  url?: string
   autoTrack?: boolean
+  interval?: number
+  max_events?: number
+  queue_size?: number
+  session_update?: number
+  url?: string
 }
 
 export default class MetricsProvider {
@@ -20,16 +24,15 @@ export default class MetricsProvider {
   private sessionStarted: boolean = false
   private readonly _consentGranted: Set<consentTypes> = new Set()
 
-  constructor ({ autoTrack = true, url = COUNTLY_API_URL, appKey }: MetricsProviderConstructorOptions) {
-    this.metricsService.init({
-      app_key: appKey,
-      url,
-      require_consent: true
-    })
+  constructor(config: MetricsProviderConstructorOptions) {
+    const serviceConfig = {
+      ...COUNTLY_SETUP_DEFAULTS,
+      ...config
+    }
 
+    this.metricsService.init(serviceConfig)
     this.metricsService.group_features(this.groupedFeatures)
-
-    if (autoTrack) {
+    if (serviceConfig.autoTrack) {
       this.setupAutoTrack()
     }
   }
