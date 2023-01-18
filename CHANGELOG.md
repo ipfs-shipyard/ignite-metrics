@@ -1,3 +1,16 @@
+## [1.1.0](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.0.3...v1.1.0) (2023-01-18)
+
+
+### Features
+
+* export for browser and node ([47c500e](https://github.com/ipfs-shipyard/ignite-metrics/commit/47c500ea403a2d61e39a9698ae6d97ad23dd2819))
+
+
+### Trivial Changes
+
+* fix ipfs-companion import error ([#60](https://github.com/ipfs-shipyard/ignite-metrics/issues/60)) ([0f237fb](https://github.com/ipfs-shipyard/ignite-metrics/commit/0f237fb905523d117fb033aa0baade6c2cef8730))
+* run 'ncu -u' ([#50](https://github.com/ipfs-shipyard/ignite-metrics/issues/50)) ([c5d060e](https://github.com/ipfs-shipyard/ignite-metrics/commit/c5d060eb5976e15b85c766a506fae038f38060ba))
+
 ## [1.0.3](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.0.2...v1.0.3) (2023-01-13)
 
 
