@@ -34,6 +34,10 @@
       "types": "./dist/src/index.d.ts",
       "import": "./dist/index.min.js"
     },
+    "./vanilla": {
+      "browser": "./dist/src/BrowserMetrics.js",
+      "import": "./dist/src/NodeMetrics.js"
+    },
     "./*": {
       "types": "./dist/src/*.d.ts",
       "import": "./dist/src/*.js"
