@@ -1,8 +1,10 @@
-import type { consentTypes, consentTypesExceptAll, metricFeatures } from 'countly-sdk-web'
-import Countly from 'countly-sdk-web'
 import { COUNTLY_SETUP_DEFAULTS } from './config.js'
 
-export interface MetricsProviderConstructorOptions {
+import type { metricFeatures, CountlyWebSdk } from 'countly-sdk-web'
+import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
+import type { consentTypes, consentTypesExceptAll } from './types/index.js'
+
+export interface MetricsProviderConstructorOptions<T> {
   appKey: string
   autoTrack?: boolean
   interval?: number
@@ -10,9 +12,10 @@ export interface MetricsProviderConstructorOptions {
   queue_size?: number
   session_update?: number
   url?: string
+  metricsService: T
 }
 
-export default class MetricsProvider {
+export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = this.mapAllEvents({
     minimal: ['sessions', 'views', 'events'],
     performance: ['crashes', 'apm'],
@@ -23,12 +26,20 @@ export default class MetricsProvider {
 
   private sessionStarted: boolean = false
   private readonly _consentGranted: Set<consentTypes> = new Set()
+  private readonly metricsService: T
 
-  constructor (config: MetricsProviderConstructorOptions) {
+  constructor(config: MetricsProviderConstructorOptions<T>) {
     const serviceConfig = {
       ...COUNTLY_SETUP_DEFAULTS,
       ...config
     }
+    const { appKey, url, metricsService } = serviceConfig
+    this.metricsService = metricsService
+    this.metricsService.init({
+      app_key: appKey,
+      url,
+      require_consent: true
+    })
 
     this.metricsService.init(serviceConfig)
     this.metricsService.group_features(this.groupedFeatures)
@@ -42,10 +53,6 @@ export default class MetricsProvider {
       ...eventMap,
       all: Object.values(eventMap).flat()
     }
-  }
-
-  get metricsService (): typeof Countly {
-    return Countly
   }
 
   get consentGranted (): consentTypes[] {

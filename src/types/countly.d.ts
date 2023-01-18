@@ -20,12 +20,10 @@ declare module 'countly-sdk-web' {
 
   export type metricFeatures = 'apm' | 'attribution' | 'clicks' | 'crashes' | 'events' | 'feedback' | 'forms' |
   'location' | 'scrolls' | 'sessions' | 'star-rating' | 'users' | 'views'
-  export type consentTypesExceptAll = 'minimal' | 'performance' | 'ux' | 'feedback' | 'location'
-  export type consentTypes = 'all' | consentTypesExceptAll
   type Segments = Record<string, string>
   type IgnoreList = Array<string | RegExp>
   type CountlyEventQueueItem = [string, CountlyEventData] | [eventName: string, key: string] | [eventName: string]
-  interface CountlyWebSdk {
+  export interface CountlyWebSdk {
     group_features: (arg0: Record<consentTypes, metricFeatures[]>) => unknown
     check_consent: (consentFeature: metricFeatures | consentTypes) => boolean
     add_consent: (consentFeature: consentTypes | consentTypes[]) => void
@@ -119,5 +117,5 @@ declare module 'countly-sdk-web' {
     end_session: (sec, force) => void
   }
   const Countly: CountlyWebSdk
-  export = Countly
+  export default Countly
 }
