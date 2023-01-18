@@ -10,6 +10,7 @@ export default {
   tsRepo: true,
   build: {
     types: true,
+    bundle: false,
     config: {
       format: 'esm',
       external: ['electron', '#ansi-styles', 'yargs/yargs', '#supports-color'],
