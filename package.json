@@ -32,11 +32,11 @@
   "exports": {
     ".": {
       "types": "./dist/src/index.d.ts",
-      "import": "./dist/src/index.js"
+      "import": "./dist/index.min.js"
     },
-    "./vanilla": {
-      "types": "./dist/src/MetricsProvider.d.ts",
-      "import": "./dist/src/MetricsProvider.js"
+    "./*": {
+      "types": "./dist/src/*.d.ts",
+      "import": "./dist/src/*.js"
     }
   },
   "eslintConfig": {
@@ -139,6 +139,7 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "countly-sdk-nodejs": "^22.6.0",
     "countly-sdk-web": "^22.6.4",
     "esbuild-css-modules-plugin": "^2.7.0",
     "react": "^18.2.0",

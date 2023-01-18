@@ -1,14 +1,16 @@
 import { COUNTLY_API_URL } from './config.js'
-import type { consentTypes, consentTypesExceptAll, metricFeatures } from 'countly-sdk-web'
-import Countly from 'countly-sdk-web'
+import type { metricFeatures, CountlyWebSdk } from 'countly-sdk-web'
+import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
+import type { consentTypes, consentTypesExceptAll } from './types/index.js'
 
-interface MetricsProviderConstructorOptions {
+export interface MetricsProviderConstructorOptions<T> {
   appKey: string
   url?: string
   autoTrack?: boolean
+  metricsService: T
 }
 
-export default class MetricsProvider {
+export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = this.mapAllEvents({
     minimal: ['sessions', 'views', 'events'],
     performance: ['crashes', 'apm'],
@@ -19,8 +21,10 @@ export default class MetricsProvider {
 
   private sessionStarted: boolean = false
   private readonly _consentGranted: Set<consentTypes> = new Set()
+  private readonly metricsService: T
 
-  constructor ({ autoTrack = true, url = COUNTLY_API_URL, appKey }: MetricsProviderConstructorOptions) {
+  constructor ({ autoTrack = true, url = COUNTLY_API_URL, appKey, metricsService }: MetricsProviderConstructorOptions<T>) {
+    this.metricsService = metricsService
     this.metricsService.init({
       app_key: appKey,
       url,
@@ -39,10 +43,6 @@ export default class MetricsProvider {
       ...eventMap,
       all: Object.values(eventMap).flat()
     }
-  }
-
-  get metricsService (): typeof Countly {
-    return Countly
   }
 
   get consentGranted (): consentTypes[] {
