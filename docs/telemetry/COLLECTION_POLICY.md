@@ -11,7 +11,7 @@ For an up to date list of projects we own that follow this policy, please see:
 
 ## History
 
-Before 2022Q4, telemetry was only implemented in https://github.com/ipfs/ipfs-webui and https://github.com/ipfs/ipfs-desktop, using our [self-hosted countly](https://count.ly/community-edition) server. The telemetry implemented within ipfs-webui and ipfs-desktop was opt-in only. i.e. metrics data was sent only if a user specifically opted-in to collecting metrics.
+Before 2022Q4, telemetry was only implemented in https://github.com/ipfs/ipfs-webui and https://github.com/ipfs/ipfs-desktop, using our [self-hosted countly](https://count.ly/product) server. The telemetry implemented within ipfs-webui and ipfs-desktop was opt-in only. i.e. metrics data was sent only if a user specifically opted-in to collecting metrics.
 
 Our other projects did not implement telemetry or collection of any metrics data. The only exception was https://github.com/ipfs/ipfs-companion where we have had a [privacy policy since 2019-02-15](https://github.com/ipfs/ipfs-companion/blob/main/PRIVACY-POLICY.md). The privacy policy in ipfs-companion indicates that no data is collected whatsoever, and that will be changing in the future.
 
