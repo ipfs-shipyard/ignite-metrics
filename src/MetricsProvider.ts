@@ -28,7 +28,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly _consentGranted: Set<consentTypes> = new Set()
   private readonly metricsService: T
 
-  constructor(config: MetricsProviderConstructorOptions<T>) {
+  constructor (config: MetricsProviderConstructorOptions<T>) {
     const serviceConfig = {
       ...COUNTLY_SETUP_DEFAULTS,
       ...config
@@ -43,6 +43,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
 
     this.metricsService.init(serviceConfig)
     this.metricsService.group_features(this.groupedFeatures)
+
     if (autoTrack) {
       this.setupAutoTrack()
     }
