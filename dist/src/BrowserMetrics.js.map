@@ -1,0 +1,1 @@
+{"version":3,"file":"BrowserMetrics.js","sourceRoot":"","sources":["../../src/BrowserMetrics.ts"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,iBAAiB,CAAA;AAErC,OAAO,eAAsD,MAAM,sBAAsB,CAAA;AAEzF,MAAM,CAAC,OAAO,OAAO,sBAAuB,SAAQ,eAA+B;IACjF,YAAa,IAA+E;QAC1F,KAAK,iCAAM,IAAI,KAAE,cAAc,EAAE,OAAO,IAAG,CAAA;IAC7C,CAAC;CACF"}

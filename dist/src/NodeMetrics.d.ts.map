@@ -1,0 +1,1 @@
+{"version":3,"file":"NodeMetrics.d.ts","sourceRoot":"","sources":["../../src/NodeMetrics.ts"],"names":[],"mappings":"AAAA,OAAO,OAAO,MAAM,oBAAoB,CAAA;AAExC,OAAO,eAAe,EAAE,EAAE,iCAAiC,EAAE,MAAM,sBAAsB,CAAA;AAEzF,MAAM,CAAC,OAAO,OAAO,mBAAoB,SAAQ,eAAe,CAAC,OAAO,OAAO,CAAC;gBACjE,IAAI,EAAE,IAAI,CAAC,iCAAiC,CAAC,OAAO,OAAO,CAAC,EAAE,gBAAgB,CAAC;CAG7F"}
