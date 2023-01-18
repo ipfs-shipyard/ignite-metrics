@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.1.0...v1.1.1) (2023-01-18)
+
+
+### Bug Fixes
+
+* 500/1000 event-queue split ([5744297](https://github.com/ipfs-shipyard/ignite-metrics/commit/5744297c941bdf6912b41a2c4569444b92fe8203))
+
 ## [1.1.0](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.0.3...v1.1.0) (2023-01-18)
 
 
