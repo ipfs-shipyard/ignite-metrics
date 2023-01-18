@@ -33,7 +33,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
       ...COUNTLY_SETUP_DEFAULTS,
       ...config
     }
-    const { appKey, url, metricsService } = serviceConfig
+    const { appKey, autoTrack, metricsService, url } = serviceConfig
     this.metricsService = metricsService
     this.metricsService.init({
       app_key: appKey,
@@ -43,7 +43,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
 
     this.metricsService.init(serviceConfig)
     this.metricsService.group_features(this.groupedFeatures)
-    if (serviceConfig.autoTrack) {
+    if (autoTrack) {
       this.setupAutoTrack()
     }
   }
