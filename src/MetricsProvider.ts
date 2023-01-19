@@ -51,7 +51,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
       this.setupAutoTrack()
     }
 
-    this.getConsentStore().forEach(this.addConsent.bind(this))
+    this.getConsentStore().forEach(consent => this.addConsent(consent))
   }
 
   mapAllEvents (eventMap: Record<consentTypesExceptAll, metricFeatures[]>): Record<consentTypes, metricFeatures[]> {
