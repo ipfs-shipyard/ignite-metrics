@@ -38,6 +38,16 @@
       "browser": "./dist/src/BrowserMetrics.js",
       "import": "./dist/src/NodeMetrics.js"
     },
+    "./browser-vanilla": {
+      "types": "./dist/src/BrowserMetrics.d.ts",
+      "browser": "./dist/src/BrowserMetrics.js",
+      "import": "./dist/src/BrowserMetrics.js"
+    },
+    "./node-vanilla": {
+      "types": "./dist/src/NodeMetrics.d.ts",
+      "node": "./dist/src/NodeMetrics.js",
+      "import": "./dist/src/NodeMetrics.js"
+    },
     "./*": {
       "types": "./dist/src/*.d.ts",
       "import": "./dist/src/*.js"
