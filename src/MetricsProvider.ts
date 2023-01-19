@@ -1,16 +1,17 @@
 import { COUNTLY_API_URL } from './config.js'
 import type { metricFeatures, CountlyWebSdk } from 'countly-sdk-web'
 import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
-import type { consentTypes, consentTypesExceptAll } from './types/index.js'
+import type { consentTypes, consentTypesExceptAll, StorageProvider } from './types/index.js'
 
 export interface MetricsProviderConstructorOptions<T> {
   appKey: string
   url?: string
   autoTrack?: boolean
   metricsService: T
+  storageProvider?: StorageProvider | null
 }
 
-export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
+export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = this.mapAllEvents({
     minimal: ['sessions', 'views', 'events'],
     performance: ['crashes', 'apm'],
@@ -22,9 +23,17 @@ export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
   private sessionStarted: boolean = false
   private readonly _consentGranted: Set<consentTypes> = new Set()
   private readonly metricsService: T
+  private readonly storageProvider: StorageProvider | null
 
-  constructor ({ autoTrack = true, url = COUNTLY_API_URL, appKey, metricsService }: MetricsProviderConstructorOptions<T>) {
+  constructor ({
+    autoTrack = true,
+    url = COUNTLY_API_URL,
+    appKey,
+    metricsService,
+    storageProvider
+  }: MetricsProviderConstructorOptions<T>) {
     this.metricsService = metricsService
+    this.storageProvider = storageProvider ?? null
     this.metricsService.init({
       app_key: appKey,
       url,
@@ -36,6 +45,8 @@ export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
     if (autoTrack) {
       this.setupAutoTrack()
     }
+
+    this.getConsentStore().forEach(this.addConsent.bind(this))
   }
 
   mapAllEvents (eventMap: Record<consentTypesExceptAll, metricFeatures[]>): Record<consentTypes, metricFeatures[]> {
@@ -66,6 +77,7 @@ export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
     }
     consent.forEach(c => this._consentGranted.add(c))
     this.metricsService.add_consent(consent)
+    this.setConsentStore()
   }
 
   removeConsent (consent: consentTypes | consentTypes[]): void {
@@ -74,6 +86,20 @@ export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
     }
     consent.forEach(c => this._consentGranted.delete(c))
     this.metricsService.remove_consent(consent, true)
+    this.setConsentStore()
+  }
+
+  private setConsentStore (): void {
+    if (this.storageProvider != null) {
+      this.storageProvider.setStore(Array.from(this._consentGranted))
+    }
+  }
+
+  private getConsentStore (): consentTypes[] {
+    if (this.storageProvider != null) {
+      return this.storageProvider.getStore()
+    }
+    return []
   }
 
   checkConsent (consent: consentTypes | metricFeatures): boolean {

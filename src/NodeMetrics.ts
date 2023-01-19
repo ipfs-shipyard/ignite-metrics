@@ -4,7 +4,10 @@ import MetricsProvider, { MetricsProviderConstructorOptions } from './MetricsPro
 
 export class NodeMetricsProvider extends MetricsProvider<typeof Countly> {
   constructor (args: Omit<MetricsProviderConstructorOptions<typeof Countly>, 'metricsService'>) {
-    super({ ...args, metricsService: Countly })
+    super({
+      metricsService: Countly,
+      ...args
+    })
   }
 }
 
