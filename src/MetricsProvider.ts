@@ -15,7 +15,7 @@ export interface MetricsProviderConstructorOptions<T> {
   metricsService: T
 }
 
-export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
+export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
   private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = this.mapAllEvents({
     minimal: ['sessions', 'views', 'events'],
     performance: ['crashes', 'apm'],

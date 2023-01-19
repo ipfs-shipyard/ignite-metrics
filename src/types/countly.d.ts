@@ -24,10 +24,10 @@ declare module 'countly-sdk-web' {
   type IgnoreList = Array<string | RegExp>
   type CountlyEventQueueItem = [string, CountlyEventData] | [eventName: string, key: string] | [eventName: string]
   export interface CountlyWebSdk {
-    group_features: (arg0: Record<consentTypes, metricFeatures[]>) => unknown
-    check_consent: (consentFeature: metricFeatures | consentTypes) => boolean
-    add_consent: (consentFeature: consentTypes | consentTypes[]) => void
-    remove_consent: (consentFeature: consentTypes | consentTypes[], enforceConsentUpdate?: boolean) => void
+    group_features: (arg0: Record<import('./index.js').consentTypes, metricFeatures[]>) => unknown
+    check_consent: (consentFeature: metricFeatures | import('./index.js').consentTypes) => boolean
+    add_consent: (consentFeature: import('./index.js').consentTypes | Array<import('./index.js').consentTypes>) => void
+    remove_consent: (consentFeature: import('./index.js').consentTypes | Array<import('./index.js').consentTypes>, enforceConsentUpdate?: boolean) => void
     require_consent: boolean
     init: (configOptions?: Partial<CountlyWebSdk>) => void
     /**

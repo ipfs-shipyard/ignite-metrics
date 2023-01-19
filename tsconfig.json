@@ -6,7 +6,10 @@
     "outDir": "dist",
     "target": "ES6",
     "allowSyntheticDefaultImports": true,
-    "moduleResolution": "NodeNext"
+    "moduleResolution": "NodeNext",
+    "typeRoots": [
+      "src/types"
+    ],
   },
   "include": [
     "src",

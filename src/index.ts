@@ -1,2 +1,6 @@
 export * from './components/index.js'
+export * from './config.js'
+export * from './BrowserMetrics.js'
 export * from './MetricsProvider.js'
+export * from './NodeMetrics.js'
+export * from './types/index.js'
