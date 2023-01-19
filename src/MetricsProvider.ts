@@ -101,10 +101,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   }
 
   private getConsentStore (): consentTypes[] {
-    if (this.storageProvider != null) {
-      return this.storageProvider.getStore()
-    }
-    return []
+    return this.storageProvider?.getStore() ?? []
   }
 
   checkConsent (consent: consentTypes | metricFeatures): boolean {
