@@ -2,7 +2,7 @@
   "extends": "aegir/src/config/tsconfig.aegir.json",
   "compilerOptions": {
     "jsx": "react",
-    "types": ["node"],
+    "types": ["node", "mocha"],
     "outDir": "dist",
     "target": "ES6",
     "allowSyntheticDefaultImports": true,
@@ -13,6 +13,7 @@
   },
   "include": [
     "src",
+    "test",
     "src/**/*.css"
   ],
   "exclude": [

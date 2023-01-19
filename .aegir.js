@@ -41,5 +41,7 @@ export default {
     },
     bundlesizeMax: '44KB',
   },
-  test: {}
+  test: {
+    build: true,
+  }
 }
