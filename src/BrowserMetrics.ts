@@ -7,7 +7,7 @@ export class BrowserMetricsProvider extends MetricsProvider<typeof Countly> {
   constructor (args: Omit<MetricsProviderConstructorOptions<typeof Countly>, 'metricsService'>) {
     super({
       metricsService: Countly,
-      storageProvider: BrowserStorageProvider,
+      storageProvider: new BrowserStorageProvider(),
       ...args
     })
   }

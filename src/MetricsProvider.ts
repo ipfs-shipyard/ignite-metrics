@@ -2,7 +2,8 @@ import { COUNTLY_SETUP_DEFAULTS } from './config.js'
 
 import type { metricFeatures, CountlyWebSdk } from 'countly-sdk-web'
 import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
-import type { consentTypes, consentTypesExceptAll, StorageProvider } from './types/index.js'
+import type { consentTypes, consentTypesExceptAll } from './types/index.js'
+import type { StorageProvider } from './StorageProvider.js'
 
 export interface MetricsProviderConstructorOptions<T> {
   appKey: string

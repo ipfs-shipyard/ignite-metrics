@@ -1,7 +1,8 @@
-import type { StorageProvider } from './types/index.js'
+import type { consentTypes } from './types/index.js'
+import type { StorageProvider } from './StorageProvider.js'
 
-export const BrowserStorageProvider: StorageProvider = {
-  setStore: (consentArray) => {
+export class BrowserStorageProvider implements StorageProvider {
+  setStore(consentArray: consentTypes[]) {
     try {
       const jsonString = JSON.stringify(consentArray)
       globalThis.localStorage.setItem('@ipfs-shipyard/ignite-metrics:consent', jsonString)
@@ -9,8 +10,9 @@ export const BrowserStorageProvider: StorageProvider = {
       // eslint-disable-next-line no-console
       console.error(err)
     }
-  },
-  getStore: () => {
+  }
+
+  getStore(): consentTypes[] {
     try {
       const jsonString = globalThis.localStorage.getItem('@ipfs-shipyard/ignite-metrics:consent')
       if (jsonString != null) {
