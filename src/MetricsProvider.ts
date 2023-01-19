@@ -1,12 +1,17 @@
-import { COUNTLY_API_URL } from './config.js'
+import { COUNTLY_SETUP_DEFAULTS } from './config.js'
+
 import type { metricFeatures, CountlyWebSdk } from 'countly-sdk-web'
 import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
 import type { consentTypes, consentTypesExceptAll, StorageProvider } from './types/index.js'
 
 export interface MetricsProviderConstructorOptions<T> {
   appKey: string
-  url?: string
   autoTrack?: boolean
+  interval?: number
+  max_events?: number
+  queue_size?: number
+  session_update?: number
+  url?: string
   metricsService: T
   storageProvider?: StorageProvider | null
 }
@@ -25,13 +30,12 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly metricsService: T
   private readonly storageProvider: StorageProvider | null
 
-  constructor ({
-    autoTrack = true,
-    url = COUNTLY_API_URL,
-    appKey,
-    metricsService,
-    storageProvider
-  }: MetricsProviderConstructorOptions<T>) {
+  constructor (config: MetricsProviderConstructorOptions<T>) {
+    const serviceConfig = {
+      ...COUNTLY_SETUP_DEFAULTS,
+      ...config
+    }
+    const { appKey, autoTrack, metricsService, url, storageProvider } = serviceConfig
     this.metricsService = metricsService
     this.storageProvider = storageProvider ?? null
     this.metricsService.init({
@@ -40,9 +44,10 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
       require_consent: true
     })
 
+    this.metricsService.init(serviceConfig)
     this.metricsService.group_features(this.groupedFeatures)
 
-    if (autoTrack) {
+    if (autoTrack === true) {
       this.setupAutoTrack()
     }
 
