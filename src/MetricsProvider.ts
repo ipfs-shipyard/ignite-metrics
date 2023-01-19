@@ -47,7 +47,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
     this.metricsService.init(serviceConfig)
     this.metricsService.group_features(this.groupedFeatures)
 
-    if (autoTrack === true) {
+    if (autoTrack) {
       this.setupAutoTrack()
     }
 
