@@ -4,7 +4,7 @@ import MetricsProvider, { MetricsProviderConstructorOptions } from './MetricsPro
 import { BrowserStorageProvider } from './BrowserStorageProvider.js'
 
 export class BrowserMetricsProvider extends MetricsProvider<typeof Countly> {
-  constructor (args: Omit<MetricsProviderConstructorOptions<typeof Countly>, 'metricsService'>) {
+  constructor (args: Omit<MetricsProviderConstructorOptions<typeof Countly>, 'metricsService'> & Partial<Pick<MetricsProviderConstructorOptions<typeof Countly>, 'metricsService'>>) {
     super({
       metricsService: Countly,
       storageProvider: new BrowserStorageProvider(),

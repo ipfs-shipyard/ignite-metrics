@@ -32,18 +32,12 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly storageProvider: StorageProvider | null
 
   constructor (config: MetricsProviderConstructorOptions<T>) {
-    const serviceConfig = {
+    const { autoTrack, metricsService, storageProvider, ...serviceConfig } = {
       ...COUNTLY_SETUP_DEFAULTS,
       ...config
     }
-    const { appKey, autoTrack, metricsService, url, storageProvider } = serviceConfig
     this.metricsService = metricsService
     this.storageProvider = storageProvider ?? null
-    this.metricsService.init({
-      app_key: appKey,
-      url,
-      require_consent: true
-    })
 
     this.metricsService.init(serviceConfig)
     this.metricsService.group_features(this.groupedFeatures)
@@ -67,13 +61,14 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   }
 
   setupAutoTrack (): void {
-    this.metricsService.track_clicks()
+    const webSdk = this.metricsService as CountlyWebSdk
+    webSdk.track_clicks?.()
     this.metricsService.track_errors()
-    this.metricsService.track_forms()
-    this.metricsService.track_links()
+    webSdk.track_forms?.()
+    webSdk.track_links?.()
     this.metricsService.track_pageview()
-    this.metricsService.track_scrolls()
-    this.metricsService.track_sessions()
+    webSdk.track_scrolls?.()
+    webSdk.track_sessions?.()
     this.metricsService.track_view()
   }
 
