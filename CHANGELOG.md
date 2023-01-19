@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.1.1...v1.1.2) (2023-01-19)
+
+
+### Bug Fixes
+
+* importing into starmap project ([0026429](https://github.com/ipfs-shipyard/ignite-metrics/commit/0026429ae69344eed3999703ff3b233d9862847a))
+
 ## [1.1.1](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.1.0...v1.1.1) (2023-01-18)
 
 
