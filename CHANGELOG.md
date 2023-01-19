@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.1.2...v1.1.3) (2023-01-19)
+
+
+### Documentation
+
+* Update link to countly server website ([#62](https://github.com/ipfs-shipyard/ignite-metrics/issues/62)) ([2d3226b](https://github.com/ipfs-shipyard/ignite-metrics/commit/2d3226be46dab73ad2d5ecedaeabd094581a0d0c))
+
 ## [1.1.2](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.1.1...v1.1.2) (2023-01-19)
 
 
