@@ -1,7 +1,8 @@
 import { COUNTLY_SETUP_DEFAULTS } from './config.js'
+import { EventAccumulator } from './EventAccumulator.js'
 
-import type { metricFeatures, CountlyWebSdk } from 'countly-sdk-web'
 import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
+import type { CountlyWebSdk, metricFeatures } from 'countly-sdk-web'
 import type { consentTypes, consentTypesExceptAll } from './types/index.js'
 
 export interface MetricsProviderConstructorOptions<T> {
@@ -9,13 +10,14 @@ export interface MetricsProviderConstructorOptions<T> {
   autoTrack?: boolean
   interval?: number
   max_events?: number
+  metricsService: T
   queue_size?: number
   session_update?: number
   url?: string
-  metricsService: T
 }
 
 export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
+  public readonly accumulate: EventAccumulator
   private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = this.mapAllEvents({
     minimal: ['sessions', 'views', 'events'],
     performance: ['crashes', 'apm'],
@@ -40,6 +42,7 @@ export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
       url,
       require_consent: true
     })
+    this.accumulate = new EventAccumulator(metricsService)
 
     this.metricsService.init(serviceConfig)
     this.metricsService.group_features(this.groupedFeatures)

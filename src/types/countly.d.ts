@@ -1,11 +1,12 @@
 declare module 'countly-sdk-web' {
-  interface CountlyEventData {
+  export interface CountlyEventData {
     key: string
     count: number
     sum: number
-    segmentation: Record<string, string | number>
+    dur: number
+    segmentation: Segments
   }
-  interface CountlyEvent {
+  export interface CountlyEvent {
     // name or id of the event
     key: string
     // how many times did event occur
@@ -18,12 +19,18 @@ declare module 'countly-sdk-web' {
     segmentation?: Segments
   }
 
+  export interface IEventAccumulator {
+    addEvent: (event: CountlyEvent, flush: boolean) => void
+    flush: (key: string) => void
+  }
+
   export type metricFeatures = 'apm' | 'attribution' | 'clicks' | 'crashes' | 'events' | 'feedback' | 'forms' |
   'location' | 'scrolls' | 'sessions' | 'star-rating' | 'users' | 'views'
   type Segments = Record<string, string>
   type IgnoreList = Array<string | RegExp>
   type CountlyEventQueueItem = [string, CountlyEventData] | [eventName: string, key: string] | [eventName: string]
   export interface CountlyWebSdk {
+    accumulate: IEventAccumulator
     group_features: (arg0: Record<import('./index.js').consentTypes, metricFeatures[]>) => unknown
     check_consent: (consentFeature: metricFeatures | import('./index.js').consentTypes) => boolean
     add_consent: (consentFeature: import('./index.js').consentTypes | Array<import('./index.js').consentTypes>) => void
