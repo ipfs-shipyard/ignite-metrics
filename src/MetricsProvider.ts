@@ -32,10 +32,11 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly storageProvider: StorageProvider | null
 
   constructor (config: MetricsProviderConstructorOptions<T>) {
-    const { autoTrack, metricsService, storageProvider, ...serviceConfig } = {
+    const serviceConfig = {
       ...COUNTLY_SETUP_DEFAULTS,
       ...config
     }
+    const { autoTrack, metricsService, storageProvider } = serviceConfig
     this.metricsService = metricsService
     this.storageProvider = storageProvider ?? null
 
