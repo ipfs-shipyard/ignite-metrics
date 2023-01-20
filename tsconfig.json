@@ -20,8 +20,7 @@
   ],
   "ts-node": {
     "extends": "aegir/src/config/tsconfig.aegir.json",
-      "transpileOnly": true,
-      "compilerOptions": {
-      }
+    "transpileOnly": true,
+    "compilerOptions": {}
   }
 }
