@@ -32,6 +32,13 @@ export class EventAccumulator implements IEventAccumulator {
     this.metricsService = metricsService
     this.flushInterval = flushInterval
     this.events = new Map()
+    this.setupUnloadEvent()
+  }
+
+  private setupUnloadEvent (): void {
+    globalThis.addEventListener('beforeunload', () => {
+      this.flushAll()
+    })
   }
 
   /**

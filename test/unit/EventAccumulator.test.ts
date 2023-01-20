@@ -5,6 +5,8 @@ import { expect } from 'chai'
 
 const sleep = async (ms: number): Promise<unknown> => await new Promise(resolve => setTimeout(resolve, ms))
 const CountlyStub = Sinon.stub(Countly)
+const addEventListenerStub = Sinon.stub()
+globalThis.addEventListener = addEventListenerStub
 
 describe('EventAccumulator', () => {
   beforeEach(() => {
@@ -13,6 +15,7 @@ describe('EventAccumulator', () => {
 
   it('should accumulate events', async () => {
     const accumulator = new EventAccumulator(CountlyStub)
+    Sinon.assert.calledOnce(addEventListenerStub)
     const event = {
       key: 'test',
       count: 1,
