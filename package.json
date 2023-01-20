@@ -27,6 +27,7 @@
   "files": [
     "src",
     "dist",
+    "!dist/test",
     "!**/*.tsbuildinfo"
   ],
   "exports": {
