@@ -1,7 +1,7 @@
 import CountlyNodeSdk from 'countly-sdk-nodejs'
 
 import { expect, sinon } from '../testUtils.js'
-import { NodeMetricsProvider } from '../../src/NodeMetrics.js'
+import { NodeMetricsProvider } from '../../src/NodeMetricsProvider.js'
 import type { StorageProvider } from '../../src/StorageProvider.js'
 import type { consentTypes } from '../../src/types/index.js'
 
@@ -75,6 +75,7 @@ describe('NodeMetricsProvider', function () {
 
       // storageProvider methods are called when loading.
       expect(storageProviderStub.getStore).to.have.callCount(1)
+      expect(countlyStub.add_consent).to.have.callCount(1)
       expect(countlyStub.add_consent).to.have.been.calledWith(['minimal'])
       expect(storageProviderStub.setStore).not.to.have.been.called
     })
@@ -108,6 +109,24 @@ describe('NodeMetricsProvider', function () {
       expect(storageProviderStub.getStore).to.have.callCount(1)
       expect(countlyStub.add_consent).to.have.been.calledWith(storedConsent)
       expect(storageProviderStub.setStore).not.to.have.been.called
+    })
+
+    it('User removes consent', function () {
+      const storedConsent: consentTypes[] = ['minimal']
+      storageProviderStub.getStore.returns(storedConsent)
+      const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar', storageProvider: storageProviderStub })
+      expect(telemetry).to.have.property('storageProvider').that.is.not.null
+
+      // storageProvider methods are not called when loading.
+      expect(storageProviderStub.getStore).to.have.callCount(1)
+      expect(countlyStub.add_consent).to.have.been.calledWith(storedConsent)
+      expect(storageProviderStub.setStore).not.to.have.been.called
+      telemetry.removeConsent('minimal')
+      expect(countlyStub.remove_consent).to.have.callCount(1)
+      expect(countlyStub.remove_consent.firstCall.args[0]).to.deep.equal(['minimal'])
+      expect(storageProviderStub.setStore.firstCall.args[0]).to.deep.equal([])
+      expect(storageProviderStub.getStore).to.have.callCount(1)
+      expect(storageProviderStub.setStore).to.have.callCount(1)
     })
   })
 })

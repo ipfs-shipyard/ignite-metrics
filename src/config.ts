@@ -5,5 +5,6 @@ export const COUNTLY_SETUP_DEFAULTS = {
   interval: 5000,
   max_events: 500,
   queue_size: 1000,
-  session_update: 60
+  session_update: 60,
+  require_consent: true
 }
