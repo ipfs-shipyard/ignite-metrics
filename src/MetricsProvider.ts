@@ -3,7 +3,7 @@ import { EventAccumulator } from './EventAccumulator.js'
 
 import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
 import type { CountlyWebSdk, metricFeatures } from 'countly-sdk-web'
-import type { consentTypes, consentTypesExceptAll } from './types/index.js'
+import type { consentTypes, consentTypesExceptAll } from '../types/index.js'
 
 export interface MetricsProviderConstructorOptions<T> {
   appKey: string
