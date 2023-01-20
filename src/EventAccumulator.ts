@@ -4,7 +4,7 @@ const eventDefaults: CountlyEventData = {
   key: '',
   count: 1,
   sum: 1,
-  dur: Date.now(),
+  dur: 0,
   segmentation: {}
 }
 
@@ -19,7 +19,7 @@ interface eventStore {
  */
 export class EventAccumulator implements IEventAccumulator {
   private readonly metricsService: CountlyWebSdk
-  private readonly events: Record<string, eventStore>
+  private readonly events: Map<string, eventStore>
   private readonly flushInterval: number
 
   /**
@@ -31,7 +31,7 @@ export class EventAccumulator implements IEventAccumulator {
   constructor (metricsService: CountlyWebSdk, flushInterval: number = 5 * 60 * 1000) {
     this.metricsService = metricsService
     this.flushInterval = flushInterval
-    this.events = {}
+    this.events = new Map()
   }
 
   /**
@@ -45,23 +45,13 @@ export class EventAccumulator implements IEventAccumulator {
   }
 
   /**
-   * Check if we're already accumulating an event by key.
-   *
-   * @param {string} key - event key
-   * @returns {boolean} - whether the event accumulator exists
-   */
-  private accumulatorExists (key: string): boolean {
-    return key in this.events
-  }
-
-  /**
    * Setup the event accumulator for a key type for the first time.
    *
    * @param {CountlyEventData} eventData - event data
    */
   private setupEventAccumulator (eventData: CountlyEventData): void {
     const { key } = eventData
-    this.events[key] = {
+    this.events.set(key, {
       eventData,
       // set start time to now. This will be updated when the event is flushed.
       startTime: Date.now(),
@@ -69,7 +59,7 @@ export class EventAccumulator implements IEventAccumulator {
       timeout: setTimeout(() => {
         this.flush(key)
       }, this.flushInterval)
-    }
+    })
   }
 
   /**
@@ -80,7 +70,12 @@ export class EventAccumulator implements IEventAccumulator {
   private digestEventData (newEventData: CountlyEventData): void {
     const { key, count, segmentation } = newEventData
     // if event is in the store, update the event data.
-    const { eventData } = this.events[key]
+    const eventStore = this.events.get(key)
+    if (eventStore == null) {
+      this.setupEventAccumulator(newEventData)
+      return
+    }
+    const { eventData } = eventStore
     eventData.count += count
     eventData.sum += 1
     eventData.segmentation = { ...eventData.segmentation, ...segmentation }
@@ -101,12 +96,7 @@ export class EventAccumulator implements IEventAccumulator {
       throw new Error('Event key is required.')
     }
 
-    // if event is not in the store, add it.
-    if (!this.accumulatorExists(key)) {
-      this.setupEventAccumulator(eventData)
-    } else {
-      this.digestEventData(eventData)
-    }
+    this.digestEventData(eventData)
 
     // flush the event if flush is true.
     if (flush) {
@@ -120,12 +110,12 @@ export class EventAccumulator implements IEventAccumulator {
    * @param {string} key - event key
    */
   flush (key: string): void {
-    // if event is not in the store, return.
-    if (!(key in this.events)) {
+    const eventStore = this.events.get(key)
+    if (eventStore == null) {
       return
     }
 
-    const { eventData, startTime, timeout } = this.events[key]
+    const { eventData, startTime, timeout } = eventStore
 
     // update duration to ms from start.
     eventData.dur = Date.now() - startTime
@@ -133,6 +123,6 @@ export class EventAccumulator implements IEventAccumulator {
     this.metricsService.add_event(eventData)
     clearTimeout(timeout)
     // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-    delete this.events[key]
+    this.events.delete(key)
   }
 }
