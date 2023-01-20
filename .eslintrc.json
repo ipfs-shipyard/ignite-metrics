@@ -9,7 +9,9 @@
   "parserOptions": {
     "sourceType": "module"
   },
-  "rules": {},
+  "rules": {
+    "sort-imports": ["error"]
+  },
   "overrides": [
     {
       "files": [

@@ -1,9 +1,8 @@
-import { COUNTLY_SETUP_DEFAULTS } from './config.js'
-import { EventAccumulator } from './EventAccumulator.js'
-
-import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
 import type { CountlyWebSdk, metricFeatures } from 'countly-sdk-web'
 import type { consentTypes, consentTypesExceptAll } from '../types/index.js'
+import { COUNTLY_SETUP_DEFAULTS } from './config.js'
+import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
+import { EventAccumulator } from './EventAccumulator.js'
 
 export interface MetricsProviderConstructorOptions<T> {
   appKey: string

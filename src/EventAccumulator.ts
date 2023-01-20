@@ -1,4 +1,4 @@
-import type { CountlyWebSdk, IEventAccumulator, CountlyEvent, CountlyEventData } from 'countly-sdk-web'
+import type { CountlyEvent, CountlyEventData, CountlyWebSdk, IEventAccumulator } from 'countly-sdk-web'
 
 const eventDefaults: CountlyEventData = {
   key: '',
