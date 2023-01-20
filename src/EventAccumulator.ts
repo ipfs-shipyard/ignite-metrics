@@ -91,7 +91,7 @@ export class EventAccumulator implements IEventAccumulator {
     // update duration to ms from start.
     eventData.dur = Date.now() - startTime
     // add event to the async queue.
-    this.metricsService.q.push(['add_event', eventData])
+    this.metricsService.add_event(eventData)
     clearTimeout(timeout)
     // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
     delete this.events[key]
