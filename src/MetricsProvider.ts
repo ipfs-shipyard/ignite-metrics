@@ -30,6 +30,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly _consentGranted: Set<consentTypes> = new Set()
   private readonly metricsService: T
   private readonly storageProvider: StorageProvider | null
+  private readonly initDone: boolean = false
 
   constructor (config: MetricsProviderConstructorOptions<T>) {
     const serviceConfig = {
@@ -47,7 +48,11 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
       this.setupAutoTrack()
     }
 
-    this.getConsentStore().forEach((consent) => { this.addConsent(consent) })
+    const existingConsent = this.getConsentStore()
+    if (existingConsent.length > 0) {
+      this.addConsent(existingConsent)
+    }
+    this.initDone = true
   }
 
   mapAllEvents (eventMap: Record<consentTypesExceptAll, metricFeatures[]>): Record<consentTypes, metricFeatures[]> {
@@ -92,7 +97,12 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   }
 
   private setConsentStore (): void {
-    if (this.storageProvider != null) {
+    /**
+     * Only set the consent store if
+     * 1. we have a storage provider
+     * 2. we're out of the initialization phase.
+     */
+    if (this.storageProvider != null && this.initDone) {
       this.storageProvider.setStore(Array.from(this._consentGranted))
     }
   }

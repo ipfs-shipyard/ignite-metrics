@@ -2,7 +2,7 @@ import type { consentTypes } from './types/index.js'
 import type { StorageProvider } from './StorageProvider.js'
 
 export class BrowserStorageProvider implements StorageProvider {
-  setStore(consentArray: consentTypes[]) {
+  setStore (consentArray: consentTypes[]): void {
     try {
       const jsonString = JSON.stringify(consentArray)
       globalThis.localStorage.setItem('@ipfs-shipyard/ignite-metrics:consent', jsonString)
@@ -12,7 +12,7 @@ export class BrowserStorageProvider implements StorageProvider {
     }
   }
 
-  getStore(): consentTypes[] {
+  getStore (): consentTypes[] {
     try {
       const jsonString = globalThis.localStorage.getItem('@ipfs-shipyard/ignite-metrics:consent')
       if (jsonString != null) {

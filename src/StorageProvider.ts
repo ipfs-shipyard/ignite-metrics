@@ -6,15 +6,16 @@ export interface StorageProviderInterface {
 }
 
 export class StorageProvider {
-  constructor(options: StorageProviderInterface) {
+  constructor (options: StorageProviderInterface) {
     this.setStore = options.setStore ?? this.setStore
     this.getStore = options.getStore ?? this.setStore
   }
 
-  setStore(values: consentTypes[]): void {
+  setStore (values: consentTypes[]): void {
     throw new Error('Method not implemented')
   }
-  getStore(): consentTypes[] {
+
+  getStore (): consentTypes[] {
     throw new Error('Method not implemented')
   }
 }
