@@ -1,6 +1,6 @@
 import CountlyNodeSdk from 'countly-sdk-nodejs'
 
-import { expect, sinon } from '../testUtils.js'
+import { ensureCall, expect, sinon } from '../testUtils.js'
 import { NodeMetricsProvider } from '../../src/NodeMetricsProvider.js'
 import type { StorageProvider } from '../../src/StorageProvider.js'
 import type { consentTypes } from '../../src/types/index.js'
@@ -23,36 +23,36 @@ describe('NodeMetricsProvider', function () {
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar' })
       expect(telemetry).to.be.an.instanceOf(NodeMetricsProvider)
       expect(telemetry).to.have.property('metricsService')
-      expect(countlyStub.init).to.have.callCount(1)
-      expect(countlyStub.group_features).to.have.callCount(1)
+      ensureCall({ spy: countlyStub.init, callCount: 1 })
+      ensureCall({ spy: countlyStub.group_features, callCount: 1 })
       expect(telemetry).to.have.property('storageProvider').that.is.null
 
       // countly methods are not called
-      expect(countlyStub.add_consent).not.to.have.been.called
-      expect(countlyStub.remove_consent).not.to.have.been.called
+      ensureCall({ spy: countlyStub.add_consent, callCount: 0 })
+      ensureCall({ spy: countlyStub.remove_consent, callCount: 0 })
 
       // autoTrack methods are called
-      expect(countlyStub.track_errors).to.have.callCount(1)
-      expect(countlyStub.track_pageview).to.have.callCount(1)
-      expect(countlyStub.track_view).to.have.callCount(1)
+      ensureCall({ spy: countlyStub.track_errors, callCount: 1 })
+      ensureCall({ spy: countlyStub.track_pageview, callCount: 1 })
+      ensureCall({ spy: countlyStub.track_view, callCount: 1 })
     })
 
     it('with no autotrack', function () {
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar', autoTrack: false })
       expect(telemetry).to.be.an.instanceOf(NodeMetricsProvider)
       expect(telemetry).to.have.property('metricsService')
-      expect(countlyStub.init).to.have.callCount(1)
-      expect(countlyStub.group_features).to.have.callCount(1)
+      ensureCall({ spy: countlyStub.init, callCount: 1 })
+      ensureCall({ spy: countlyStub.group_features, callCount: 1 })
       expect(telemetry).to.have.property('storageProvider').that.is.null
 
       // countly methods are not called
-      expect(countlyStub.add_consent).not.to.have.been.called
-      expect(countlyStub.remove_consent).not.to.have.been.called
+      ensureCall({ spy: countlyStub.add_consent, callCount: 0 })
+      ensureCall({ spy: countlyStub.remove_consent, callCount: 0 })
 
       // autoTrack methods are not called
-      expect(countlyStub.track_errors).not.to.have.been.called
-      expect(countlyStub.track_pageview).not.to.have.been.called
-      expect(countlyStub.track_view).not.to.have.been.called
+      ensureCall({ spy: countlyStub.track_errors, callCount: 0 })
+      ensureCall({ spy: countlyStub.track_pageview, callCount: 0 })
+      ensureCall({ spy: countlyStub.track_view, callCount: 0 })
     })
   })
 
@@ -62,22 +62,22 @@ describe('NodeMetricsProvider', function () {
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar', storageProvider: storageProviderStub })
       expect(telemetry).to.have.property('storageProvider').that.is.not.null
 
-      // storageProvider methods are not called when loading.
-      expect(storageProviderStub.getStore).to.have.callCount(1)
-      expect(countlyStub.add_consent).not.to.have.been.called
-      expect(storageProviderStub.setStore).not.to.have.been.called
+      // only storageProvider.getStore called when loading.
+      ensureCall({ spy: countlyStub.add_consent, callCount: 0 })
+      ensureCall({ spy: storageProviderStub.setStore, callCount: 0 })
+      ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
     })
 
     it('User has single consent stored', function () {
-      storageProviderStub.getStore.returns(['minimal'])
+      const storedConsent: consentTypes[] = ['minimal']
+      storageProviderStub.getStore.returns(storedConsent)
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar', storageProvider: storageProviderStub })
       expect(telemetry).to.have.property('storageProvider').that.is.not.null
 
       // storageProvider methods are called when loading.
-      expect(storageProviderStub.getStore).to.have.callCount(1)
-      expect(countlyStub.add_consent).to.have.callCount(1)
-      expect(countlyStub.add_consent).to.have.been.calledWith(['minimal'])
-      expect(storageProviderStub.setStore).not.to.have.been.called
+      ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
+      ensureCall({ spy: countlyStub.add_consent, callCount: 1, callIndex: 0, expectedArgs: storedConsent })
+      ensureCall({ spy: storageProviderStub.setStore, callCount: 0 })
     })
 
     it('User updates consent', function () {
@@ -86,17 +86,13 @@ describe('NodeMetricsProvider', function () {
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar', storageProvider: storageProviderStub })
       expect(telemetry).to.have.property('storageProvider').that.is.not.null
 
-      // storageProvider methods are not called when loading.
-      expect(storageProviderStub.getStore).to.have.callCount(1)
-      expect(countlyStub.add_consent).to.have.been.calledWith(storedConsent)
-      expect(countlyStub.add_consent).to.have.callCount(1)
-      expect(storageProviderStub.setStore).not.to.have.been.called
+      ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
+      ensureCall({ spy: countlyStub.add_consent, callCount: 1, callIndex: 0, expectedArgs: storedConsent })
+      ensureCall({ spy: storageProviderStub.setStore, callCount: 0 })
       telemetry.addConsent('performance')
-      expect(countlyStub.add_consent).to.have.callCount(2)
-      expect(countlyStub.add_consent.secondCall.args[0]).to.deep.equal(['performance'])
-      expect(storageProviderStub.setStore.firstCall.args[0]).to.deep.equal(['minimal', 'performance'])
-      expect(storageProviderStub.getStore).to.have.callCount(1)
-      expect(storageProviderStub.setStore).to.have.callCount(1)
+      ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
+      ensureCall({ spy: countlyStub.add_consent, callCount: 2, callIndex: 1, expectedArgs: ['performance'] })
+      ensureCall({ spy: storageProviderStub.setStore, callCount: 1, callIndex: 0, expectedArgs: ['minimal', 'performance'] })
     })
 
     it('User has multiple consents stored', function () {
@@ -105,10 +101,9 @@ describe('NodeMetricsProvider', function () {
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar', storageProvider: storageProviderStub })
       expect(telemetry).to.have.property('storageProvider').that.is.not.null
 
-      // storageProvider methods are not called when loading.
-      expect(storageProviderStub.getStore).to.have.callCount(1)
-      expect(countlyStub.add_consent).to.have.been.calledWith(storedConsent)
-      expect(storageProviderStub.setStore).not.to.have.been.called
+      ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
+      ensureCall({ spy: countlyStub.add_consent, callCount: 1, callIndex: 0, expectedArgs: storedConsent })
+      ensureCall({ spy: storageProviderStub.setStore, callCount: 0 })
     })
 
     it('User removes consent', function () {
@@ -117,16 +112,14 @@ describe('NodeMetricsProvider', function () {
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar', storageProvider: storageProviderStub })
       expect(telemetry).to.have.property('storageProvider').that.is.not.null
 
-      // storageProvider methods are not called when loading.
-      expect(storageProviderStub.getStore).to.have.callCount(1)
-      expect(countlyStub.add_consent).to.have.been.calledWith(storedConsent)
-      expect(storageProviderStub.setStore).not.to.have.been.called
+      ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
+      ensureCall({ spy: countlyStub.add_consent, callCount: 1, callIndex: 0, expectedArgs: storedConsent })
+      ensureCall({ spy: countlyStub.remove_consent, callCount: 0 })
+      ensureCall({ spy: storageProviderStub.setStore, callCount: 0 })
       telemetry.removeConsent('minimal')
-      expect(countlyStub.remove_consent).to.have.callCount(1)
-      expect(countlyStub.remove_consent.firstCall.args[0]).to.deep.equal(['minimal'])
-      expect(storageProviderStub.setStore.firstCall.args[0]).to.deep.equal([])
-      expect(storageProviderStub.getStore).to.have.callCount(1)
-      expect(storageProviderStub.setStore).to.have.callCount(1)
+      ensureCall({ spy: storageProviderStub.getStore, callCount: 1 }) // no change
+      ensureCall({ spy: countlyStub.remove_consent, callCount: 1, callIndex: 0, expectedArgs: ['minimal'] })
+      ensureCall({ spy: storageProviderStub.setStore, callCount: 1, callIndex: 0, expectedArgs: [] })
     })
   })
 })
