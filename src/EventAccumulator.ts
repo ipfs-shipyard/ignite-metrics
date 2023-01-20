@@ -125,4 +125,13 @@ export class EventAccumulator implements IEventAccumulator {
     // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
     this.events.delete(key)
   }
+
+  /**
+   * Flush all events from the accumulator
+   */
+  flushAll (): void {
+    this.events.forEach((_, key) => {
+      this.flush(key)
+    })
+  }
 }
