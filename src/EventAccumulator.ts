@@ -1,7 +1,6 @@
 import type { CountlyEvent, CountlyEventData, CountlyWebSdk, IEventAccumulator } from 'countly-sdk-web'
 import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
 
-
 const eventDefaults: CountlyEventData = {
   key: '',
   count: 1,

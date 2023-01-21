@@ -1,9 +1,8 @@
-import CountlyNodeSdk from 'countly-sdk-nodejs'
-
 import { ensureCall, expect, sinon } from '../testUtils.js'
+import CountlyNodeSdk from 'countly-sdk-nodejs'
 import { NodeMetricsProvider } from '../../src/NodeMetricsProvider.js'
 import type { StorageProvider } from '../../src/StorageProvider.js'
-import type { consentTypes } from '../../src/types/index.js'
+import type { consentTypes } from '../../types/index.js'
 
 const sandbox = sinon.createSandbox()
 
@@ -18,6 +17,7 @@ describe('NodeMetricsProvider', function () {
   afterEach(function () {
     sandbox.restore()
   })
+
   describe('instantiation', function () {
     it('with defaults', function () {
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar' })
