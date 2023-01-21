@@ -126,11 +126,11 @@ declare module 'countly-sdk-web' {
     log_error: (err, segments) => void
 
     /**
-     *  Record and report error, this is where tracked errors are modified and sent to the request queue
+     * Record and report error, this is where tracked errors are modified and sent to the request queue
      *
-     *  @param {Error} err - Error object
-     *  @param {boolean} nonfatal - nonfatal if true and false if fatal
-     *  @param {Segments} segments - custom crash segments
+     * @param {Error} err - Error object
+     * @param {boolean} nonfatal - nonfatal if true and false if fatal
+     * @param {Segments} segments - custom crash segments
      */
     recordError: (err, nonfatal, segments) => void
   }
