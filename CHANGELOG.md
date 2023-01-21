@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.1.3...v1.2.0) (2023-01-21)
+
+
+### Features
+
+* use localStorage to cache consent in browsers ([#64](https://github.com/ipfs-shipyard/ignite-metrics/issues/64)) ([5fd14ce](https://github.com/ipfs-shipyard/ignite-metrics/commit/5fd14ce8f714930a562108029a78490cfc099d51))
+
 ## [1.1.3](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.1.2...v1.1.3) (2023-01-19)
 
 
