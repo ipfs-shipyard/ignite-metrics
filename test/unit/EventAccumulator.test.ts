@@ -1,21 +1,25 @@
+import { expect, sinon } from '../testUtils.js'
 import Countly from 'countly-sdk-nodejs'
 import { EventAccumulator } from '../../src/EventAccumulator.js'
-import Sinon from 'sinon'
-import { expect } from 'chai'
 
 const sleep = async (ms: number): Promise<unknown> => await new Promise(resolve => setTimeout(resolve, ms))
-const CountlyStub = Sinon.stub(Countly)
-const addEventListenerStub = Sinon.stub()
+const sandbox = sinon.createSandbox()
+const addEventListenerStub = sandbox.stub()
 globalThis.addEventListener = addEventListenerStub
 
 describe('EventAccumulator', () => {
+  let countlyStub: sinon.SinonStubbedInstance<typeof Countly>
+
   beforeEach(() => {
-    Sinon.reset()
+    countlyStub = sandbox.stub(Countly)
+  })
+
+  afterEach(() => {
+    sandbox.restore()
   })
 
   it('should accumulate events', async () => {
-    const accumulator = new EventAccumulator(CountlyStub)
-    Sinon.assert.calledOnce(addEventListenerStub)
+    const accumulator = new EventAccumulator(countlyStub)
     const event = {
       key: 'test',
       count: 1,
@@ -29,17 +33,17 @@ describe('EventAccumulator', () => {
     // flush the event
     accumulator.flush('test')
     // check the event data
-    const { count, dur, key, sum, segmentation } = CountlyStub.add_event.getCall(0).args[0]
+    const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
     expect(count).to.be.equal(2)
     expect(dur).to.be.greaterThan(100)
     expect(key).to.be.equal('test')
     expect(sum).to.be.equal(2)
     expect(segmentation).to.be.deep.equal({})
-    expect(CountlyStub.add_event.callCount).to.be.equal(1)
+    expect(countlyStub.add_event.callCount).to.be.equal(1)
   })
 
   it('should flush events after the flush interval', async () => {
-    const accumulator = new EventAccumulator(CountlyStub, 100)
+    const accumulator = new EventAccumulator(countlyStub, 100)
     const event = {
       key: 'test',
       count: 1,
@@ -50,17 +54,17 @@ describe('EventAccumulator', () => {
     // wait for the flush interval to pass
     await sleep(150)
     // check the event data
-    const { count, dur, key, sum, segmentation } = CountlyStub.add_event.getCall(0).args[0]
+    const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
     expect(count).to.be.equal(1)
     expect(dur).to.be.greaterThanOrEqual(100)
     expect(key).to.be.equal('test')
     expect(sum).to.be.equal(1)
     expect(segmentation).to.be.deep.equal({})
-    expect(CountlyStub.add_event.callCount).to.be.equal(1)
+    expect(countlyStub.add_event.callCount).to.be.equal(1)
   })
 
   it('should flush events when flush=true', async () => {
-    const accumulator = new EventAccumulator(CountlyStub, 1000)
+    const accumulator = new EventAccumulator(countlyStub, 1000)
     const event = {
       key: 'test',
       count: 1,
@@ -72,17 +76,17 @@ describe('EventAccumulator', () => {
     await sleep(100)
     accumulator.addEvent(event, true)
     // check the event data
-    const { count, dur, key, sum, segmentation } = CountlyStub.add_event.getCall(0).args[0]
+    const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
     expect(count).to.be.equal(2)
     expect(dur).to.be.greaterThanOrEqual(100)
     expect(key).to.be.equal('test')
     expect(sum).to.be.equal(2)
     expect(segmentation).to.be.deep.equal({})
-    expect(CountlyStub.add_event.callCount).to.be.equal(1)
+    expect(countlyStub.add_event.callCount).to.be.equal(1)
   })
 
   it('should accumulate segments', async () => {
-    const accumulator = new EventAccumulator(CountlyStub, 1000)
+    const accumulator = new EventAccumulator(countlyStub, 1000)
     const event1 = {
       key: 'test',
       count: 1,
@@ -104,7 +108,7 @@ describe('EventAccumulator', () => {
     await sleep(100)
     accumulator.addEvent(event2, true)
     // check the event data
-    const { count, dur, key, sum, segmentation } = CountlyStub.add_event.getCall(0).args[0]
+    const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
     expect(count).to.be.equal(2)
     expect(dur).to.be.greaterThanOrEqual(100)
     expect(key).to.be.equal('test')
@@ -113,11 +117,11 @@ describe('EventAccumulator', () => {
       foo: 'bar',
       bar: 'baz'
     })
-    expect(CountlyStub.add_event.callCount).to.be.equal(1)
+    expect(countlyStub.add_event.callCount).to.be.equal(1)
   })
 
   it('should accumulate different types of events', async () => {
-    const accumulator = new EventAccumulator(CountlyStub, 100)
+    const accumulator = new EventAccumulator(countlyStub, 100)
     const event1 = {
       key: 'test1',
       count: 1,
@@ -143,18 +147,18 @@ describe('EventAccumulator', () => {
     // check the event data
     const calls = [['test1', { foo: 'bar' }], ['test2', { bar: 'baz' }]]
     calls.forEach(([testKey, segment], idx) => {
-      const { count, dur, key, sum, segmentation } = CountlyStub.add_event.getCall(idx).args[0]
+      const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(idx).args[0]
       expect(count).to.be.equal(1)
       expect(dur).to.be.greaterThanOrEqual(100)
       expect(key).to.be.equal(testKey)
       expect(sum).to.be.equal(1)
       expect(segmentation).to.be.deep.equals(segment)
     })
-    expect(CountlyStub.add_event.callCount).to.be.equal(2)
+    expect(countlyStub.add_event.callCount).to.be.equal(2)
   })
 
   it('should flush all events from the accumulator', async () => {
-    const accumulator = new EventAccumulator(CountlyStub, 1000)
+    const accumulator = new EventAccumulator(countlyStub, 1000)
     const event1 = {
       key: 'test1',
       count: 1,
@@ -188,20 +192,20 @@ describe('EventAccumulator', () => {
     accumulator.addEvent(event3)
     accumulator.flushAll()
     // check the event data
-    const test1Results = CountlyStub.add_event.getCall(0).args[0]
+    const test1Results = countlyStub.add_event.getCall(0).args[0]
     expect(test1Results.count).to.be.equal(3)
     expect(test1Results.dur).to.be.greaterThanOrEqual(100)
     expect(test1Results.key).to.be.equal('test1')
     expect(test1Results.sum).to.be.equal(2)
     expect(test1Results.segmentation).to.be.deep.equals({ foo: 'baz' })
 
-    const test2Results = CountlyStub.add_event.getCall(1).args[0]
+    const test2Results = countlyStub.add_event.getCall(1).args[0]
     expect(test2Results.count).to.be.equal(1)
     expect(test2Results.dur).to.be.greaterThanOrEqual(50)
     expect(test2Results.key).to.be.equal('test2')
     expect(test2Results.sum).to.be.equal(1)
     expect(test2Results.segmentation).to.be.deep.equals({ bar: 'baz' })
 
-    expect(CountlyStub.add_event.callCount).to.be.equal(2)
+    expect(countlyStub.add_event.callCount).to.be.equal(2)
   })
 })
