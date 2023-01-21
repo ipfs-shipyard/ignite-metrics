@@ -54,12 +54,6 @@
       "import": "./dist/src/*.js"
     }
   },
-  "eslintConfig": {
-    "extends": "ipfs",
-    "parserOptions": {
-      "sourceType": "module"
-    }
-  },
   "release": {
     "branches": [
       "main"
@@ -149,7 +143,8 @@
     "lint": "aegir lint",
     "release": "aegir release",
     "build": "aegir build",
-    "test": "aegir test --target node --files 'test/**/*.ts'",
+    "test": "run-s test:*",
+    "test:node": "aegir test --target node --files 'test/**/*.spec.ts'",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
