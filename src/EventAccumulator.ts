@@ -1,4 +1,6 @@
 import type { CountlyEvent, CountlyEventData, CountlyWebSdk, IEventAccumulator } from 'countly-sdk-web'
+import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
+
 
 const eventDefaults: CountlyEventData = {
   key: '',
@@ -18,7 +20,7 @@ interface eventStore {
  * EventAccumulator is a class that accumulates events and flushes them to the Countly server.
  */
 export class EventAccumulator implements IEventAccumulator {
-  private readonly metricsService: CountlyWebSdk
+  private readonly metricsService: CountlyWebSdk | CountlyNodeSdk
   private readonly events: Map<string, eventStore>
   private readonly flushInterval: number
 
@@ -28,7 +30,7 @@ export class EventAccumulator implements IEventAccumulator {
    * @param {CountlyWebSdk} metricsService - instance
    * @param {number} flushInterval - in milliseconds
    */
-  constructor (metricsService: CountlyWebSdk, flushInterval: number = 5 * 60 * 1000) {
+  constructor (metricsService: CountlyWebSdk | CountlyNodeSdk, flushInterval: number = 5 * 60 * 1000) {
     this.metricsService = metricsService
     this.flushInterval = flushInterval
     this.events = new Map()
