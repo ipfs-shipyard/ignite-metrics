@@ -1,6 +1,6 @@
 {
   "name": "@ipfs-shipyard/ignite-metrics",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "description": "UI library for gathering metrics for ignite team projects",
   "author": "Ignite Team",
   "license": "Apache-2.0 OR MIT",
@@ -27,6 +27,7 @@
   "files": [
     "src",
     "dist",
+    "!dist/test",
     "!**/*.tsbuildinfo"
   ],
   "exports": {
@@ -35,18 +36,18 @@
       "import": "./dist/index.min.js"
     },
     "./vanilla": {
-      "browser": "./dist/src/BrowserMetrics.js",
-      "import": "./dist/src/NodeMetrics.js"
+      "browser": "./dist/src/BrowserMetricsProvider.js",
+      "import": "./dist/src/NodeMetricsProvider.js"
     },
     "./browser-vanilla": {
       "types": "./dist/src/BrowserMetrics.d.ts",
-      "browser": "./dist/src/BrowserMetrics.js",
-      "import": "./dist/src/BrowserMetrics.js"
+      "browser": "./dist/src/BrowserMetricsProvider.js",
+      "import": "./dist/src/BrowserMetricsProvider.js"
     },
     "./node-vanilla": {
       "types": "./dist/src/NodeMetrics.d.ts",
-      "node": "./dist/src/NodeMetrics.js",
-      "import": "./dist/src/NodeMetrics.js"
+      "node": "./dist/src/NodeMetricsProvider.js",
+      "import": "./dist/src/NodeMetricsProvider.js"
     },
     "./*": {
       "types": "./dist/src/*.d.ts",
@@ -148,7 +149,7 @@
     "lint": "aegir lint",
     "release": "aegir release",
     "build": "aegir build",
-    "test": "aegir test --target node --files 'test/**/*.test.ts'",
+    "test": "aegir test --target node --files 'test/**/*.ts'",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -174,8 +175,10 @@
     "@storybook/react": "^6.5.15",
     "@storybook/testing-library": "^0.0.13",
     "@types/mocha": "^10.0.1",
+    "@types/mocha": "^10.0.1",
     "@types/react-dom": "^18.0.10",
     "@types/sinon": "^10.0.13",
+    "@types/sinon-chai": "^3.2.9",
     "@types/styled-components": "^5.1.26",
     "aegir": "^38.1.0",
     "babel-loader": "^9.1.2",
@@ -187,9 +190,9 @@
     "eslint-plugin-react": "^7.32.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "html-loader": "^4.2.0",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.21",
     "prettier": "^2.8.2",
-    "sinon": "^15.0.1",
     "style-loader": "^3.3.1",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.4"

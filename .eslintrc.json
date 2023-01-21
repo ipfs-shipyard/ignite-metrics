@@ -10,7 +10,8 @@
     "sourceType": "module"
   },
   "rules": {
-    "sort-imports": ["error"]
+    "sort-imports": ["error"],
+    "@typescript-eslint/no-unused-expressions": "off"
   },
   "overrides": [
     {

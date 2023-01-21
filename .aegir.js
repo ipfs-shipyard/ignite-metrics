@@ -12,6 +12,10 @@ export default {
     types: true,
     bundle: false,
     config: {
+      define: {
+        window: 'globalThis',
+        global: 'globalThis',
+      },
       format: 'esm',
       external: ['electron', '#ansi-styles', 'yargs/yargs', '#supports-color'],
       plugins: [
@@ -41,5 +45,7 @@ export default {
     },
     bundlesizeMax: '44KB',
   },
-  test: {}
+  test: {
+    build: false,
+  }
 }
