@@ -3,6 +3,7 @@ import { COUNTLY_SETUP_DEFAULTS } from './config.js'
 import type { metricFeatures, CountlyWebSdk } from 'countly-sdk-web'
 import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
 import type { consentTypes, consentTypesExceptAll } from './types/index.js'
+import type { StorageProvider } from './StorageProvider.js'
 
 export interface MetricsProviderConstructorOptions<T> {
   appKey: string
@@ -13,9 +14,10 @@ export interface MetricsProviderConstructorOptions<T> {
   session_update?: number
   url?: string
   metricsService: T
+  storageProvider?: StorageProvider | null
 }
 
-export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
+export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = this.mapAllEvents({
     minimal: ['sessions', 'views', 'events'],
     performance: ['crashes', 'apm'],
@@ -27,19 +29,18 @@ export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
   private sessionStarted: boolean = false
   private readonly _consentGranted: Set<consentTypes> = new Set()
   private readonly metricsService: T
+  private readonly storageProvider: StorageProvider | null
+  private readonly initDone: boolean = false
 
   constructor (config: MetricsProviderConstructorOptions<T>) {
     const serviceConfig = {
       ...COUNTLY_SETUP_DEFAULTS,
-      ...config
+      ...config,
+      app_key: config.appKey
     }
-    const { appKey, autoTrack, metricsService, url } = serviceConfig
+    const { autoTrack, metricsService, storageProvider } = serviceConfig
     this.metricsService = metricsService
-    this.metricsService.init({
-      app_key: appKey,
-      url,
-      require_consent: true
-    })
+    this.storageProvider = storageProvider ?? null
 
     this.metricsService.init(serviceConfig)
     this.metricsService.group_features(this.groupedFeatures)
@@ -47,6 +48,12 @@ export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
     if (autoTrack) {
       this.setupAutoTrack()
     }
+
+    const existingConsent = this.getConsentStore()
+    if (existingConsent.length > 0) {
+      this.addConsent(existingConsent)
+    }
+    this.initDone = true
   }
 
   mapAllEvents (eventMap: Record<consentTypesExceptAll, metricFeatures[]>): Record<consentTypes, metricFeatures[]> {
@@ -61,13 +68,14 @@ export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
   }
 
   setupAutoTrack (): void {
-    this.metricsService.track_clicks()
+    const webSdk = this.metricsService as CountlyWebSdk
+    webSdk.track_clicks?.()
+    webSdk.track_forms?.()
+    webSdk.track_links?.()
+    webSdk.track_scrolls?.()
+    webSdk.track_sessions?.()
     this.metricsService.track_errors()
-    this.metricsService.track_forms()
-    this.metricsService.track_links()
     this.metricsService.track_pageview()
-    this.metricsService.track_scrolls()
-    this.metricsService.track_sessions()
     this.metricsService.track_view()
   }
 
@@ -77,6 +85,7 @@ export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
     }
     consent.forEach(c => this._consentGranted.add(c))
     this.metricsService.add_consent(consent)
+    this.setConsentStore()
   }
 
   removeConsent (consent: consentTypes | consentTypes[]): void {
@@ -85,6 +94,22 @@ export default class MetricsProvider<T extends CountlyWebSdk & CountlyNodeSdk> {
     }
     consent.forEach(c => this._consentGranted.delete(c))
     this.metricsService.remove_consent(consent, true)
+    this.setConsentStore()
+  }
+
+  private setConsentStore (): void {
+    /**
+     * Only set the consent store if
+     * 1. we have a storage provider
+     * 2. we're out of the initialization phase.
+     */
+    if (this.storageProvider != null && this.initDone) {
+      this.storageProvider.setStore(Array.from(this._consentGranted))
+    }
+  }
+
+  private getConsentStore (): consentTypes[] {
+    return this.storageProvider?.getStore() ?? []
   }
 
   checkConsent (consent: consentTypes | metricFeatures): boolean {

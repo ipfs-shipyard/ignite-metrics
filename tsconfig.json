@@ -2,17 +2,19 @@
   "extends": "aegir/src/config/tsconfig.aegir.json",
   "compilerOptions": {
     "jsx": "react",
-    "types": ["node"],
+    "types": ["node", "mocha"],
     "outDir": "dist",
     "target": "ES6",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "NodeNext",
+    "module": "es2022",
     "typeRoots": [
       "src/types"
     ],
   },
   "include": [
     "src",
+    "test",
     "src/**/*.css"
   ],
   "exclude": [

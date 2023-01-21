@@ -10,5 +10,13 @@
     "sourceType": "module"
   },
   "rules": {
-  }
+  },
+  "overrides": [
+    {
+      "files": "test/**/*.spec.ts",
+      "rules": {
+        "@typescript-eslint/no-unused-expressions": "off"
+      }
+    }
+  ]
 }
