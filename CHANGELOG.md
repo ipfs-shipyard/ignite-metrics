@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.2.0...v1.2.1) (2023-01-23)
+
+
+### Bug Fixes
+
+* expose more tracking methods ([#70](https://github.com/ipfs-shipyard/ignite-metrics/issues/70)) ([5ba256c](https://github.com/ipfs-shipyard/ignite-metrics/commit/5ba256c53680995d5f6bccba72c9923aacaa9807))
+
 ## [1.2.0](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.1.3...v1.2.0) (2023-01-21)
 
 
