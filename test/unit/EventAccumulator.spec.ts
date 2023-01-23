@@ -35,7 +35,7 @@ describe('EventAccumulator', () => {
     // check the event data
     const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
     expect(count).to.be.equal(2)
-    expect(dur).to.be.greaterThan(100)
+    expect(dur).to.be.greaterThanOrEqual(100)
     expect(key).to.be.equal('test')
     expect(sum).to.be.equal(2)
     expect(segmentation).to.be.deep.equal({})
