@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.2.1...v1.2.2) (2023-01-23)
+
+
+### Bug Fixes
+
+* **types:** correct types for exports ([#73](https://github.com/ipfs-shipyard/ignite-metrics/issues/73)) ([50c4c69](https://github.com/ipfs-shipyard/ignite-metrics/commit/50c4c695e659d7c79b60aa0707fed92245f27f43))
+
 ## [1.2.1](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.2.0...v1.2.1) (2023-01-23)
 
 
