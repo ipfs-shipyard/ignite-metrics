@@ -5,7 +5,7 @@ declare module 'countly-sdk-web' {
     sum: number
     segmentation: Record<string, string | number>
   }
-  interface CountlyEvent {
+  export interface CountlyEvent {
     // name or id of the event
     key: string
     // how many times did event occur
@@ -20,8 +20,8 @@ declare module 'countly-sdk-web' {
 
   export type metricFeatures = 'apm' | 'attribution' | 'clicks' | 'crashes' | 'events' | 'feedback' | 'forms' |
   'location' | 'scrolls' | 'sessions' | 'star-rating' | 'users' | 'views'
-  type Segments = Record<string, string>
-  type IgnoreList = Array<string | RegExp>
+  export type Segments = Record<string, string>
+  export type IgnoreList = Array<string | RegExp>
   type CountlyEventQueueItem = [string, CountlyEventData] | [eventName: string, key: string] | [eventName: string]
   export interface CountlyWebSdk {
     group_features: (arg0: Record<import('./index.js').consentTypes, metricFeatures[]>) => unknown
@@ -115,6 +115,24 @@ declare module 'countly-sdk-web' {
      * @returns {void}
      */
     end_session: (sec, force) => void
+
+    /**
+     * Log an exception that you caught through try and catch block and handled yourself and just want to report it to server
+     * Note: calls recordError internally
+     *
+     * @param {Error} err - error exception object provided in catch block
+     * @param {Segments} segments - additional key value pairs you want to provide with error report, like versions of libraries used, etc.
+     */
+    log_error: (err, segments) => void
+
+    /**
+     * Record and report error, this is where tracked errors are modified and sent to the request queue
+     *
+     * @param {Error} err - Error object
+     * @param {boolean} nonfatal - nonfatal if true and false if fatal
+     * @param {Segments} segments - custom crash segments
+     */
+    recordError: (err, nonfatal, segments) => void
   }
   const Countly: CountlyWebSdk
   export default Countly
