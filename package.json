@@ -40,12 +40,12 @@
       "import": "./dist/src/NodeMetricsProvider.js"
     },
     "./browser-vanilla": {
-      "types": "./dist/src/BrowserMetrics.d.ts",
+      "types": "./dist/src/BrowserMetricsProvider.d.ts",
       "browser": "./dist/src/BrowserMetricsProvider.js",
       "import": "./dist/src/BrowserMetricsProvider.js"
     },
     "./node-vanilla": {
-      "types": "./dist/src/NodeMetrics.d.ts",
+      "types": "./dist/src/NodeMetricsProvider.d.ts",
       "node": "./dist/src/NodeMetricsProvider.js",
       "import": "./dist/src/NodeMetricsProvider.js"
     },
