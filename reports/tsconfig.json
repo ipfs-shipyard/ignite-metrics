@@ -1,0 +1,29 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+
+    // "jsx": "react",
+    // "types": ["node", "mocha"],
+    // "outDir": "dist",
+    "target": "ES2022",
+    "allowSyntheticDefaultImports": true,
+    "moduleResolution": "NodeNext",
+    "module": "NodeNext",
+    // "typeRoots": [
+    //   "src/types"
+    // ],
+    "esModuleInterop": true
+  },
+  "include": [
+    "**/*.ts",
+    "data/*.json"
+  ],
+  "exclude": [
+    "node_modules",
+  ],
+  "ts-node": {
+    "extends": "../tsconfig.json",
+    "transpileOnly": true,
+    "compilerOptions": {}
+  }
+}

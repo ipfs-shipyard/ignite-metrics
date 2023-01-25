@@ -19,6 +19,7 @@
   ],
   "exclude": [
     "node_modules",
+    "reports"
   ],
   "ts-node": {
     "extends": "aegir/src/config/tsconfig.aegir.json",
