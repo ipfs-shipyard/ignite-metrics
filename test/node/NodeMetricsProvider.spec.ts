@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { ensureCall, expect, sinon } from '../testUtils.js'
 import CountlyNodeSdk from 'countly-sdk-nodejs'
 import { NodeMetricsProvider } from '../../src/NodeMetricsProvider.js'
