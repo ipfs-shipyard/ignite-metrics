@@ -1,6 +1,13 @@
-import type { CountlyWebSdk, metricFeatures } from 'countly-sdk-web'
+import type {
+  CountlyEvent,
+  CountlyWebSdk,
+  IgnoreList,
+  Segments,
+  metricFeatures
+} from 'countly-sdk-web'
 import type { consentTypes, consentTypesExceptAll } from '../types/index.js'
 import { COUNTLY_SETUP_DEFAULTS } from './config.js'
+
 import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
 import { EventAccumulator } from './EventAccumulator.js'
 import type { StorageProvider } from './StorageProvider.js'
@@ -136,6 +143,39 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
         this.removeConsent(groupName as consentTypes)
       }
     })
+  }
+
+  /**
+   * Track a page view
+   *
+   * Leave arguments empty to have countly automatically track the events for you.
+   *
+   * @param page - The page name to track
+   * @param ignoreList - A list of urls to ignore
+   * @param viewSegments - A list of segments to add to the view event
+   */
+  trackView (page?: string, ignoreList?: IgnoreList, viewSegments?: Segments): void {
+    this.metricsService.track_view(page, ignoreList, viewSegments)
+  }
+
+  /**
+   * Track a custom event
+   *
+   * @param event - The event to add to the queue
+   */
+  trackEvent (event: CountlyEvent): void {
+    this.metricsService.add_event(event)
+  }
+
+  /**
+   * Track an Error
+   *
+   * @param error - The Error instance
+   * @param nonFatal - Whether the error is fatal or not
+   * @param segments - A list of segments to add to the error event
+   */
+  trackError (error: Error, nonFatal = true, segments: Segments = {}): void {
+    this.metricsService.recordError(error, nonFatal, segments)
   }
 
   /**
