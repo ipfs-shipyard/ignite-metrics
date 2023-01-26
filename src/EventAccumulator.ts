@@ -20,7 +20,7 @@ interface eventStore {
  */
 export class EventAccumulator<T extends CountlyWebSdk | CountlyNodeSdk> implements IEventAccumulator {
   private readonly metricsService: T
-  private readonly events: Map<string, eventStore>
+  private readonly events: Map<string, eventStore> = new Map()
   private readonly flushInterval: number
 
   /**
@@ -32,7 +32,6 @@ export class EventAccumulator<T extends CountlyWebSdk | CountlyNodeSdk> implemen
   constructor (metricsService: T, flushInterval: number = 5 * 60 * 1000) {
     this.metricsService = metricsService
     this.flushInterval = flushInterval
-    this.events = new Map()
     this.setupUnloadEvent()
   }
 
