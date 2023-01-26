@@ -33,6 +33,8 @@ describe('EventAccumulator', () => {
     accumulator.addEvent(event)
     // flush the event
     accumulator.flush('test')
+    // validate the call count
+    expect(countlyStub.add_event.callCount).to.be.equal(1)
     // check the event data
     const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
     expect(count).to.be.equal(2)
@@ -40,7 +42,6 @@ describe('EventAccumulator', () => {
     expect(key).to.be.equal('test')
     expect(sum).to.be.equal(2)
     expect(segmentation).to.be.deep.equal({})
-    expect(countlyStub.add_event.callCount).to.be.equal(1)
   })
 
   it('should flush events after the flush interval', async () => {
@@ -54,6 +55,8 @@ describe('EventAccumulator', () => {
     accumulator.addEvent(event)
     // wait for the flush interval to pass
     await clock.tickAsync(150)
+    // validate the call count
+    expect(countlyStub.add_event.callCount).to.be.equal(1)
     // check the event data
     const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
     expect(count).to.be.equal(1)
@@ -61,7 +64,6 @@ describe('EventAccumulator', () => {
     expect(key).to.be.equal('test')
     expect(sum).to.be.equal(1)
     expect(segmentation).to.be.deep.equal({})
-    expect(countlyStub.add_event.callCount).to.be.equal(1)
   })
 
   it('should flush events when flush=true', async () => {
@@ -76,6 +78,8 @@ describe('EventAccumulator', () => {
     accumulator.addEvent(event)
     await clock.tickAsync(100)
     accumulator.addEvent(event, true)
+    // validate the call count
+    expect(countlyStub.add_event.callCount).to.be.equal(1)
     // check the event data
     const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
     expect(count).to.be.equal(2)
@@ -83,7 +87,6 @@ describe('EventAccumulator', () => {
     expect(key).to.be.equal('test')
     expect(sum).to.be.equal(2)
     expect(segmentation).to.be.deep.equal({})
-    expect(countlyStub.add_event.callCount).to.be.equal(1)
   })
 
   it('should accumulate segments', async () => {
@@ -108,6 +111,8 @@ describe('EventAccumulator', () => {
     accumulator.addEvent(event1)
     await clock.tickAsync(100)
     accumulator.addEvent(event2, true)
+    // validate the call count
+    expect(countlyStub.add_event.callCount).to.be.equal(1)
     // check the event data
     const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
     expect(count).to.be.equal(2)
@@ -118,7 +123,6 @@ describe('EventAccumulator', () => {
       foo: 'bar',
       bar: 'baz'
     })
-    expect(countlyStub.add_event.callCount).to.be.equal(1)
   })
 
   it('should accumulate different types of events', async () => {
@@ -145,6 +149,8 @@ describe('EventAccumulator', () => {
     accumulator.addEvent(event2)
     // wait for the flush interval to pass
     await clock.tickAsync(150)
+    // validate the call count
+    expect(countlyStub.add_event.callCount).to.be.equal(2)
     // check the event data
     const calls = [['test1', { foo: 'bar' }], ['test2', { bar: 'baz' }]]
     calls.forEach(([testKey, segment], idx) => {
@@ -155,7 +161,6 @@ describe('EventAccumulator', () => {
       expect(sum).to.be.equal(1)
       expect(segmentation).to.be.deep.equals(segment)
     })
-    expect(countlyStub.add_event.callCount).to.be.equal(2)
   })
 
   it('should flush all events from the accumulator', async () => {
@@ -192,6 +197,8 @@ describe('EventAccumulator', () => {
     await clock.tickAsync(50)
     accumulator.addEvent(event3)
     accumulator.flushAll()
+    // validate the call count
+    expect(countlyStub.add_event.callCount).to.be.equal(2)
     // check the event data
     const test1Results = countlyStub.add_event.getCall(0).args[0]
     expect(test1Results.count).to.be.equal(3)
@@ -206,7 +213,5 @@ describe('EventAccumulator', () => {
     expect(test2Results.key).to.be.equal('test2')
     expect(test2Results.sum).to.be.equal(1)
     expect(test2Results.segmentation).to.be.deep.equals({ bar: 'baz' })
-
-    expect(countlyStub.add_event.callCount).to.be.equal(2)
   })
 })
