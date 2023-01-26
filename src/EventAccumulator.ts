@@ -18,8 +18,8 @@ interface eventStore {
 /**
  * EventAccumulator is a class that accumulates events and flushes them to the Countly server.
  */
-export class EventAccumulator implements IEventAccumulator {
-  private readonly metricsService: CountlyWebSdk | CountlyNodeSdk
+export class EventAccumulator<T extends CountlyWebSdk | CountlyNodeSdk> implements IEventAccumulator {
+  private readonly metricsService: T
   private readonly events: Map<string, eventStore>
   private readonly flushInterval: number
 
@@ -29,7 +29,7 @@ export class EventAccumulator implements IEventAccumulator {
    * @param {CountlyWebSdk} metricsService - instance
    * @param {number} flushInterval - in milliseconds
    */
-  constructor (metricsService: CountlyWebSdk | CountlyNodeSdk, flushInterval: number = 5 * 60 * 1000) {
+  constructor (metricsService: T, flushInterval: number = 5 * 60 * 1000) {
     this.metricsService = metricsService
     this.flushInterval = flushInterval
     this.events = new Map()
