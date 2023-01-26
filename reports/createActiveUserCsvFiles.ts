@@ -1,4 +1,4 @@
-import { appIds } from './constants.js';
+import { appIds, daysOfDataInMs } from './constants.js';
 import { doCountlyFetch } from './doCountlyFetch.js';
 import { writeFile } from 'node:fs/promises';
 
@@ -8,7 +8,9 @@ interface ActiveUsersResponse {
     d: number,
     w: number
     m: number,
-  }>}
+  }>
+}
+
 /**
  * Print out a CSV of the number of unique users per day for each app
  */
@@ -19,10 +21,20 @@ export async function createActiveUserCsvFiles() {
   let monthlyOutputCsv: string = ''
   let printedHeaders = false
   for (let [appName, appId] of Object.entries(appIds)) {
-    /**
-     * @see https://api.count.ly/reference/oanalyticssessions
-     */
-    const response: ActiveUsersResponse = await doCountlyFetch({ path: '/o/active_users', appId, extraParams: `period=[${new Date('2020-01-01').getTime()}, ${new Date().getTime()}]` });
+
+    // let calculating = true
+    let response: ActiveUsersResponse = { calculating: true, data: {} };
+    while(response.calculating) {
+      /**
+       * @see https://api.count.ly/reference/oanalyticssessions
+       */
+      response = await doCountlyFetch({ path: '/o/active_users', appId, extraParams: `period=[${new Date().getTime() - daysOfDataInMs}, ${new Date().getTime()}]` });
+      // calculating = response.calculating;
+      console.log(`${appName} calculating? `, response.calculating);
+      if (response.calculating) {
+        await new Promise((resolve) => setTimeout(resolve, 4000));
+      }
+    }
     const activeUserData = [];
     for (const [key, value] of Object.entries(response.data)) {
       activeUserData.push({
@@ -30,6 +42,7 @@ export async function createActiveUserCsvFiles() {
         ...value,
       })
     }
+
     activeUserData.sort((a, b) => new Date(a._id).getTime() - new Date(b._id).getTime());
 
     // output the name of the app as row headers and the date labels as column headers

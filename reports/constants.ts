@@ -25,6 +25,11 @@ async function getApiKey() {
 
 export const apiKey = await getApiKey()
 
+/**
+ * 90 days of data
+ */
+export const daysOfDataInMs = 1000 * 60 * 60 * 24 * 90;
+
 export const appIds = {
   // Webui.ipfs.io
   'ipfs-webui': '5c6e72803fd4432348b8119c',

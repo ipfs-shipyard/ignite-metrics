@@ -10,7 +10,6 @@
     "netrc": "^0.1.4"
   },
   "scripts": {
-    "download-data": "./get-countly-data.sh",
-    "process-data": "npx -y ts-node-esm index.ts"
+    "get-csv": "npx -y ts-node-esm index.ts"
   }
 }
