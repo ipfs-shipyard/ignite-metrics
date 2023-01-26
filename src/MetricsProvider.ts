@@ -25,7 +25,7 @@ export interface MetricsProviderConstructorOptions<T> {
 }
 
 export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
-  public readonly accumulate: EventAccumulator
+  public readonly accumulate: EventAccumulator<T>
   private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = this.mapAllEvents({
     minimal: ['sessions', 'views', 'events'],
     performance: ['crashes', 'apm'],
