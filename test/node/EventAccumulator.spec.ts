@@ -2,16 +2,17 @@ import { expect, sinon } from '../testUtils.js'
 import Countly from 'countly-sdk-nodejs'
 import { EventAccumulator } from '../../src/EventAccumulator.js'
 
-const sleep = async (ms: number): Promise<unknown> => await new Promise(resolve => setTimeout(resolve, ms))
 const sandbox = sinon.createSandbox()
 const addEventListenerStub = sandbox.stub()
 globalThis.addEventListener = addEventListenerStub
 
 describe('EventAccumulator', () => {
   let countlyStub: sinon.SinonStubbedInstance<typeof Countly>
+  let clock: sinon.SinonFakeTimers
 
   beforeEach(() => {
     countlyStub = sandbox.stub(Countly)
+    clock = sandbox.useFakeTimers()
   })
 
   afterEach(() => {
@@ -28,7 +29,7 @@ describe('EventAccumulator', () => {
     }
     // add the event twice with a 100ms delay between them, this is needed to test the duration.
     accumulator.addEvent(event)
-    await sleep(100)
+    await clock.tickAsync(100)
     accumulator.addEvent(event)
     // flush the event
     accumulator.flush('test')
@@ -52,7 +53,7 @@ describe('EventAccumulator', () => {
     }
     accumulator.addEvent(event)
     // wait for the flush interval to pass
-    await sleep(150)
+    await clock.tickAsync(150)
     // check the event data
     const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
     expect(count).to.be.equal(1)
@@ -73,7 +74,7 @@ describe('EventAccumulator', () => {
     }
     // add the event twice with a 100ms delay between them, this is needed to test the duration.
     accumulator.addEvent(event)
-    await sleep(100)
+    await clock.tickAsync(100)
     accumulator.addEvent(event, true)
     // check the event data
     const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
@@ -105,7 +106,7 @@ describe('EventAccumulator', () => {
     }
     // add the event twice with a 100ms delay between them, this is needed to test the duration.
     accumulator.addEvent(event1)
-    await sleep(100)
+    await clock.tickAsync(100)
     accumulator.addEvent(event2, true)
     // check the event data
     const { count, dur, key, sum, segmentation } = countlyStub.add_event.getCall(0).args[0]
@@ -140,10 +141,10 @@ describe('EventAccumulator', () => {
     }
     accumulator.addEvent(event1)
     // adding the second event after 50ms so that the first event is flushed first
-    await sleep(50)
+    await clock.tickAsync(50)
     accumulator.addEvent(event2)
     // wait for the flush interval to pass
-    await sleep(150)
+    await clock.tickAsync(150)
     // check the event data
     const calls = [['test1', { foo: 'bar' }], ['test2', { bar: 'baz' }]]
     calls.forEach(([testKey, segment], idx) => {
@@ -186,9 +187,9 @@ describe('EventAccumulator', () => {
 
     accumulator.addEvent(event1)
     // adding the second event after 50ms so that the first event is flushed first
-    await sleep(50)
+    await clock.tickAsync(50)
     accumulator.addEvent(event2)
-    await sleep(50)
+    await clock.tickAsync(50)
     accumulator.addEvent(event3)
     accumulator.flushAll()
     // check the event data
