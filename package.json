@@ -144,7 +144,7 @@
     "release": "aegir release",
     "build": "aegir build",
     "test": "run-s test:*",
-    "test:node": "aegir test --target node --files 'test/**/*.spec.ts'",
+    "test:node": "aegir test --target node --files 'test/node/**/*.spec.ts'",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
