@@ -41,10 +41,11 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly initDone: boolean = false
 
   constructor (config: MetricsProviderConstructorOptions<T>) {
+    const { appKey, ...remainderConfig } = config
     const serviceConfig = {
       ...COUNTLY_SETUP_DEFAULTS,
-      ...config,
-      app_key: config.appKey
+      ...remainderConfig,
+      app_key: appKey
     }
     const { autoTrack, metricsService, storageProvider } = serviceConfig
     this.metricsService = metricsService
