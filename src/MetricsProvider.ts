@@ -49,9 +49,8 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
     const { autoTrack, metricsService, storageProvider } = serviceConfig
     this.metricsService = metricsService
     this.storageProvider = storageProvider ?? null
-    this.accumulate = new EventAccumulator(metricsService)
-    this.storageProvider = storageProvider ?? null
     this.metricsService.init(serviceConfig)
+    this.accumulate = new EventAccumulator(metricsService)
     this.metricsService.group_features(this.groupedFeatures)
 
     if (autoTrack) {
