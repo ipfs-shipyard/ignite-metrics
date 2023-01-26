@@ -83,7 +83,7 @@ export class EventAccumulator<T extends CountlyWebSdk | CountlyNodeSdk> implemen
    *
    * @param {CountlyEventData} newEventData - event data
    */
-  private digestEventData (newEventData: CountlyEventData): void {
+  private accumulateEventData (newEventData: CountlyEventData): void {
     const { key, count, segmentation } = newEventData
     // if event is in the store, update the event data.
     const eventStore = this.events.get(key)
@@ -112,7 +112,7 @@ export class EventAccumulator<T extends CountlyWebSdk | CountlyNodeSdk> implemen
       throw new Error('Event key is required.')
     }
 
-    this.digestEventData(eventData)
+    this.accumulateEventData(eventData)
 
     // flush the event if flush is true.
     if (flush) {
