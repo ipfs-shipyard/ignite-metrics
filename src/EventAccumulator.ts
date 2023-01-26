@@ -35,6 +35,9 @@ export class EventAccumulator<T extends CountlyWebSdk | CountlyNodeSdk> implemen
     this.setupUnloadEvent()
   }
 
+  /**
+   * Setup the beforeunload event to flush all events.
+   */
   private setupUnloadEvent (): void {
     globalThis.addEventListener('beforeunload', () => {
       this.flushAll()
