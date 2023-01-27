@@ -1,4 +1,4 @@
-import type { consentTypes } from './types/index.js'
+import type { consentTypes } from '../types/index.js'
 
 export interface StorageProviderInterface {
   setStore: (values: consentTypes[]) => void

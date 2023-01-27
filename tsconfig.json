@@ -7,23 +7,15 @@
     "target": "ES6",
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "NodeNext",
-    "module": "es2022",
-    "typeRoots": [
-      "src/types"
-    ],
+    "esModuleInterop": true,
+    "typeRoots": ["types"]
   },
-  "include": [
-    "src",
-    "test",
-    "src/**/*.css"
-  ],
-  "exclude": [
-    "node_modules",
-  ],
+  "rootDir": "src",
+  "include": ["src", "types"],
+  "exclude": ["node_modules"],
   "ts-node": {
     "extends": "aegir/src/config/tsconfig.aegir.json",
-      "transpileOnly": true,
-      "compilerOptions": {
-      }
+    "transpileOnly": true,
+    "compilerOptions": {}
   }
 }

@@ -1,7 +1,7 @@
-import Countly from 'countly-sdk-web'
+import type { MetricProviderOptionalConstructorArgs, WithOptional } from '../types/index.js'
 import MetricsProvider, { MetricsProviderConstructorOptions } from './MetricsProvider.js'
 import { BrowserStorageProvider } from './BrowserStorageProvider.js'
-import type { MetricProviderOptionalConstructorArgs, WithOptional } from './types/index.js'
+import Countly from 'countly-sdk-web'
 
 export class BrowserMetricsProvider extends MetricsProvider<typeof Countly> {
   constructor (args: WithOptional<MetricsProviderConstructorOptions<typeof Countly>, MetricProviderOptionalConstructorArgs>) {

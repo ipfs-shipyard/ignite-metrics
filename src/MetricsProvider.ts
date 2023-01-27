@@ -1,8 +1,15 @@
+import type {
+  CountlyEvent,
+  CountlyWebSdk,
+  IgnoreList,
+  Segments,
+  metricFeatures
+} from 'countly-sdk-web'
+import type { consentTypes, consentTypesExceptAll } from '../types/index.js'
 import { COUNTLY_SETUP_DEFAULTS } from './config.js'
 
-import type { metricFeatures, CountlyWebSdk, IgnoreList, Segments, CountlyEvent } from 'countly-sdk-web'
 import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
-import type { consentTypes, consentTypesExceptAll } from './types/index.js'
+import { EventAccumulator } from './EventAccumulator.js'
 import type { StorageProvider } from './StorageProvider.js'
 
 export interface MetricsProviderConstructorOptions<T> {
@@ -10,14 +17,15 @@ export interface MetricsProviderConstructorOptions<T> {
   autoTrack?: boolean
   interval?: number
   max_events?: number
+  metricsService: T
   queue_size?: number
   session_update?: number
   url?: string
-  metricsService: T
   storageProvider?: StorageProvider | null
 }
 
 export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
+  public readonly accumulate: EventAccumulator<T>
   private readonly groupedFeatures: Record<consentTypes, metricFeatures[]> = this.mapAllEvents({
     minimal: ['sessions', 'views', 'events'],
     performance: ['crashes', 'apm'],
@@ -33,16 +41,17 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly initDone: boolean = false
 
   constructor (config: MetricsProviderConstructorOptions<T>) {
+    const { appKey, ...remainderConfig } = config
     const serviceConfig = {
       ...COUNTLY_SETUP_DEFAULTS,
-      ...config,
-      app_key: config.appKey
+      ...remainderConfig,
+      app_key: appKey
     }
     const { autoTrack, metricsService, storageProvider } = serviceConfig
     this.metricsService = metricsService
     this.storageProvider = storageProvider ?? null
-
     this.metricsService.init(serviceConfig)
+    this.accumulate = new EventAccumulator(metricsService)
     this.metricsService.group_features(this.groupedFeatures)
 
     if (autoTrack) {

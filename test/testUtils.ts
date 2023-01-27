@@ -1,6 +1,6 @@
 import chai from 'chai'
-import sinonChai from 'sinon-chai'
 import sinon from 'sinon'
+import sinonChai from 'sinon-chai'
 
 chai.use(sinonChai)
 const expect = chai.expect
@@ -20,6 +20,7 @@ export const ensureCall = <T extends readonly any[], R>(config: EnsureCallOption
     expect(config.spy.getCall(config.callIndex).args[config.argsIndex ?? 0]).to.deep.equal(config.expectedArgs)
   }
 }
+
 export {
   expect,
   chai,
