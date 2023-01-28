@@ -1,3 +1,5 @@
-import { createActiveUserCsvFiles } from './createActiveUserCsvFiles.js';
+import { downloadDashboardData } from './downloadDashboardData.js'
+import { updateGoogleSheets } from './updateGoogleSheets.js'
 
-await createActiveUserCsvFiles()
+await downloadDashboardData()
+await updateGoogleSheets()

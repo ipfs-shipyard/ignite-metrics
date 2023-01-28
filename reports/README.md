@@ -6,7 +6,13 @@ The CSV content is then loaded into it's respective sheet at https://docs.google
 
 The charts in the "Charts" sheet are loaded in our Notion page at https://www.notion.so/pl-strflt/Ignite-IPFS-GUI-Tools-3bc1c1bf54d74f928bf11ef59c876b74#b6970aa92e914114848fbddd84eab2ba
 
-## How to get the data from countly
+## With google sheets authentication
+
+Just run `npm run update-dashboards`. This will download all data from countly and then automatically update the google sheets.
+
+## Without google sheets authenticaiton
+
+### How to get the data from countly
 
 Inside the `./reports` folder, run
 
@@ -15,7 +21,9 @@ npm install
 npm run get-csv
 ```
 
-## How to copy the data to google spreadsheets
+### How to copy the data to google spreadsheets
+
+If you have a valid keyfile for google sheets authentication
 
 1. Open up the relevant `./reports/output/*.csv` daily/weekly/monthly file and copy its contents.
 1. Paste that content into the relevant google sheet, cell A1, at https://docs.google.com/spreadsheets/d/1xq36kjThObEaRKzb3VRtXEs9RgM-bfgfjGbi1vbPUiE/edit#gid=755468744

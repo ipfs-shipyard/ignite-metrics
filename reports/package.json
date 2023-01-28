@@ -10,6 +10,12 @@
     "netrc": "^0.1.4"
   },
   "scripts": {
-    "get-csv": "npx -y ts-node-esm index.ts"
+    "get-csv": "npx -y ts-node-esm scripts/get-csv.ts",
+    "update-dashboards": "npx -y ts-node-esm index.ts"
+  },
+  "dependencies": {
+    "@googleapis/sheets": "^4.0.1",
+    "csv-parse": "^5.3.3",
+    "googleapis": "^110.0.0"
   }
 }

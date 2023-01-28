@@ -1,26 +1,28 @@
 import netrc from 'netrc'
 
 const myNetrc = netrc()
-export const hostname = 'countly.ipfs.tech';
+export const hostname = 'countly.ipfs.tech'
 export const authorizationHeader = `Basic ${Buffer.from(`${myNetrc['countly.ipfs.tech'].login}:${myNetrc['countly.ipfs.tech'].password}`).toString('base64')}`
+// eslint-disable-next-line no-console
+// console.log('myNetrc[\'countly.ipfs.tech\'].login: ', myNetrc['countly.ipfs.tech'].login)
 export const baseOptions = {
   method: 'GET',
   headers: {
     accept: 'application/json',
     authorization: authorizationHeader
   }
-};
+}
 
-async function getApiKey() {
+async function getApiKey (): Promise<string> {
   const response = await fetch(`https://${hostname}/api-key`, {
     ...baseOptions,
     headers: {
       ...baseOptions.headers,
-      accept: 'text/plain',
+      accept: 'text/plain'
     }
-  });
+  })
 
- return await response.text();
+  return await response.text()
 }
 
 export const apiKey = await getApiKey()
@@ -28,7 +30,7 @@ export const apiKey = await getApiKey()
 /**
  * 90 days of data
  */
-export const daysOfDataInMs = 1000 * 60 * 60 * 24 * 90;
+export const daysOfDataInMs = 1000 * 60 * 60 * 24 * 90
 
 export const appIds = {
   // Webui.ipfs.io
@@ -65,5 +67,5 @@ export const appIds = {
   'pinning-service-compliance': '63cf08ccd09125d219d3d776',
 
   // pl-diagnose
-  'pl-diagnose': '63cef095d09125d219d3d6a6',
+  'pl-diagnose': '63cef095d09125d219d3d6a6'
 }
