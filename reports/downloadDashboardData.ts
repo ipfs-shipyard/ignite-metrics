@@ -60,9 +60,9 @@ export async function downloadDashboardData (): Promise<void> {
 
     dailyArray.push([appName, ...activeUserData.map((day: any) => day.d)])
     // dailyOutputCsv = `${dailyOutputCsv}${appName}, ${activeUserData.map((day: any) => day.d).join(', ')}\n`
-    weeklyArray.push([appName, ...activeUserData.map((day: any) => day.d)])
+    weeklyArray.push([appName, ...activeUserData.map((day: any) => day.w)])
     // weeklyOutputCsv = `${weeklyOutputCsv}${appName}, ${activeUserData.map((day: any) => day.w).join(', ')}\n`
-    monthlyArray.push([appName, ...activeUserData.map((day: any) => day.d)])
+    monthlyArray.push([appName, ...activeUserData.map((day: any) => day.m)])
     // monthlyOutputCsv = `${monthlyOutputCsv}${appName}, ${activeUserData.map((day: any) => day.m).join(', ')}\n`
   }
   // Write the outputs to their appropriate Csv files
