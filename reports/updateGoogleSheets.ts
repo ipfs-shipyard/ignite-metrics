@@ -4,9 +4,12 @@ import { google } from 'googleapis'
 // weekly: https://docs.google.com/spreadsheets/d/1xq36kjThObEaRKzb3VRtXEs9RgM-bfgfjGbi1vbPUiE/edit#gid=1417442855
 // monthly: https://docs.google.com/spreadsheets/d/1xq36kjThObEaRKzb3VRtXEs9RgM-bfgfjGbi1vbPUiE/edit#gid=431140753
 const spreadsheetId = '1xq36kjThObEaRKzb3VRtXEs9RgM-bfgfjGbi1vbPUiE'
+if (!process.env.GOOGLE_CREDENTIALS) {
+  throw new Error('GOOGLE_CREDENTIALS must be set')
+}
+const credentials = JSON.parse(process.env.GOOGLE_CREDENTIALS)
 const googleAuth = new google.auth.GoogleAuth({
-  // This keyfile is a service account key obtained from https://console.cloud.google.com/iam-admin/serviceaccounts
-  keyFile: 'ignite-metrics-dashboard-d99dde383c4c.json',
+  credentials,
   scopes: 'https://www.googleapis.com/auth/spreadsheets'
 })
 const auth = await googleAuth.getClient()

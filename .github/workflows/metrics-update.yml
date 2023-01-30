@@ -1,0 +1,31 @@
+name: Update metrics data in google spreadsheet
+
+on:
+  workflow_dispatch:
+  schedule:
+  # Every 2 hours: "At minute 0 past every 2nd hour."
+  - cron: '0 */2 * * *'
+
+jobs:
+  update-metrics:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./reports
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: lts/*
+    - uses: ipfs/aegir/actions/cache-node-modules@master
+    # - id: 'auth'
+    #   name: 'Authenticate to Google Cloud'
+    #   uses: 'google-github-actions/auth@v0.4.0'
+    #   with:
+    #     credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+    - run: npm run update-dashboards
+      env:
+        GOOGLE_CREDENTIALS: '${{ secrets.GOOGLE_CREDENTIALS }}'
+        COUNTLY_USERNAME: '${{ secrets.COUNTLY_USERNAME }}'
+        COUNTLY_PASSWORD: '${{ secrets.COUNTLY_PASSWORD }}'
+# https://cloud.google.com/blog/products/identity-security/enabling-keyless-authentication-from-github-actions

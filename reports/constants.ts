@@ -1,10 +1,5 @@
-import netrc from 'netrc'
-
-const myNetrc = netrc()
 export const hostname = 'countly.ipfs.tech'
-export const authorizationHeader = `Basic ${Buffer.from(`${myNetrc['countly.ipfs.tech'].login}:${myNetrc['countly.ipfs.tech'].password}`).toString('base64')}`
-// eslint-disable-next-line no-console
-// console.log('myNetrc[\'countly.ipfs.tech\'].login: ', myNetrc['countly.ipfs.tech'].login)
+export const authorizationHeader = `Basic ${Buffer.from(`${process.env.COUNTLY_USERNAME}:${process.env.COUNTLY_PASSWORD}`).toString('base64')}`
 export const baseOptions = {
   method: 'GET',
   headers: {
