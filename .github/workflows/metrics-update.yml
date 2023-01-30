@@ -2,6 +2,9 @@ name: Update metrics data in google spreadsheet
 
 on:
   workflow_dispatch:
+    branches:
+      - "feat/reports"
+      - "main"
   schedule:
   # Every 2 hours: "At minute 0 past every 2nd hour."
   - cron: '0 */2 * * *'
