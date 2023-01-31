@@ -8,6 +8,8 @@ on:
   schedule:
   # Every 2 hours: "At minute 0 past every 2nd hour."
   - cron: '0 */2 * * *'
+  push:
+    branches: [ feat/reports ]
 
 jobs:
   update-metrics:
