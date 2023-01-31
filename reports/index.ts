@@ -1,7 +1,7 @@
 import { downloadDashboardData } from './downloadDashboardData.js'
 import { updateSheet } from './updateGoogleSheets.js'
 
-const {daily, weekly, monthly} = await downloadDashboardData({writeFiles: true})
+const {daily, weekly, monthly} = await downloadDashboardData()
 
 await Promise.all([
   updateSheet('Daily Active Users', daily),
