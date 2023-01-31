@@ -6,10 +6,11 @@
   "type": "module",
   "license": "Apache-2.0 OR MIT",
   "devDependencies": {
+    "ts-node": "^10.9.1"
   },
   "scripts": {
-    "get-csv": "npx -y ts-node-esm scripts/get-csv.ts",
-    "update-dashboards": "npx -y ts-node-esm index.ts"
+    "get-csv": "ts-node-esm scripts/get-csv.ts",
+    "update-dashboards": "ts-node-esm index.ts"
   },
   "dependencies": {
     "@googleapis/sheets": "^4.0.1",
