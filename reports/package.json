@@ -1,0 +1,19 @@
+{
+  "name": "reports",
+  "version": "1.0.0",
+  "description": "Code for generating reports",
+  "main": "index.ts",
+  "type": "module",
+  "license": "Apache-2.0 OR MIT",
+  "devDependencies": {
+    "ts-node": "^10.9.1"
+  },
+  "scripts": {
+    "get-csv": "ts-node-esm scripts/get-csv.ts",
+    "update-dashboards": "ts-node-esm index.ts"
+  },
+  "dependencies": {
+    "@googleapis/sheets": "^4.0.1",
+    "googleapis": "^110.0.0"
+  }
+}

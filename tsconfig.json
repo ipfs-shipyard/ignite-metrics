@@ -12,7 +12,7 @@
   },
   "rootDir": "src",
   "include": ["src", "types"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "reports"],
   "ts-node": {
     "extends": "aegir/src/config/tsconfig.aegir.json",
     "transpileOnly": true,

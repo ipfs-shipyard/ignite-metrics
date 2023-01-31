@@ -1,0 +1,25 @@
+name: Update metrics data in google spreadsheet
+
+on:
+  workflow_dispatch:
+  schedule:
+  # Every 2 hours: "At minute 0 past every 2nd hour."
+  - cron: '0 */2 * * *'
+
+jobs:
+  update-metrics:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./reports
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-node@v3
+      with:
+        node-version: lts/*
+    - uses: ipfs/aegir/actions/cache-node-modules@master # npm install at the root
+    - run: npm install && npm run update-dashboards # npm install & run in reports directory
+      env:
+        GOOGLE_CREDENTIALS: '${{ secrets.GOOGLE_CREDENTIALS }}'
+        COUNTLY_USERNAME: '${{ secrets.COUNTLY_USERNAME }}'
+        COUNTLY_PASSWORD: '${{ secrets.COUNTLY_PASSWORD }}'
