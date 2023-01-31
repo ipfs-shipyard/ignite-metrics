@@ -22,13 +22,13 @@ jobs:
     - uses: actions/setup-node@v3
       with:
         node-version: lts/*
-    - uses: ipfs/aegir/actions/cache-node-modules@master
+    # - uses: ipfs/aegir/actions/cache-node-modules@master
     # - id: 'auth'
     #   name: 'Authenticate to Google Cloud'
     #   uses: 'google-github-actions/auth@v0.4.0'
     #   with:
     #     credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-    - run: npm run update-dashboards
+    - run: npm install && npm run update-dashboards
       env:
         GOOGLE_CREDENTIALS: '${{ secrets.GOOGLE_CREDENTIALS }}'
         COUNTLY_USERNAME: '${{ secrets.COUNTLY_USERNAME }}'
