@@ -1,3 +1,44 @@
+## [1.3.0](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.2.2...v1.3.0) (2023-01-27)
+
+
+### Features
+
+* :zap: useFakeTimers instead of await ([ab218ab](https://github.com/ipfs-shipyard/ignite-metrics/commit/ab218ab00aa7703380ee74898a9da5a25d05f470))
+* adding accumulator test. ([dd6a6cb](https://github.com/ipfs-shipyard/ignite-metrics/commit/dd6a6cb5907ee042846aefbcceeb95334d46b3e6))
+* Adding impl using map ([719519c](https://github.com/ipfs-shipyard/ignite-metrics/commit/719519cc19703d34bad0d4f8c1f3624ab10d69f9))
+* editor config, sane! ([ee49b2a](https://github.com/ipfs-shipyard/ignite-metrics/commit/ee49b2a5531e119ab9f29ee89cb5aa525766069b))
+* moving types to set rootDir ([06ef5a9](https://github.com/ipfs-shipyard/ignite-metrics/commit/06ef5a9ec5494309958dbf982ea2315147157d3c))
+* Update types and hookup accumulator ([ccece9b](https://github.com/ipfs-shipyard/ignite-metrics/commit/ccece9b0219c2b10caf75053eb38ff18f0ffd32f))
+
+
+### Bug Fixes
+
+* :adhesive_bandage: fix imports ([eb5ae38](https://github.com/ipfs-shipyard/ignite-metrics/commit/eb5ae38eef9d6d82076f02ca3cf78c528cacfad1))
+* :label: generics ([772018d](https://github.com/ipfs-shipyard/ignite-metrics/commit/772018de73649d181e021ba23e6a42a13dcb7c80))
+* :memo: adding missing documentation ([8c4f560](https://github.com/ipfs-shipyard/ignite-metrics/commit/8c4f560064fa078927707cb93365efa123fe4a66))
+* :necktie: fixing unload event to handle both browser and node. ([c999b06](https://github.com/ipfs-shipyard/ignite-metrics/commit/c999b06ba5d7504d130c88ad9f617219c3860640))
+* :necktie: instantiating at declaration ([2313806](https://github.com/ipfs-shipyard/ignite-metrics/commit/2313806726e4edbeb75c06311334c803c0865c5c))
+* :package: adding missing package after merge ([98a7ab2](https://github.com/ipfs-shipyard/ignite-metrics/commit/98a7ab2ca3927d19871bc3a0b2af3cd51ce69d6e))
+* :package: package-lock.json ([6bd68c6](https://github.com/ipfs-shipyard/ignite-metrics/commit/6bd68c6ea5806832cfca0ad46951919c9b7e5f8c))
+* :pencil2: dupe imports ([c2c4277](https://github.com/ipfs-shipyard/ignite-metrics/commit/c2c4277b3e58d01ad2fc7e4320f634f31a4a04d7))
+* :pencil2: spec naming and scope ([7c07a7d](https://github.com/ipfs-shipyard/ignite-metrics/commit/7c07a7dcb13a8fb78f70fb51e8edb74c7179849b))
+* :recycle: cleanup ([1238a5f](https://github.com/ipfs-shipyard/ignite-metrics/commit/1238a5faaebd9e1dceeca454a263975fa3c79f91))
+* :recycle: move call order ([3549175](https://github.com/ipfs-shipyard/ignite-metrics/commit/3549175b248bf0cfa511ba6a1ab855eaa1e38735))
+* :recycle: Moving tests to node folder ([d34928b](https://github.com/ipfs-shipyard/ignite-metrics/commit/d34928b12ddaa9f952c8eb1e43ed5d0faa29ed91))
+* :rotating_light: fixes lint. ([8eb34e9](https://github.com/ipfs-shipyard/ignite-metrics/commit/8eb34e9421f655bb131b7e9205ff556e94fa8049))
+* :test_tube: EventAccumulator ([90b37ba](https://github.com/ipfs-shipyard/ignite-metrics/commit/90b37bae2ff475c8ed29d79f8dc1c18e86b2cd5d))
+* :truck: digest -> accumulate ([fbaa4f3](https://github.com/ipfs-shipyard/ignite-metrics/commit/fbaa4f32c8d074cf88174714de057805f57faa54))
+* :truck: rename to spec.ts ([f638eb8](https://github.com/ipfs-shipyard/ignite-metrics/commit/f638eb8f144116d056f51a83d5155ed959da83b9))
+* :twisted_rightwards_arrows: merged with upstream ([5791d84](https://github.com/ipfs-shipyard/ignite-metrics/commit/5791d846eb17a99ed481efec98d6d6365368ad29))
+* :wrench: don't disable rules globally ([9eea9a5](https://github.com/ipfs-shipyard/ignite-metrics/commit/9eea9a57e299479ef4b79e34856724825804b500))
+* :wrench: only apply eslint overrides to spec files. ([2722ec2](https://github.com/ipfs-shipyard/ignite-metrics/commit/2722ec2a614859fdc8a09de95e73bc7402f3d10b))
+* add_event ([6a59727](https://github.com/ipfs-shipyard/ignite-metrics/commit/6a5972790793054a232a43c278e8c475cb39e811))
+* configs ([f1da631](https://github.com/ipfs-shipyard/ignite-metrics/commit/f1da6316903478c9d6f4a1af03c531c57de83ada))
+* fixing appKey ([a0242f9](https://github.com/ipfs-shipyard/ignite-metrics/commit/a0242f9b57998039bad38d41bb8e1a7d98e5896c))
+* generics ([dfc72df](https://github.com/ipfs-shipyard/ignite-metrics/commit/dfc72df6909e822198f45e0445237cc68bcc77fc))
+* import order ([9e62d8f](https://github.com/ipfs-shipyard/ignite-metrics/commit/9e62d8fdaea19d46a12922e0c12adfe607f89e52))
+* sinon stubs ([ded115c](https://github.com/ipfs-shipyard/ignite-metrics/commit/ded115cec845e14a7225b92d9af60dda7aca34bc))
+
 ## [1.2.2](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.2.1...v1.2.2) (2023-01-23)
 
 

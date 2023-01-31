@@ -1,0 +1,12 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "types": ["node", "mocha", "chai", "sinon"]
+  },
+  "include": [
+    "../src",
+    "../types",
+    "./**/*.ts",
+    "node/NodeMetricsProvider.spec.ts"
+  ]
+}

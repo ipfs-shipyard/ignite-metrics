@@ -1,5 +1,5 @@
-import type { consentTypes } from './types/index.js'
 import type { StorageProvider } from './StorageProvider.js'
+import type { consentTypes } from '../types/index.js'
 
 export class BrowserStorageProvider implements StorageProvider {
   setStore (consentArray: consentTypes[]): void {
