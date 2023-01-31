@@ -6,13 +6,22 @@ The CSV content is then loaded into it's respective sheet at https://docs.google
 
 The charts in the "Charts" sheet are loaded in our Notion page at https://www.notion.so/pl-strflt/Ignite-IPFS-GUI-Tools-3bc1c1bf54d74f928bf11ef59c876b74#b6970aa92e914114848fbddd84eab2ba
 
+NOTE: The below instructions do not need to be followed once our GitHub Action is merged. The data will update according to the scheduled GitHub Action at [`../.github/workflows/metrics-update.yml`](../.github/workflows/metrics-update.yml)
+
 ## With google sheets authentication
+
+You need the following ENV vars set properly:
+
+* `GOOGLE_CREDENTIALS` - Your 'JSON service account key' file stringified into a single line
 
 Just run `npm run update-dashboards`. This will download all data from countly and then automatically update the google sheets.
 
-## Without google sheets authenticaiton
+## How to get the data from countly
 
-### How to get the data from countly
+You need the following ENV vars set properly:
+
+* `COUNTLY_USERNAME` - The username you use to login to the countly server
+* `COUNTLY_PASSWORD` - The password you use to login to the countly server
 
 Inside the `./reports` folder, run
 
@@ -21,7 +30,7 @@ npm install
 npm run get-csv
 ```
 
-### How to copy the data to google spreadsheets
+## How to copy the data to google spreadsheets (manually)
 
 If you have a valid keyfile for google sheets authentication
 
