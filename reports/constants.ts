@@ -1,5 +1,10 @@
 export const hostname = 'countly.ipfs.tech'
-export const authorizationHeader = `Basic ${Buffer.from(`${process.env.COUNTLY_USERNAME}:${process.env.COUNTLY_PASSWORD}`).toString('base64')}`
+const { env: { COUNTLY_USERNAME, COUNTLY_PASSWORD }} = process 
+export const authorizationHeader = `Basic ${
+  Buffer
+    .from(`${COUNTLY_USERNAME}:${COUNTLY_PASSWORD}`)
+    .toString('base64')
+}`
 export const baseOptions = {
   method: 'GET',
   headers: {
