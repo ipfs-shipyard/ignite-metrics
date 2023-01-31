@@ -15,9 +15,6 @@ interface ActiveUsersResponse {
  * Print out a CSV of the number of unique users per day for each app
  */
 export async function downloadDashboardData (): Promise<void> {
-  // let dailyOutputCsv: string = ''
-  // let weeklyOutputCsv: string = ''
-  // let monthlyOutputCsv: string = ''
   let printedHeaders = false
   const dailyArray = []
   const weeklyArray = []
@@ -50,20 +47,14 @@ export async function downloadDashboardData (): Promise<void> {
     if (!printedHeaders) {
       const dateLabels = activeUserData.map((day: any) => new Date(day._id).toISOString().split('T')[0])
       dailyArray.push(['App Name', ...dateLabels])
-      // dailyOutputCsv = `App Name, ${dateLabels.join(', ')}\n`
       weeklyArray.push(['App Name', ...dateLabels])
-      // weeklyOutputCsv = `App Name, ${dateLabels.join(', ')}\n`
       monthlyArray.push(['App Name', ...dateLabels])
-      // monthlyOutputCsv = `App Name, ${dateLabels.join(', ')}\n`
       printedHeaders = true
     }
 
     dailyArray.push([appName, ...activeUserData.map((day: any) => day.d)])
-    // dailyOutputCsv = `${dailyOutputCsv}${appName}, ${activeUserData.map((day: any) => day.d).join(', ')}\n`
     weeklyArray.push([appName, ...activeUserData.map((day: any) => day.w)])
-    // weeklyOutputCsv = `${weeklyOutputCsv}${appName}, ${activeUserData.map((day: any) => day.w).join(', ')}\n`
     monthlyArray.push([appName, ...activeUserData.map((day: any) => day.m)])
-    // monthlyOutputCsv = `${monthlyOutputCsv}${appName}, ${activeUserData.map((day: any) => day.m).join(', ')}\n`
   }
   // Write the outputs to their appropriate Csv files
   await writeFile('./output/activeUsers-daily.json', JSON.stringify(dailyArray, null, 2))
