@@ -12,5 +12,10 @@ export async function doCountlyFetch({
   path: string
 }) {
   const response = await fetch(`https://${hostname}${path}?api_key=${apiKey}&app_id=${appId}&${extraParams}`, {...baseOptions, ...fetchOptions});
-  return await response.json();
+  try {
+    return await response.json();
+  } catch (e) {
+    console.error(`Could not fetch data from https://${hostname}${path}`, e);
+    throw e;
+  }
 }

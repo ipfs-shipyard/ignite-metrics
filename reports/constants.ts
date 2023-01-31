@@ -1,6 +1,6 @@
 export const hostname = 'countly.ipfs.tech'
-const { env: { COUNTLY_USERNAME, COUNTLY_PASSWORD }} = process 
-export const authorizationHeader = `Basic ${
+const { env: { COUNTLY_USERNAME, COUNTLY_PASSWORD } } = process
+const authorizationHeader = `Basic ${
   Buffer
     .from(`${COUNTLY_USERNAME}:${COUNTLY_PASSWORD}`)
     .toString('base64')
@@ -22,7 +22,12 @@ async function getApiKey (): Promise<string> {
     }
   })
 
-  return await response.text()
+  try {
+    return await response.text()
+  } catch (e) {
+    console.error('Could not get API key from Countly', e)
+    throw e
+  }
 }
 
 export const apiKey = await getApiKey()

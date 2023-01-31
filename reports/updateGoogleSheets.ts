@@ -21,7 +21,8 @@ const jsonFiles = {
   'Monthly Active Users': './output/activeUsers-monthly.json'
 }
 
-async function updateSheet (sheetName: string, values: string[][]): Promise<void> {
+export async function updateSheet (sheetName: string, values: (string|number)[][]): Promise<void> {
+  console.info(`Writing ${values.length} rows to ${sheetName}...`)
   await googleSheetsInstance.spreadsheets.values.update({
     auth,
     spreadsheetId,
@@ -33,6 +34,7 @@ async function updateSheet (sheetName: string, values: string[][]): Promise<void
     }
   })
 }
+
 export async function updateGoogleSheets (): Promise<void> {
   for await (const [sheetName, jsonFilePath] of Object.entries(jsonFiles)) {
     const { default: json } = await import(jsonFilePath, { assert: { type: 'json' } })
