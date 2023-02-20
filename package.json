@@ -199,7 +199,7 @@
   },
   "optionalDependencies": {
     "@esbuild/darwin-arm64": "^0.16.17",
-    "@esbuild/linux-x64": "^0.16.17",
+    "@esbuild/linux-x64": "^0.17.9",
     "react-refresh": "^0.14.0"
   },
   "module": "src/index.ts",
