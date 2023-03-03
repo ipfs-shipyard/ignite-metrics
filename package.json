@@ -149,13 +149,19 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "child_process": "^1.0.2",
+    "cluster": "^0.7.7",
     "countly-sdk-nodejs": "^22.6.0",
     "countly-sdk-web": "^22.6.4",
+    "dgram": "^1.0.1",
+    "dns": "^0.2.2",
     "esbuild-css-modules-plugin": "^2.7.0",
+    "net": "^1.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.2",
-    "styled-components": "^5.3.6"
+    "styled-components": "^5.3.6",
+    "tty": "^1.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.20.12",
