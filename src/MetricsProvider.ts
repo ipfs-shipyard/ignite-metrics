@@ -10,7 +10,7 @@ import { COUNTLY_SETUP_DEFAULTS } from './config.js'
 
 import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
 import { EventAccumulator } from './EventAccumulator.js'
-import type { StorageProvider } from './StorageProvider.js'
+import type { StorageProviderInterface } from './StorageProvider.js'
 
 export interface MetricsProviderConstructorOptions<T> {
   appKey: string
@@ -21,7 +21,7 @@ export interface MetricsProviderConstructorOptions<T> {
   queue_size?: number
   session_update?: number
   url?: string
-  storageProvider?: StorageProvider | null
+  storageProvider?: StorageProviderInterface | null
 }
 
 export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
@@ -37,8 +37,8 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private sessionStarted: boolean = false
   private readonly _consentGranted: Set<consentTypes> = new Set()
   private readonly metricsService: T
-  private readonly storageProvider: StorageProvider | null
-  private readonly initDone: boolean = false
+  private readonly storageProvider: StorageProviderInterface | null
+  private initDone: boolean = false
 
   constructor (config: MetricsProviderConstructorOptions<T>) {
     const { appKey, ...remainderConfig } = config
@@ -58,7 +58,11 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
       this.setupAutoTrack()
     }
 
-    const existingConsent = this.getConsentStore()
+    void this.initExistingConsent()
+  }
+
+  private async initExistingConsent (): Promise<void> {
+    const existingConsent = await this.getConsentStore()
     if (existingConsent.length > 0) {
       this.addConsent(existingConsent)
     }
@@ -88,37 +92,37 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
     this.metricsService.track_view()
   }
 
-  addConsent (consent: consentTypes | consentTypes[]): void {
+  async addConsent (consent: consentTypes | consentTypes[]): Promise<void> {
     if (!Array.isArray(consent)) {
       consent = [consent]
     }
     consent.forEach(c => this._consentGranted.add(c))
     this.metricsService.add_consent(consent)
-    this.setConsentStore()
+    await this.setConsentStore()
   }
 
-  removeConsent (consent: consentTypes | consentTypes[]): void {
+  async removeConsent (consent: consentTypes | consentTypes[]): Promise<void> {
     if (!Array.isArray(consent)) {
       consent = [consent]
     }
     consent.forEach(c => this._consentGranted.delete(c))
     this.metricsService.remove_consent(consent, true)
-    this.setConsentStore()
+    await this.setConsentStore()
   }
 
-  private setConsentStore (): void {
+  private async setConsentStore (): Promise<void> {
     /**
      * Only set the consent store if
      * 1. we have a storage provider
      * 2. we're out of the initialization phase.
      */
     if (this.storageProvider != null && this.initDone) {
-      this.storageProvider.setStore(Array.from(this._consentGranted))
+      await this.storageProvider.setStore(Array.from(this._consentGranted))
     }
   }
 
-  private getConsentStore (): consentTypes[] {
-    return this.storageProvider?.getStore() ?? []
+  private async getConsentStore (): Promise<consentTypes[]> {
+    return await this.storageProvider?.getStore() ?? []
   }
 
   checkConsent (consent: consentTypes | metricFeatures): boolean {
@@ -134,15 +138,15 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
    *
    * @param {string[]} consent
    */
-  updateConsent (consent: string[]): void {
+  async updateConsent (consent: string[]): Promise<void> {
     const approvedConsent = new Set(consent)
-    Object.keys(this.groupedFeatures).forEach((groupName) => {
+    await Promise.all(Object.keys(this.groupedFeatures).map(async (groupName): Promise<void> => {
       if (approvedConsent.has(groupName)) {
-        this.addConsent(groupName as consentTypes)
+        await this.addConsent(groupName as consentTypes)
       } else {
-        this.removeConsent(groupName as consentTypes)
+        await this.removeConsent(groupName as consentTypes)
       }
-    })
+    }))
   }
 
   /**

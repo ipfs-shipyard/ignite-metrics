@@ -1,7 +1,7 @@
-import type { StorageProvider } from './StorageProvider.js'
+import type { StorageProviderInterface } from './StorageProvider.js'
 import type { consentTypes } from '../types/index.js'
 
-export class BrowserStorageProvider implements StorageProvider {
+export class BrowserStorageProvider implements StorageProviderInterface {
   setStore (consentArray: consentTypes[]): void {
     try {
       const jsonString = JSON.stringify(consentArray)
