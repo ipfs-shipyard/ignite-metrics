@@ -5,8 +5,8 @@ import type {
   Segments,
   metricFeatures
 } from 'countly-sdk-web'
-import { COUNTLY_SETUP_DEFAULTS } from './config.js'
 import type { consentTypes, consentTypesExceptAll } from './typings/countly.js'
+import { COUNTLY_SETUP_DEFAULTS } from './config.js'
 
 import type { CountlyNodeSdk } from 'countly-sdk-nodejs'
 import { EventAccumulator } from './EventAccumulator.js'

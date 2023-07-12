@@ -3,7 +3,7 @@ import { ensureCall, expect, sinon } from '../testUtils.js'
 import CountlyNodeSdk from 'countly-sdk-nodejs'
 import { NodeMetricsProvider } from '../../src/NodeMetricsProvider.js'
 import type { StorageProvider } from '../../src/StorageProvider.js'
-import type { consentTypes } from '../../types/index.js'
+import type { consentTypes } from '../../src/typings/countly.js'
 
 const sandbox = sinon.createSandbox()
 
@@ -96,7 +96,7 @@ describe('NodeMetricsProvider', function () {
       ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
       ensureCall({ spy: countlyStub.add_consent, callCount: 1, callIndex: 0, expectedArgs: storedConsent })
       ensureCall({ spy: storageProviderStub.setStore, callCount: 0 })
-      telemetry.addConsent('performance')
+      await telemetry.addConsent('performance')
       ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
       ensureCall({ spy: countlyStub.add_consent, callCount: 2, callIndex: 1, expectedArgs: ['performance'] })
       ensureCall({ spy: storageProviderStub.setStore, callCount: 1, callIndex: 0, expectedArgs: ['minimal', 'performance'] })
@@ -129,7 +129,7 @@ describe('NodeMetricsProvider', function () {
       ensureCall({ spy: countlyStub.add_consent, callCount: 1, callIndex: 0, expectedArgs: storedConsent })
       ensureCall({ spy: countlyStub.remove_consent, callCount: 0 })
       ensureCall({ spy: storageProviderStub.setStore, callCount: 0 })
-      telemetry.removeConsent('minimal')
+      await telemetry.removeConsent('minimal')
       ensureCall({ spy: storageProviderStub.getStore, callCount: 1 }) // no change
       ensureCall({ spy: countlyStub.remove_consent, callCount: 1, callIndex: 0, expectedArgs: ['minimal'] })
       ensureCall({ spy: storageProviderStub.setStore, callCount: 1, callIndex: 0, expectedArgs: [] })
