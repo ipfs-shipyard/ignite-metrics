@@ -7,7 +7,7 @@
     "moduleResolution": "NodeNext",
     "outDir": "dist",
     "target": "ES6",
-    "typeRoots": ["types"],
+    "typeRoots": ["types", "src/typings"],
     "types": ["node", "mocha"]
   },
   "rootDir": "src",
