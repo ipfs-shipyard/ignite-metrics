@@ -95,7 +95,7 @@ describe('NodeMetricsProvider', function () {
       await telemetry.addConsent('performance')
       ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
       ensureCall({ spy: countlyStub.add_consent, callCount: 2, callIndex: 1, expectedArgs: ['performance'] })
-      ensureCall({ spy: storageProviderStub.setStore, callCount: 2, callIndex: 0, expectedArgs: ['minimal', 'performance'] })
+      ensureCall({ spy: storageProviderStub.setStore, callCount: 2, callIndex: 1, expectedArgs: ['minimal', 'performance'] })
     })
 
     it('User has multiple consents stored', async function () {
