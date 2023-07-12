@@ -1,21 +1,21 @@
 {
   "extends": "aegir/src/config/tsconfig.aegir.json",
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "jsx": "react",
-    "types": ["node", "mocha"],
+    "moduleResolution": "NodeNext",
     "outDir": "dist",
     "target": "ES6",
-    "allowSyntheticDefaultImports": true,
-    "moduleResolution": "NodeNext",
-    "esModuleInterop": true,
-    "typeRoots": ["types"]
+    "typeRoots": ["types", "src/typings"],
+    "types": ["node", "mocha"]
   },
   "rootDir": "src",
   "include": ["src", "types"],
   "exclude": ["node_modules", "reports"],
   "ts-node": {
     "extends": "aegir/src/config/tsconfig.aegir.json",
-    "transpileOnly": true,
-    "compilerOptions": {}
+    "compilerOptions": {},
+    "transpileOnly": true
   }
 }

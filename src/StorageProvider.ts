@@ -1,21 +1,26 @@
-import type { consentTypes } from '../types/index.js'
+import type { consentTypes } from './typings/countly.js'
 
 export interface StorageProviderInterface {
-  setStore: (values: consentTypes[]) => void
-  getStore: () => consentTypes[]
+  setStore: (values: consentTypes[]) => void | Promise<void>
+  getStore: () => consentTypes[] | Promise<consentTypes[]>
 }
 
 export class StorageProvider {
   constructor (options: StorageProviderInterface) {
-    this.setStore = options.setStore ?? this.setStore
-    this.getStore = options.getStore ?? this.setStore
+    this.init(options)
   }
 
-  setStore (values: consentTypes[]): void {
+  private init (options: StorageProviderInterface): void {
+    const { setStore, getStore } = options
+    this.setStore = setStore
+    this.getStore = getStore
+  }
+
+  setStore (values: consentTypes[]): void | Promise<void> {
     throw new Error('Method not implemented')
   }
 
-  getStore (): consentTypes[] {
+  getStore (): consentTypes[] | Promise<consentTypes[]> {
     throw new Error('Method not implemented')
   }
 }

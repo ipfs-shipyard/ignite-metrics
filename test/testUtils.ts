@@ -17,7 +17,7 @@ export interface EnsureCallOptions<T extends readonly any[], R> {
 export const ensureCall = <T extends readonly any[], R>(config: EnsureCallOptions<T, R>): void => {
   expect(config.spy).to.have.callCount(config.callCount)
   if (config.expectedArgs != null && config.callIndex != null) {
-    expect(config.spy.getCall(config.callIndex).args[config.argsIndex ?? 0]).to.deep.equal(config.expectedArgs)
+    expect(config.expectedArgs).to.deep.equal(config.spy.getCall(config.callIndex).args[config.argsIndex ?? 0])
   }
 }
 
