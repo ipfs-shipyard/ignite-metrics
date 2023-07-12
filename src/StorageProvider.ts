@@ -7,10 +7,10 @@ export interface StorageProviderInterface {
 
 export class StorageProvider {
   constructor (options: StorageProviderInterface) {
-    void this.init(options)
+    this.init(options)
   }
 
-  private async init (options: StorageProviderInterface): Promise<void> {
+  private init (options: StorageProviderInterface): void {
     const { setStore, getStore } = options
     this.setStore = setStore
     this.getStore = getStore
