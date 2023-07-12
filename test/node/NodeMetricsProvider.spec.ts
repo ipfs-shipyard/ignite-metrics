@@ -124,7 +124,7 @@ describe('NodeMetricsProvider', function () {
       await telemetry.removeConsent('minimal')
       ensureCall({ spy: storageProviderStub.getStore, callCount: 1 }) // no change
       ensureCall({ spy: countlyStub.remove_consent, callCount: 1, callIndex: 0, expectedArgs: ['minimal'] })
-      ensureCall({ spy: storageProviderStub.setStore, callCount: 2, callIndex: 0, expectedArgs: [] })
+      ensureCall({ spy: storageProviderStub.setStore, callCount: 2, callIndex: 1, expectedArgs: [] })
     })
   })
 })

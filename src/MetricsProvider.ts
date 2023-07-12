@@ -119,7 +119,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
      * 1. we have a storage provider
      * 2. we're out of the initialization phase.
      */
-    if (this.storageProvider != null && this.initDone) {
+    if (this.storageProvider != null) {
       await this.storageProvider.setStore(Array.from(this._consentGranted))
     }
   }
