@@ -42,7 +42,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly _consentGranted: Set<consentTypes> = new Set()
   private readonly metricsService: T
   private readonly storageProvider: StorageProviderInterface | null
-  public initDone: boolean = false
+  public initDone: Promise<void>
 
   constructor (config: MetricsProviderConstructorOptions<T>) {
     const { appKey, ...remainderConfig } = config
@@ -62,7 +62,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
       this.setupAutoTrack()
     }
 
-    void this.initExistingConsent()
+    this.initDone = this.initExistingConsent()
   }
 
   private async initExistingConsent (): Promise<void> {
@@ -70,7 +70,6 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
     if (existingConsent.length > 0) {
       await this.addConsent(existingConsent)
     }
-    this.initDone = true
   }
 
   mapAllEvents (eventMap: Record<consentTypesExceptAll, metricFeatures[]>): Record<consentTypes, metricFeatures[]> {
