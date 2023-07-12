@@ -39,7 +39,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private readonly _consentGranted: Set<consentTypes> = new Set()
   private readonly metricsService: T
   private readonly storageProvider: StorageProviderInterface | null
-  private initDone: boolean = false
+  public initDone: boolean = false
 
   constructor (config: MetricsProviderConstructorOptions<T>) {
     const { appKey, ...remainderConfig } = config
@@ -49,8 +49,6 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
       app_key: appKey
     }
     const { autoTrack, metricsService, storageProvider } = serviceConfig
-    // eslint-disable-next-line no-console
-    console.log({ config, serviceConfig })
     this.metricsService = metricsService
     this.storageProvider = storageProvider ?? null
     this.metricsService.init(serviceConfig)
@@ -67,7 +65,7 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
   private async initExistingConsent (): Promise<void> {
     const existingConsent = await this.getConsentStore()
     if (existingConsent.length > 0) {
-      this.addConsent(existingConsent)
+      await this.addConsent(existingConsent)
     }
     this.initDone = true
   }
