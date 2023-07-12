@@ -20,6 +20,9 @@ export interface MetricsProviderConstructorOptions<T> {
   metricsService: T
   queue_size?: number
   session_update?: number
+  // one of these are required for storing metric related info.
+  // eslint-disable-next-line no-warning-comments
+  // TODO(whizzzkid): default to none storage on countly and instead use our own storage provider.
   storage?: 'none' | 'localStorage' | 'sessionStorage' | 'cookie'
   storageProvider?: StorageProviderInterface | null
   url?: string
