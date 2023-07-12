@@ -1,5 +1,5 @@
 import type { StorageProviderInterface } from './StorageProvider.js'
-import type { consentTypes } from '../types/index.js'
+import type { consentTypes } from './typings/countly.js'
 
 export class BrowserStorageProvider implements StorageProviderInterface {
   setStore (consentArray: consentTypes[]): void {
