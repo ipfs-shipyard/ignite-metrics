@@ -69,10 +69,13 @@ describe('NodeMetricsProvider', function () {
       ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
     })
 
-    it('User has single consent stored', function () {
+    it('User has single consent stored', async function () {
       const storedConsent: consentTypes[] = ['minimal']
       storageProviderStub.getStore.returns(storedConsent)
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar', storageProvider: storageProviderStub })
+      while (!telemetry.initDone) {
+        await new Promise(resolve => setTimeout(resolve, 10))
+      }
       expect(telemetry).to.have.property('storageProvider').that.is.not.null
 
       // storageProvider methods are called when loading.
@@ -81,10 +84,13 @@ describe('NodeMetricsProvider', function () {
       ensureCall({ spy: storageProviderStub.setStore, callCount: 0 })
     })
 
-    it('User updates consent', function () {
+    it('User updates consent', async function () {
       const storedConsent: consentTypes[] = ['minimal']
       storageProviderStub.getStore.returns(storedConsent)
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar', storageProvider: storageProviderStub })
+      while (!telemetry.initDone) {
+        await new Promise(resolve => setTimeout(resolve, 10))
+      }
       expect(telemetry).to.have.property('storageProvider').that.is.not.null
 
       ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
@@ -96,10 +102,13 @@ describe('NodeMetricsProvider', function () {
       ensureCall({ spy: storageProviderStub.setStore, callCount: 1, callIndex: 0, expectedArgs: ['minimal', 'performance'] })
     })
 
-    it('User has multiple consents stored', function () {
+    it('User has multiple consents stored', async function () {
       const storedConsent: consentTypes[] = ['minimal', 'performance']
       storageProviderStub.getStore.returns(storedConsent)
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar', storageProvider: storageProviderStub })
+      while (!telemetry.initDone) {
+        await new Promise(resolve => setTimeout(resolve, 10))
+      }
       expect(telemetry).to.have.property('storageProvider').that.is.not.null
 
       ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
@@ -107,10 +116,13 @@ describe('NodeMetricsProvider', function () {
       ensureCall({ spy: storageProviderStub.setStore, callCount: 0 })
     })
 
-    it('User removes consent', function () {
+    it('User removes consent', async function () {
       const storedConsent: consentTypes[] = ['minimal']
       storageProviderStub.getStore.returns(storedConsent)
       const telemetry = new NodeMetricsProvider({ appKey: 'foo', url: 'bar', storageProvider: storageProviderStub })
+      while (!telemetry.initDone) {
+        await new Promise(resolve => setTimeout(resolve, 10))
+      }
       expect(telemetry).to.have.property('storageProvider').that.is.not.null
 
       ensureCall({ spy: storageProviderStub.getStore, callCount: 1 })
