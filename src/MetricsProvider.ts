@@ -20,8 +20,9 @@ export interface MetricsProviderConstructorOptions<T> {
   metricsService: T
   queue_size?: number
   session_update?: number
-  url?: string
+  storage?: 'none' | 'localStorage' | 'sessionStorage' | 'cookie'
   storageProvider?: StorageProviderInterface | null
+  url?: string
 }
 
 export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
@@ -48,6 +49,8 @@ export default class MetricsProvider<T extends CountlyWebSdk | CountlyNodeSdk> {
       app_key: appKey
     }
     const { autoTrack, metricsService, storageProvider } = serviceConfig
+    // eslint-disable-next-line no-console
+    console.log({ config, serviceConfig })
     this.metricsService = metricsService
     this.storageProvider = storageProvider ?? null
     this.metricsService.init(serviceConfig)
