@@ -1,6 +1,6 @@
 {
   "name": "@ipfs-shipyard/ignite-metrics",
-  "version": "1.3.0",
+  "version": "2.0.0",
   "description": "UI library for gathering metrics for ignite team projects",
   "author": "Ignite Team",
   "license": "Apache-2.0 OR MIT",

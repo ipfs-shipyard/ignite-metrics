@@ -1,3 +1,20 @@
+## [2.0.0](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.3.0...v2.0.0) (2023-07-13)
+
+
+### ⚠ BREAKING CHANGES
+
+* **stores:** Since stores are now async, upgrading to this might require some logic rework.
+
+### Features
+
+* **stores:** Async Stores Release Please ([#132](https://github.com/ipfs-shipyard/ignite-metrics/issues/132)) ([c12e6ca](https://github.com/ipfs-shipyard/ignite-metrics/commit/c12e6cabd0de89da5baf462d3e2183f4b60632ac))
+
+
+### Trivial Changes
+
+* add dashboard automation ([#86](https://github.com/ipfs-shipyard/ignite-metrics/issues/86)) ([b8c0416](https://github.com/ipfs-shipyard/ignite-metrics/commit/b8c041682ad6f399c91af36ff5a452cec07c88d6))
+* update docs/telemetry/PRIVACY_POLICY.md ([#76](https://github.com/ipfs-shipyard/ignite-metrics/issues/76)) ([3321ff1](https://github.com/ipfs-shipyard/ignite-metrics/commit/3321ff18b7f54540fe670e337b62da04cfe54da6))
+
 ## [1.3.0](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.2.2...v1.3.0) (2023-01-27)
 
 
