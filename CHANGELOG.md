@@ -1,3 +1,10 @@
+## [2.1.0](https://github.com/ipfs-shipyard/ignite-metrics/compare/v2.0.1...v2.1.0) (2023-12-06)
+
+
+### Features
+
+* create script for generating final MoM values for a month ([d876052](https://github.com/ipfs-shipyard/ignite-metrics/commit/d8760520dc4db67cde465b0c9ae9179104817701))
+
 ## [2.0.1](https://github.com/ipfs-shipyard/ignite-metrics/compare/v2.0.0...v2.0.1) (2023-12-06)
 
 
