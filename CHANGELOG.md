@@ -1,3 +1,16 @@
+## [2.0.1](https://github.com/ipfs-shipyard/ignite-metrics/compare/v2.0.0...v2.0.1) (2023-12-06)
+
+
+### Bug Fixes
+
+* report generation ([0fb4ff7](https://github.com/ipfs-shipyard/ignite-metrics/commit/0fb4ff7847a46f9703fca96a04f2f51bc69bdd17))
+* type errors ([be3d1ac](https://github.com/ipfs-shipyard/ignite-metrics/commit/be3d1ac7c54abf9462b387e34d3d6284ff3cb1ff))
+
+
+### Trivial Changes
+
+* package-lock.json update ([c0bc2f2](https://github.com/ipfs-shipyard/ignite-metrics/commit/c0bc2f28c635b059e253b08174650beb8cc35033))
+
 ## [2.0.0](https://github.com/ipfs-shipyard/ignite-metrics/compare/v1.3.0...v2.0.0) (2023-07-13)
 
 
