@@ -16,6 +16,7 @@
   ],
   "exclude": [
     "node_modules",
+    "dist"
   ],
   "ts-node": {
     "extends": "../tsconfig.json",

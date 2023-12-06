@@ -31,9 +31,10 @@ async function getApiKey (): Promise<string> {
 }
 
 export const apiKey = await getApiKey()
+console.log(`apiKey: `, apiKey);
 
 /**
- * 90 days of data
+ * 90 days of data is the default
  */
 export const daysOfDataInMs = 1000 * 60 * 60 * 24 * 90
 

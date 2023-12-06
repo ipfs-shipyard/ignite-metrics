@@ -11,7 +11,9 @@
   "scripts": {
     "build": "tsc",
     "get-csv": "node dist/scripts/get-csv.js",
-    "update-dashboards": "node dist/index.js"
+    "update-dashboards": "node dist/index.js",
+    "download-data": "node dist/scripts/download-data.js",
+    "report:mom": "node dist/scripts/report-mom.js"
   },
   "dependencies": {
     "@googleapis/sheets": "^4.0.1",

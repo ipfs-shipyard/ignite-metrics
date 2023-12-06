@@ -30,7 +30,7 @@ export interface DashboardData {
 /**
  * Print out a CSV of the number of unique users per day for each app
  */
-export async function downloadDashboardData ({ writeFiles = false }: { writeFiles?: boolean } = {}): Promise<DashboardData> {
+export async function downloadDashboardData ({ writeFiles = false, daysOfDataMs = daysOfDataInMs }: { writeFiles?: boolean, daysOfDataMs?: number } = {}): Promise<DashboardData> {
   const todayEpoch = Date.now()
   const dailyArray: googleSheetData = []
   const weeklyArray: googleSheetData = []
@@ -42,7 +42,7 @@ export async function downloadDashboardData ({ writeFiles = false }: { writeFile
       /**
        * @see https://api.count.ly/reference/oanalyticssessions
        */
-      response = await doCountlyFetch({ path: '/o/active_users', appId, extraParams: `period=[${todayEpoch - daysOfDataInMs}, ${todayEpoch}]` })
+      response = await doCountlyFetch({ path: '/o/active_users', appId, extraParams: `period=[${todayEpoch - daysOfDataMs}, ${todayEpoch}]` })
       // eslint-disable-next-line no-console
       console.log(`${appName} calculating? `, response.calculating)
       if (response.calculating) {
