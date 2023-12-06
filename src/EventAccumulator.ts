@@ -12,7 +12,7 @@ const eventDefaults: CountlyEventData = {
 interface eventStore {
   eventData: CountlyEventData
   startTime: number
-  timeout: NodeJS.Timeout
+  timeout: ReturnType<typeof setTimeout>
 }
 
 /**
@@ -45,7 +45,9 @@ export class EventAccumulator<T extends CountlyWebSdk | CountlyNodeSdk> implemen
 
     if (typeof globalThis.addEventListener === 'function') {
       globalThis.addEventListener('beforeunload', flushAllHandler)
+      // @ts-expect-error - broken types
     } else if (typeof globalThis.process?.on === 'function') {
+      // @ts-expect-error - broken types
       globalThis.process.on('beforeExit', flushAllHandler)
     }
   }

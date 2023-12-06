@@ -16,7 +16,7 @@ jobs:
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
-        node-version: lts/*
+        node-version: 18.19.0
     - uses: ipfs/aegir/actions/cache-node-modules@master # npm install at the root
     - run: npm install && npm run build && npm run update-dashboards # npm install & run in reports directory
       env:

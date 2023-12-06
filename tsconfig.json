@@ -8,8 +8,7 @@
     "outDir": "dist",
     "target": "ES6",
     "typeRoots": ["types", "src/typings"],
-    "module": "NodeNext",
-    "ignoreDeprecations": "5.0"
+    "module": "NodeNext"
   },
   "rootDir": "src",
   "include": ["src", "types"],
