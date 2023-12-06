@@ -9,8 +9,9 @@
     "ts-node": "^10.9.1"
   },
   "scripts": {
-    "get-csv": "ts-node-esm scripts/get-csv.ts",
-    "update-dashboards": "ts-node-esm index.ts"
+    "build": "tsc",
+    "get-csv": "node dist/scripts/get-csv.js",
+    "update-dashboards": "node dist/index.js"
   },
   "dependencies": {
     "@googleapis/sheets": "^4.0.1",

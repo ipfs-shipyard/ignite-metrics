@@ -5,7 +5,9 @@
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "NodeNext",
     "module": "NodeNext",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "emitDeclarationOnly": false,
+    "outDir": "dist"
   },
   "include": [
     "**/*.ts",
