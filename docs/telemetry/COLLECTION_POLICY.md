@@ -9,7 +9,7 @@ For an up to date list of projects we own that follow this policy, please see:
 * https://github.com/ipfs/ipfs-gui#primary-projects
 * https://github.com/ipfs/ipfs-gui#other-ipfs-gui--tools-owned-projects
 
-# ❗️ Attention: metrics are not being stored ❗️
+## ❗️ Attention: metrics are not being stored ❗️
 As of early February 2024, the backend service account with Countly that was used for collecting data from ignite-metrics has been deactivated.  Data is still being POSTed, but our previous 3rd-party vendor, Countly, is dropping it.  We have a backlog item in [issue #133](https://github.com/ipfs-shipyard/ignite-metrics/issues/133) to move to an alternative service, Plausible.
 
 ## History
