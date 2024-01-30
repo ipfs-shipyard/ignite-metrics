@@ -9,6 +9,9 @@ For an up to date list of projects we own that follow this policy, please see:
 * https://github.com/ipfs/ipfs-gui#primary-projects
 * https://github.com/ipfs/ipfs-gui#other-ipfs-gui--tools-owned-projects
 
+# ❗️ Attention: metrics are not being stored ❗️
+As of early February 2024, the backend service account with Countly that was used for collecting data from ignite-metrics has been deactivated.  Data is still being POSTed, but our previous 3rd-party vendor, Countly, is dropping it.  We have a backlog item in [issue #133](https://github.com/ipfs-shipyard/ignite-metrics/issues/133) to move to an alternative service, Plausible.
+
 ## History
 
 Before 2022Q4, telemetry was only implemented in https://github.com/ipfs/ipfs-webui and https://github.com/ipfs/ipfs-desktop, using our [self-hosted countly](https://count.ly/product) server. The telemetry implemented within ipfs-webui and ipfs-desktop was opt-in only. i.e. metrics data was sent only if a user specifically opted-in to collecting metrics.
