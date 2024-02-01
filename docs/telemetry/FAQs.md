@@ -1,5 +1,10 @@
 # FAQs - Frequently asked questions
 
+## Are metrics being stored? 
+As of 2024-02-18, the backend service account with Countly that was used for collecting data from ignite-metrics has been deactivated.  Data is still being POSTed, but our previous 3rd-party vendor, Countly, is dropping it.  We have a backlog item in [issue #133](https://github.com/ipfs-shipyard/ignite-metrics/issues/133) to move to an alternative service, Plausible.
+
+One could still use this library as is and pass in an API key with their own Countly account, but the APIs keys for the apps/sites listed in [issue #133](https://github.com/ipfs-shipyard/ignite-metrics/issues/133) have been disabled.
+
 ## Why are you collecting metrics?
 
 We are collecting metrics for all of our projects to assist with prioritizing work and provide proof that our work is valuable. Our prior state (<2023) had the following issues:
