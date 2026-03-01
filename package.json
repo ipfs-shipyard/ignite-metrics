@@ -174,7 +174,7 @@
     "@types/sinon": "^10.0.13",
     "@types/sinon-chai": "^3.2.9",
     "@types/styled-components": "^5.1.26",
-    "aegir": "^38.1.0",
+    "aegir": "^47.0.26",
     "babel-loader": "^9.1.2",
     "copyfiles": "^2.4.1",
     "css-loader": "^6.7.3",
